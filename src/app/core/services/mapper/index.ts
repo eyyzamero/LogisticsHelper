@@ -1,1 +1,1 @@
-export * from "./observable-mapper.service";
+export * from './observable-mapper.service';

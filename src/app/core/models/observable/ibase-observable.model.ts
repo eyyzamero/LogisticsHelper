@@ -1,5 +1,5 @@
-import { IObservableErrorModel } from "..";
-import { CommunicationState } from "../../enums";
+import { IObservableErrorModel } from '..';
+import { CommunicationState } from '../../enums';
 
 export interface IBaseObservableModel<T> {
   error: IObservableErrorModel | null;

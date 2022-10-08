@@ -1,4 +1,4 @@
-import { IObservableErrorModel } from "..";
+import { IObservableErrorModel } from '..';
 
 export class ObservableErrorModel implements IObservableErrorModel {
 

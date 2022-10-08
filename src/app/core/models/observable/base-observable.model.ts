@@ -1,5 +1,5 @@
-import { IBaseObservableModel, IObservableErrorModel } from "..";
-import { CommunicationState } from "../../enums";
+import { IBaseObservableModel, IObservableErrorModel } from '..';
+import { CommunicationState } from '../../enums';
 
 export class BaseObservableModel<T> implements IBaseObservableModel<T> {
 

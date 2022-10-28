@@ -23,7 +23,7 @@ export class LayoutToolbarComponent implements OnInit, OnDestroy {
     this._initObservables();
   }
 
-  logout() {
+  logout(): void {
     this._authService
       .signOut()
       .then(() => this._router.navigate(['logout']));

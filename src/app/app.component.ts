@@ -44,11 +44,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this._subscriptions.push(authStateSubscription);
   }
 
-  private _navigateToLoginPage() {
+  private _navigateToLoginPage(): void {
     this._router.navigate(['login']);
   }
 
-  private _navigateToHomePage() {
+  private _navigateToHomePage(): void {
     this._router.navigate(['home']);
   }
 

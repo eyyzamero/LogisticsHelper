@@ -21,7 +21,7 @@ export class LoginComponent {
     private _authService: AngularFireAuth
   ) { }
 
-  login() {
+  login(): void {
     if (this.form.valid) {
       this._authService.signInWithEmailAndPassword(
         this.formControls['login'].value,
@@ -45,7 +45,7 @@ export class LoginComponent {
     return form;
   }
 
-  private _navigateToHomePage() {
+  private _navigateToHomePage(): void {
     this._router.navigate(['home']);
   }
 }

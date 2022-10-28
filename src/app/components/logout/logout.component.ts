@@ -12,7 +12,7 @@ export class LogoutComponent {
     private _router: Router
   ) { }
 
-  login() {
+  login(): void {
     this._router.navigate(['login']);
   }
 }

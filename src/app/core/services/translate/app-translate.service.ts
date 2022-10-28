@@ -23,12 +23,12 @@ export class AppTranslateService {
 		private _translateService: TranslateService
 	) { }
 
-	setDefaultLang(language: LanguageKind) {
+	setDefaultLang(language: LanguageKind): void {
 		this._translateService.setTranslation(DEFAULT_LANG, defaultLanguageRef);
 		this._translateService.setDefaultLang(language);
 	}
 
-	use(language: LanguageKind) {
+	use(language: LanguageKind): void {
 		const browserLang = this._translateService.getBrowserLang() ?? DEFAULT_LANG;
 
 		try {

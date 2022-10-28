@@ -1,4 +1,4 @@
-import { IAuthModel } from "..";
+import { IAuthModel } from '..';
 
 export class AuthModel implements IAuthModel {
 

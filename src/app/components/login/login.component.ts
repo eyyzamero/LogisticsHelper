@@ -36,7 +36,8 @@ export class LoginComponent {
   private _initForm(): FormGroup {
     const form = new FormGroup({
       login: new FormControl(null, [
-        Validators.required
+        Validators.required,
+        Validators.email
       ]),
       password: new FormControl(null, [
         Validators.required

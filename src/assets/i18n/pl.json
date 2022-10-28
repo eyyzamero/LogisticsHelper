@@ -1,10 +1,15 @@
 {
   "validation": {
-    "field-required": "Pole wymagane"
+    "field-required": "Pole wymagane",
+    "email-invalid": "Nieprawidłowy adres email"
   },
   "auth": {
     "sign-in": "Zaloguj się",
     "sign-in-back": "Zaloguj się ponownie",
-    "signed-out-correctly": "Zostałeś prawidłowo wylogowany"
+    "signed-out-correctly": "Zostałeś prawidłowo wylogowany",
+    "placeholders": {
+      "email": "Email",
+      "password": "Hasło"
+    }
   }
 }

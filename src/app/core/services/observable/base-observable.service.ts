@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { CommunicationState } from 'src/app/core/enums';
 import { BaseObservableModel, IBaseObservableModel } from 'src/app/core/models';
 import { IBaseObservableService } from '.';
-import { BaseObservableMapperService } from '../mapper';
+import { ObservableMapperService } from '../mapper';
 
 @Injectable({
 	providedIn: 'root'
@@ -26,10 +26,10 @@ export abstract class BaseObservableService<T> implements IBaseObservableService
 
 	constructor(
 		clearObject: T,
-		private _baseObservableMapperService: BaseObservableMapperService
+		private _observableMapperService: ObservableMapperService
 	) {
 		this._cleanObservableSubject = _.cloneDeep(clearObject);
-		this._observableSubject = new BaseObservableModel(clearObject);
+		this._observableSubject = new BaseObservableModel<T>(null, clearObject);
 		this._initSubject();
 	}
 
@@ -80,6 +80,6 @@ export abstract class BaseObservableService<T> implements IBaseObservableService
 
 	protected _addErrorBase(error: HttpErrorResponse, errorText: string = ''): void {
 		this._observableSubject.communicationState = CommunicationState.ERROR;
-		this._observableSubject.error = this._baseObservableMapperService.httpErrorResponseToIObservableErrorModel(error, errorText);
+		this._observableSubject.error = this._observableMapperService.httpErrorResponseToIObservableErrorModel(error, errorText);
 	}
 }

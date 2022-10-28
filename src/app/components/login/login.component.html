@@ -1,0 +1,11 @@
+<div class="login-container">
+  <app-logo></app-logo>
+  <div class="info">Sign In</div>
+  <form [formGroup]="form" (ngSubmit)="login()">
+    <input formControlName="login" type="text" autocomplete="off">
+    <div *ngIf="formControls.login.dirty && formControls.login.errors?.required" class="error">Field required</div>
+    <input formControlName="password" type="password" autocomplete="off">
+    <div *ngIf="formControls.password.dirty && formControls.password.errors?.required" class="error">Field required</div>
+    <button type="submit" class="login-btn" [disabled]="form.invalid">Sign In</button>
+  </form>
+</div>

@@ -1,0 +1,15 @@
+.logo-container {
+  display: flex;
+  flex-direction: column;
+
+  img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .label {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+}

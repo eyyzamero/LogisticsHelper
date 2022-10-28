@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "logisticshelperdb"
+  },
+  "targets": {
+    "logisticshelperdb": {
+      "hosting": {
+        "logistics-helper": [
+          "logisticshelperdb"
+        ]
+      }
+    }
+  }
+}

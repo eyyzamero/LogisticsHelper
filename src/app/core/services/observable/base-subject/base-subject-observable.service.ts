@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BaseObservableMapperService } from '../../mapper';
+import { ObservableMapperService } from '../../mapper';
 import { BaseObservableService } from '../base-observable.service';
 import { IBaseSubjectObservableService } from './ibase-subject-observable.service';
 
@@ -10,9 +10,9 @@ export class BaseSubjectObservableService<T> extends BaseObservableService<T> im
 
   constructor(
 		clearObject: T,
-		baseObservableMapperService: BaseObservableMapperService
+		observableMapperService: ObservableMapperService
 	) {
-		super(clearObject, baseObservableMapperService);
+		super(clearObject, observableMapperService);
 	}
 
 	protected _initSubject(): void { }

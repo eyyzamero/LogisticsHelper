@@ -30,3 +30,12 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
+
+src/configs/config.common.ts
+src/configs/config.ts
+src/configs/config.prod.ts

@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { BaseObservableModel } from 'src/app/core/models';
 import { BaseObservableService } from '../base-observable.service';
 import { IBaseBehaviorSubjectLocalStorageObservableService } from '..';
-import { BaseObservableMapperService } from '../../mapper';
+import { ObservableMapperService } from '../../mapper';
 
 @Injectable({
 	providedIn: 'root'
@@ -18,10 +18,10 @@ export class BaseBehaviorSubjectLocalStorageObservableService<T> extends BaseObs
 
 	constructor(
 		clearObject: T,
-		baseObservableMapperService: BaseObservableMapperService,
+		observableMapperService: ObservableMapperService,
 		private _localStoreName: string
 	) {
-		super(clearObject, baseObservableMapperService);
+		super(clearObject, observableMapperService);
 
 		if (!this.observableSubjectValue.data)
 			this._setLocalStorageItem(clearObject);

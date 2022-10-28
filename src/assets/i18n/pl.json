@@ -1,3 +1,10 @@
 {
-  
+  "validation": {
+    "field-required": "Pole wymagane"
+  },
+  "auth": {
+    "sign-in": "Zaloguj się",
+    "sign-in-back": "Zaloguj się ponownie",
+    "signed-out-correctly": "Zostałeś prawidłowo wylogowany"
+  }
 }

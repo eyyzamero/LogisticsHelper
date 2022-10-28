@@ -1,3 +1,10 @@
 {
-  
+  "validation": {
+    "field-required": "Field required"
+  },
+  "auth": {
+    "sign-in": "Sign in",
+    "sign-in-back": "Sign in back",
+    "signed-out-correctly": "You have been signed out correctly"
+  }
 }

@@ -1,0 +1,4 @@
+export enum UserPermission {
+  ASSIGNMENTS = 'ASSIGNMENTS',
+  USER_MANAGEMENT = 'USER_MANAGEMENT'
+}

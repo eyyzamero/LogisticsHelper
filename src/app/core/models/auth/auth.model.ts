@@ -1,4 +1,5 @@
 import { IAuthModel } from '..';
+import { UserPermission, UserRole } from '../../enums';
 
 export class AuthModel implements IAuthModel {
 
@@ -9,7 +10,7 @@ export class AuthModel implements IAuthModel {
     public email: string = '',
     public emailVerified: boolean = false,
     public avatarUrl: string | null = null,
-    public roles: Array<string> = new Array<string>,
-    public permissions: Array<string> = new Array<string>
+    public role: UserRole = UserRole.NONE,
+    public permissions: Array<UserPermission> = new Array<UserPermission>
   ) { }
 }

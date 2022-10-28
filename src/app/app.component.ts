@@ -4,7 +4,9 @@ import { AppTranslateService } from './core/services/translate/app-translate.ser
 import { Subscription } from 'rxjs';
 import { AuthObservableService } from './core/services/observable/auth/auth-observable.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
+import { FirestoreUsersCollectionService } from './core/services/collections/users/firestore-users-collection.service';
+import { FirestoreRolesCollectionService } from './core/services/collections/roles/firestore-roles-collection.service';
+import { FirestorePermissionsCollectionService } from './core/services/collections/permissions/firestore-permissions-collection.service';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +20,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     appTranslateService: AppTranslateService,
-    private _router: Router,
     private _authService: AngularFireAuth,
     private _authObservableService: AuthObservableService,
+    private _firestoreUsersCollectionService: FirestoreUsersCollectionService,
+    private _firestoreRolesCollectionService: FirestoreRolesCollectionService,
+    private _firestorePermissionsCollectionService: FirestorePermissionsCollectionService
   ) {
     appTranslateService.setDefaultLang(LanguageKind.EN);
   }
@@ -34,22 +38,26 @@ export class AppComponent implements OnInit, OnDestroy {
       next: (user) => {
         if (!user) {
           this._authObservableService.clear();
-          // this._navigateToLoginPage();
           return;
         };
-        this._authObservableService.add();
-        // this._navigateToHomePage();
+        this._getUserFromDb(user.uid);
       }
     });
-    this._subscriptions.push(authStateSubscription);
+    const authSubscription = this._authObservableService.observable.subscribe({
+      next: (auth) => console.log(auth)
+    });
+    this._subscriptions.push(authStateSubscription), authSubscription;
   }
 
-  private _navigateToLoginPage(): void {
-    this._router.navigate(['login']);
-  }
-
-  private _navigateToHomePage(): void {
-    this._router.navigate(['home']);
+  private async _getUserFromDb(userId: string) {
+    const user = await this._firestoreUsersCollectionService.getUserByDocIdAsync(userId);
+    const role = await this._firestoreRolesCollectionService.getRoleByDocIdAsync(user?.roleId)
+    const permissions = await this._firestorePermissionsCollectionService.getPermissionsByDocIds(role?.permissionIds)
+    
+    this._authObservableService.addUserInfoWithoutNext(user);
+    this._authObservableService.addRoleWithoutNext(role);
+    this._authObservableService.addPermissionsWithoutNext(permissions);
+    this._authObservableService.next();
   }
 
   ngOnDestroy(): void {

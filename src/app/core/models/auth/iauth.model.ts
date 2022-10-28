@@ -1,3 +1,5 @@
+import { UserPermission, UserRole } from "../../enums";
+
 export interface IAuthModel {
   id: string;
   name: string;
@@ -5,6 +7,6 @@ export interface IAuthModel {
   email: string;
   emailVerified: boolean;
   avatarUrl: string | null;
-  roles: Array<string>;
-  permissions: Array<string>;
+  role: UserRole,
+  permissions: Array<UserPermission>;
 }

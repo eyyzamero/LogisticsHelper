@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LanguageKind } from './core/enums';
+import { FirestoreCollection, LanguageKind } from './core/enums';
 import { AppTranslateService } from './core/services/translate/app-translate.service';
 import { Subscription } from 'rxjs';
 import { AuthObservableService } from './core/services/observable/auth/auth-observable.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { FirestoreUsersCollectionService } from './core/services/collections/users/firestore-users-collection.service';
-import { FirestoreRolesCollectionService } from './core/services/collections/roles/firestore-roles-collection.service';
-import { FirestorePermissionsCollectionService } from './core/services/collections/permissions/firestore-permissions-collection.service';
+import { IPermissionDbRefModel, IRoleDbRefModel, IUserDbRefModel } from './core/models';
+import { FirestoreCollectionService } from './core/services/collections/firestore-collection.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-root',
@@ -18,15 +18,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private _subscriptions: Array<Subscription> = new Array<Subscription>();
 
+  private _usersCollectionService: FirestoreCollectionService<IUserDbRefModel>;
+  private _rolesCollectionService: FirestoreCollectionService<IRoleDbRefModel>;
+  private _permissionsCollectionService: FirestoreCollectionService<IPermissionDbRefModel>;
+
   constructor(
     appTranslateService: AppTranslateService,
+    firestore: AngularFirestore,
     private _authService: AngularFireAuth,
-    private _authObservableService: AuthObservableService,
-    private _firestoreUsersCollectionService: FirestoreUsersCollectionService,
-    private _firestoreRolesCollectionService: FirestoreRolesCollectionService,
-    private _firestorePermissionsCollectionService: FirestorePermissionsCollectionService
+    private _authObservableService: AuthObservableService
   ) {
     appTranslateService.setDefaultLang(LanguageKind.EN);
+
+    this._usersCollectionService = new FirestoreCollectionService<IUserDbRefModel>(firestore, FirestoreCollection.USERS);
+    this._rolesCollectionService = new FirestoreCollectionService<IRoleDbRefModel>(firestore, FirestoreCollection.ROLES);
+    this._permissionsCollectionService = new FirestoreCollectionService<IPermissionDbRefModel>(firestore, FirestoreCollection.PERMISSIONS);
   }
 
   ngOnInit(): void {
@@ -49,10 +55,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this._subscriptions.push(authStateSubscription), authSubscription;
   }
 
-  private async _getUserFromDb(userId: string) {
-    const user = await this._firestoreUsersCollectionService.getUserByDocIdAsync(userId);
-    const role = await this._firestoreRolesCollectionService.getRoleByDocIdAsync(user?.roleId)
-    const permissions = await this._firestorePermissionsCollectionService.getPermissionsByDocIds(role?.permissionIds)
+  private async _getUserFromDb(userId: string): Promise<void> {
+    const user = await this._usersCollectionService.getByDocIdAsync(userId);
+    const role = await this._rolesCollectionService.getByDocIdAsync(user?.roleId)
+    const permissions = await this._permissionsCollectionService.getByDocIds(role?.permissionIds)
     
     this._authObservableService.addUserInfoWithoutNext(user);
     this._authObservableService.addRoleWithoutNext(role);

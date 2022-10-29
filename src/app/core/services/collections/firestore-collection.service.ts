@@ -12,8 +12,7 @@ export class FirestoreCollectionService<T> {
   constructor(
     private _firestore: AngularFirestore,
     private _collectionName: FirestoreCollection
-  ) {
-  }
+  ) { }
 
   async getByDocIdAsync(docId?: string): Promise<T | undefined> {
     if (!docId)

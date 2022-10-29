@@ -1,4 +1,11 @@
 <div class="layout-container">
-  <app-layout-toolbar></app-layout-toolbar>
-  <router-outlet></router-outlet>
+  <app-layout-side-menu></app-layout-side-menu>
+  <div id="content" class="content">
+    <div class="toolbar">
+      <app-layout-toolbar></app-layout-toolbar>
+    </div>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

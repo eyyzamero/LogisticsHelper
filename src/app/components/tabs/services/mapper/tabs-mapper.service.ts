@@ -27,6 +27,12 @@ export class TabsMapperService {
       case TabType.USERS:
         icon = 'people-outline';
         break;
+      case TabType.BARCODES:
+        icon = 'barcode-outline';
+        break;
+      case TabType.LOGOUT:
+        icon = 'log-out-outline';
+        break;
     }
     return icon;
   }

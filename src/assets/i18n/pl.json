@@ -14,6 +14,8 @@
   },
   "tabs": {
     "assignments": "Zlecenia",
-    "users": "Użytkownicy"
+    "users": "Użytkownicy",
+    "barcodes": "Kody kreskowe",
+    "logout": "Wyloguj"
   }
 }

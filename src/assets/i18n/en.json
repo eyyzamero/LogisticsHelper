@@ -14,6 +14,8 @@
   },
   "tabs": {
     "assignments": "Assignments",
-    "users": "Users"
+    "users": "Users",
+    "barcodes": "Barcodes",
+    "logout": "Sign out"
   }
 }

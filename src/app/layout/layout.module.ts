@@ -5,6 +5,7 @@ import { LayoutComponent } from './layout.component';
 import { LayoutToolbarComponent } from './components/toolbar/layout-toolbar.component';
 import { LayoutSideMenuComponent } from './components/side-menu/layout-side-menu.component';
 import { IonicModule } from '@ionic/angular';
+import { TabsModule } from '../components/tabs/tabs.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     CommonModule,
     IonicModule,
+    TabsModule,
     LayoutRoutingModule
   ]
 })

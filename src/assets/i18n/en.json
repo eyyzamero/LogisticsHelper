@@ -11,5 +11,9 @@
       "email": "Email",
       "password": "Password"
     }
+  },
+  "tabs": {
+    "assignments": "Assignments",
+    "users": "Users"
   }
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { IonMenu } from '@ionic/angular';
 
 @Component({
   selector: 'app-layout-side-menu',
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
 })
 export class LayoutSideMenuComponent {
 
+  @ViewChild('menu', { static: true }) menuRef!: IonMenu;
+
   constructor() { }
+
+  hideSideMenu() {
+    this.menuRef.close();
+  }
 }

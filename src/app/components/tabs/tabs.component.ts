@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { TabType } from 'src/app/core/enums';
@@ -11,6 +11,8 @@ import { TabsService } from './services/tabs/tabs.service';
   styleUrls: ['./tabs.component.scss']
 })
 export class TabsComponent {
+
+  @Output() hideSideMenu: EventEmitter<void> = new EventEmitter<void>();
   
   get tabs(): Array<ITabModel> {
     const tabs = this._tabsService.getTabs();
@@ -32,6 +34,7 @@ export class TabsComponent {
         this._navigate(tab.route);
         break;
     }
+    this.hideSideMenu.emit();
   }
 
   private _signOut(): void {

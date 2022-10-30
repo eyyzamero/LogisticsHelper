@@ -1,4 +1,4 @@
-<ion-menu type="overlay" content-id="content">
+<ion-menu type="overlay" content-id="content" #menu>
   <ion-header>
     <ion-toolbar color="primary">
       <ion-buttons slot="start">
@@ -7,6 +7,6 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <app-tabs></app-tabs>
+    <app-tabs (hideSideMenu)="hideSideMenu()"></app-tabs>
   </ion-content>
 </ion-menu>

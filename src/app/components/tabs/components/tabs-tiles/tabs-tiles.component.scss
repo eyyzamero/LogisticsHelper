@@ -40,6 +40,15 @@
         padding: 16px;
         cursor: pointer;
 
+        &:hover {
+          background-color: var(--ion-color-primary);
+          color: white;
+
+          .icon {
+            color: white;
+          }
+        }
+
         .icon {
           font-size: 100px;
           margin-bottom: 16px;

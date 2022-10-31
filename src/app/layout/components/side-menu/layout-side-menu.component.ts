@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonMenu } from '@ionic/angular';
+import { TabComponentType } from 'src/app/components/tabs/enums';
 
 @Component({
   selector: 'app-layout-side-menu',
@@ -9,6 +10,8 @@ import { IonMenu } from '@ionic/angular';
 export class LayoutSideMenuComponent {
 
   @ViewChild('menu', { static: true }) menuRef!: IonMenu;
+
+  readonly TabComponentType = TabComponentType;
 
   constructor() { }
 

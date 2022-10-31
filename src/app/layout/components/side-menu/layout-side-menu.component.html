@@ -7,6 +7,6 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <app-tabs (hideSideMenu)="hideSideMenu()"></app-tabs>
+    <app-tabs [type]="TabComponentType.NAVIGATION" (hideSideMenu)="hideSideMenu()"></app-tabs>
   </ion-content>
 </ion-menu>

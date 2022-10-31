@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TabComponentType } from '../tabs/enums';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+
+  readonly TabComponentType = TabComponentType;
 
   constructor() { }
 }

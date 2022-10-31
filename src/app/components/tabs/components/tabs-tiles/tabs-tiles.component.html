@@ -1,0 +1,10 @@
+<div *ngIf="tabs.length" class="tabs-container">
+  <div class="list">
+    <div *ngFor="let tab of tabs" class="tab">
+      <div class="tab-inner" (click)="onTabClick(tab)">
+        <ion-icon [name]="tab.icon" class="icon"></ion-icon>
+        <b class="label" translate>{{ 'tabs.' + tab.type }}</b>
+      </div>
+    </div>
+  </div>
+</div>

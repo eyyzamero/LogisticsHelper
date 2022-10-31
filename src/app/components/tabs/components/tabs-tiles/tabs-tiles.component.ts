@@ -1,11 +1,21 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
+import { TabsService } from '../../services/tabs/tabs.service';
+import { TabsBase } from '../base/tabs.base';
 
 @Component({
   selector: 'app-tabs-tiles',
   templateUrl: './tabs-tiles.component.html',
   styleUrls: ['./tabs-tiles.component.scss'],
 })
-export class TabsTilesComponent {
+export class TabsTilesComponent extends TabsBase {
 
-  constructor() { }
+  constructor(
+    router: Router,
+    tabsService: TabsService,
+    authService: AngularFireAuth
+  ) {
+    super(router, tabsService, authService);
+  }
 }

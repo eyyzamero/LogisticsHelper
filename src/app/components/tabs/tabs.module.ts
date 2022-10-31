@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TabsComponent } from './tabs.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { TabsTilesComponent } from './components/tabs-tiles/tabs-tiles.component';
@@ -8,7 +7,6 @@ import { TabsNavigationComponent } from './components/tabs-navigation/tabs-navig
 
 @NgModule({
   declarations: [
-    TabsComponent,
     TabsNavigationComponent,
     TabsTilesComponent
   ],
@@ -18,7 +16,8 @@ import { TabsNavigationComponent } from './components/tabs-navigation/tabs-navig
     TranslateModule.forChild()
   ],
   exports: [
-    TabsComponent
+    TabsNavigationComponent,
+    TabsTilesComponent
   ]
 })
 export class TabsModule { }

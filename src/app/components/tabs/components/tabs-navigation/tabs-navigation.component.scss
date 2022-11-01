@@ -8,7 +8,12 @@
       --inner-border-width: 0;
 
       &.current {
-        --background: var(--ion-color-secondary);
+        color: var(--ion-color-primary);
+        font-weight: bold;
+
+        .icon {
+          color: var(--ion-color-primary);
+        }
       }
 
       &:hover {

@@ -12,7 +12,7 @@ export class TabsMapperService {
   TabTypeToArrayOfITabModel(): Array<ITabModel> {
     const dest = Object.values(TabType).filter(x => x !== TabType.NONE).map(x => {
       const tabType = x as TabType;
-      return new TabModel(tabType, this._getIconForTabType(tabType), [x]);
+      return new TabModel(tabType, this._getIconForTabType(tabType), [`/${x}`]);
     });
     return dest;
   }
@@ -21,6 +21,9 @@ export class TabsMapperService {
     let icon = '';
 
     switch(type) {
+      case TabType.HOME:
+        icon = 'home-outline';
+        break;
       case TabType.ASSIGNMENTS:
         icon = 'document-text-outline';
         break;

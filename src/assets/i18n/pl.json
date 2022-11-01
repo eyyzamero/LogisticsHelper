@@ -13,6 +13,7 @@
     }
   },
   "tabs": {
+    "home": "Strona startowa",
     "assignments": "Zlecenia",
     "users": "Użytkownicy",
     "barcodes": "Kody kreskowe",

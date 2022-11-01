@@ -13,6 +13,7 @@
     }
   },
   "tabs": {
+    "home": "Home",
     "assignments": "Assignments",
     "users": "Users",
     "barcodes": "Barcodes",

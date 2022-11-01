@@ -6,10 +6,12 @@ import { LayoutToolbarComponent } from './components/toolbar/layout-toolbar.comp
 import { LayoutSideMenuComponent } from './components/side-menu/layout-side-menu.component';
 import { IonicModule } from '@ionic/angular';
 import { TabsModule } from '../components/tabs/tabs.module';
+import { LayoutToolbarLogoComponent } from './components/toolbar/components/toolbar-logo/layout-toolbar-logo.component';
 
 @NgModule({
   declarations: [
     LayoutComponent,
+    LayoutToolbarLogoComponent,
     LayoutToolbarComponent,
     LayoutSideMenuComponent
   ],

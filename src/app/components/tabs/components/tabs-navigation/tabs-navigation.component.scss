@@ -7,6 +7,10 @@
     .tab {
       --inner-border-width: 0;
 
+      &.current {
+        --background: var(--ion-color-secondary);
+      }
+
       &:hover {
         --background: var(--ion-color-primary);
         color: white;

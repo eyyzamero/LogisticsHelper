@@ -14,9 +14,9 @@ export class TabsBase {
   }
 
   constructor(
-    private _router: Router,
-    private _tabsService: TabsService,
-    private _authService: AngularFireAuth
+    protected _router: Router,
+    protected _tabsService: TabsService,
+    protected _authService: AngularFireAuth
   ) { }
 
   protected onTabClick(tab: ITabModel): void {

@@ -7,6 +7,7 @@
         <div class="label">
           <ion-icon name="document-outline"></ion-icon>
           <ion-text>{{ assignmentAccordion.assignment.id }}</ion-text>
+          <ion-progress-bar #bar [value]="randomProgressBarValue" [ngClass]="getProgressBarClass(bar.value)"></ion-progress-bar>
         </div>
       </ion-item>
       <div slot="content" class="content">

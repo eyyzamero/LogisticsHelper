@@ -22,7 +22,7 @@ export class AssignmentsComponent {
   readonly CommunicationState = CommunicationState;
 
   private _assignmentsCollectionService: FirestoreCollectionService<IAssignmentDbRefModel>
-  
+
   constructor(
     firestore: AngularFirestore,
     private _authObservableService: AuthObservableService,
@@ -31,6 +31,27 @@ export class AssignmentsComponent {
   ) {
     this._assignmentsCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.ASSIGNMENTS);
     this._getAssignments();
+  }
+
+  get randomProgressBarValue(): string {
+    return Math.random().toFixed(2).replace(',', '.');
+  }
+
+  getProgressBarClass(value: string) {
+    const number = Number(value);
+    let className: string = '';
+
+    if (!isNaN(number)) {
+      if (number <= 0.33)
+        className = 'low';
+      else if (number <= 0.66)
+        className = 'medium';
+      else if (number <= 0.99)
+        className = 'high';
+      else
+        className = 'complete';
+    }
+    return className;
   }
 
   private async _getAssignments() {

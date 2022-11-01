@@ -1,15 +1,15 @@
 <div class="assignments-container">
   <b class="section-label" translate>tabs.assignments</b>
   <ion-accordion-group class="accordions">
-    <ion-accordion class="accordion">
+    <ion-accordion *ngFor="let assignmentAccordion of (assignments$ | async).data" class="accordion">
       <ion-item slot="header">
         <div class="label">
           <ion-icon name="document-outline"></ion-icon>
-          <ion-text>27_10_2022_9767511</ion-text>
+          <ion-text>{{ assignmentAccordion.assignment.id }}</ion-text>
         </div>
       </ion-item>
       <div slot="content" class="content">
-        <b>Content</b>
+        <b>Content for {{ assignmentAccordion.assignment.id }}</b>
       </div>
     </ion-accordion>
   </ion-accordion-group>

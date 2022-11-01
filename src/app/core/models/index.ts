@@ -10,3 +10,4 @@ export * from './collections/permissions/ipermission-db-ref.model';
 export * from './collections/permissions/permission-db-ref.model';
 export * from './collections/roles/irole-db-ref.model';
 export * from './collections/roles/role-db-ref.model';
+export * from "./collections/assignments/iassignment-db-ref.model";

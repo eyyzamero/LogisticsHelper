@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../core/guards/auth.guard';
+import { FireAuthGuard } from '../core/guards/fire-auth.guard';
 import { LayoutComponent } from './layout.component';
 
 const routes: Routes = [
@@ -12,14 +12,14 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () => import('../components/home/home.module').then(m => m.HomeModule),
         canLoad: [
-          AuthGuard
+          FireAuthGuard
         ]
       },
       {
         path: 'assignments',
         loadChildren: () => import('../components/assignments/assignments.module').then(m => m.AssignmentsModule),
         canLoad: [
-          AuthGuard
+          FireAuthGuard
         ]
       },
       {
@@ -46,7 +46,7 @@ const routes: Routes = [
     RouterModule
   ],
   providers: [
-    AuthGuard
+    FireAuthGuard
   ]
 })
 export class LayoutRoutingModule { }

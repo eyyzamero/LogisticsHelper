@@ -9,14 +9,14 @@ import { AuthMapperService } from '../../mapper/auth/auth-mapper.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthObservableService extends BaseBehaviorSubjectObservableService<IAuthModel> {
+export class AuthObservableService extends BaseBehaviorSubjectObservableService<IAuthModel | null> {
 
   constructor(
     observableMapperService: ObservableMapperService,
     private _authService: AngularFireAuth,
     private _authMapperService: AuthMapperService
   ) {
-    super(new AuthModel(), observableMapperService);
+    super(null, observableMapperService);
   }
 
   override add(): void {
@@ -35,18 +35,23 @@ export class AuthObservableService extends BaseBehaviorSubjectObservableService<
     this.next();
   }
 
-  addUserInfoWithoutNext(userInfo?: IUserDbRefModel) {
-    if (userInfo) 
-      this._authMapperService.IUserDbRefModelToIAuthModel(userInfo, this.observableSubjectValue.data);
+  initModel(): void {
+    const model = new AuthModel();
+    this.addWithoutNext(model);
   }
 
-  addRoleWithoutNext(role?: IRoleDbRefModel) {
-    if (role) 
-      this._authMapperService.IRoleDbRefModelToIAuthModel(role, this.observableSubjectValue.data);
+  addUserInfoWithoutNext(userInfo?: IUserDbRefModel): void {
+    if (userInfo)
+      this._authMapperService.IUserDbRefModelToIAuthModel(userInfo, this.observableSubjectValue.data!);
   }
 
-  addPermissionsWithoutNext(permissions?: Array<IPermissionDbRefModel>) {
-    if (permissions) 
-      this._authMapperService.ArrayOfIPermissionDbRefModelToIAuthModel(permissions, this.observableSubjectValue.data);
+  addRoleWithoutNext(role?: IRoleDbRefModel): void {
+    if (role)
+      this._authMapperService.IRoleDbRefModelToIAuthModel(role, this.observableSubjectValue.data!);
+  }
+
+  addPermissionsWithoutNext(permissions?: Array<IPermissionDbRefModel>): void {
+    if (permissions)
+      this._authMapperService.ArrayOfIPermissionDbRefModelToIAuthModel(permissions, this.observableSubjectValue.data!);
   }
 }

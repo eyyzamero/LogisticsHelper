@@ -28,8 +28,18 @@ export class FirestoreCollectionService<T> {
       return undefined;
     
     const collection = this._getCollection(ref => ref.where(documentId(), "in", docIds));
-    const permissions = await firstValueFrom(collection.valueChanges());
-    return permissions;
+    const documents = await firstValueFrom(collection.valueChanges());
+    return documents;
+  }
+
+  async getByUserRef(userId?: string, fieldName: string = 'user'): Promise<Array<T> | undefined> {
+    if (!userId)
+      return undefined;
+
+    const userDocRef = await this._firestore.collection('users').doc(userId).ref;
+    const collection = this._getCollection(ref => ref.where(fieldName, '==', userDocRef));
+    const documents = await firstValueFrom(collection.valueChanges());
+    return documents;
   }
 
   private _getCollection(query?: QueryFn): AngularFirestoreCollection<T> {

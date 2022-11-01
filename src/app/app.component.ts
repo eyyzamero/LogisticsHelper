@@ -4,7 +4,7 @@ import { AppTranslateService } from './core/services/translate/app-translate.ser
 import { Subscription } from 'rxjs';
 import { AuthObservableService } from './core/services/observable/auth/auth-observable.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { IPermissionDbRefModel, IRoleDbRefModel, IUserDbRefModel } from './core/models';
+import { AuthModel, IPermissionDbRefModel, IRoleDbRefModel, IUserDbRefModel } from './core/models';
 import { FirestoreCollectionService } from './core/services/collections/firestore-collection.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
@@ -15,6 +15,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 
 export class AppComponent implements OnInit, OnDestroy {
+
+  authDataObtained: boolean = false;
 
   private _subscriptions: Array<Subscription> = new Array<Subscription>();
 
@@ -60,6 +62,9 @@ export class AppComponent implements OnInit, OnDestroy {
     const role = await this._rolesCollectionService.getByDocIdAsync(user?.roleId)
     const permissions = await this._permissionsCollectionService.getByDocIds(role?.permissionIds)
     
+    if (!this._authObservableService.observableSubjectValue.data)
+      this._authObservableService.initModel();
+
     this._authObservableService.addUserInfoWithoutNext(user);
     this._authObservableService.addRoleWithoutNext(role);
     this._authObservableService.addPermissionsWithoutNext(permissions);

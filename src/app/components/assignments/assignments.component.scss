@@ -10,17 +10,32 @@
 
   .accordions {
     .accordion {
-      .label {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        font-weight: bold;
-        align-items: center;
-        width: 100%;
-
-        ion-icon {
-          font-size: 24px;
+      &.accordion-expanded {
+        ion-item {
+          --background: var(--ion-color-light-shade);
         }
+      }
+      
+      ion-item {
+        --background: var(--ion-color-light);
+
+        .label {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          font-weight: bold;
+          align-items: center;
+          width: 100%;
+  
+          ion-icon {
+            font-size: 24px;
+            margin-right: 8px;
+          }
+        }
+      }
+
+      .content {
+        padding: 16px;
       }
     }
   }

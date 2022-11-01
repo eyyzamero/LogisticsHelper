@@ -1,6 +1,6 @@
 <div class="assignments-container">
   <b class="section-label" translate>tabs.assignments</b>
-  <ion-accordion-group class="accordions">
+  <ion-accordion-group class="accordions" [multiple]="true">
     <ion-accordion *ngFor="let assignmentAccordion of (assignments$ | async).data" class="accordion">
       <ion-item slot="header">
         <div class="label">

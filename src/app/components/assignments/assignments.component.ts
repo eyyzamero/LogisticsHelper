@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FirestoreCollection } from 'src/app/core/enums';
 import { IAssignmentDbRefModel, IBaseObservableModel } from 'src/app/core/models';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
@@ -31,12 +31,8 @@ export class AssignmentsComponent {
     this._getAssignments();
   }
 
-  toggleAccordionState() {
-
-  }
-
   private async _getAssignments() {
-    const userId = this._authObservableService.observableSubjectValue.data?.id ?? undefined;
+    const userId = this._authObservableService.observableSubjectValue.data?.id;
     const assignments = await this._assignmentsCollectionService.getByUserRef(userId);
 
     if (assignments) {

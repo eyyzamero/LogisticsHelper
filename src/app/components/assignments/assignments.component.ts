@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { CommunicationState, FirestoreCollection } from 'src/app/core/enums';
-import { IAssignmentDbRefModel, IBaseObservableModel } from 'src/app/core/models';
+import { IAssignmentDbRefModel, IBaseObservableModel, ITcDbRefModel } from 'src/app/core/models';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { AuthObservableService } from 'src/app/core/services/observable/auth/auth-observable.service';
 import { AssignmentAccordionModel } from './models';
@@ -54,13 +54,44 @@ export class AssignmentsComponent {
     return className;
   }
 
+  toggle(item: AssignmentAccordionModel) {
+    const opened = !item.opened;
+    this._assignmentsObservableService.setOpened(item, opened);
+
+    if (opened) {
+
+    }
+  }
+
   private async _getAssignments() {
     const userId = this._authObservableService.observableSubjectValue.data?.id;
     const assignments = await this._assignmentsCollectionService.getByUserRef(userId);
 
     if (assignments) {
-      const mappedAssignments = this._assignmentsMapperService.ArrayOfIAssignmentDbRefModelToArrayOfIAssignmentAccordionModel(assignments);
+      let mappedAssignments = this._assignmentsMapperService.ArrayOfIAssignmentDbRefModelToArrayOfIAssignmentAccordionModel(assignments);
+
+      mappedAssignments.forEach(async assignment => {
+        const assignmentDbRef = assignments.find(x => x.id === assignment.assignment.id);
+        console.log(assignmentDbRef);
+        const tcs = await this._getTcs(assignmentDbRef!);
+        assignment.assignment.tcs = this._assignmentsMapperService.ArrayOfITcDbRefToArrayOfIAssignmentTcModel(tcs);
+      });
+      console.log(mappedAssignments);
       this._assignmentsObservableService.add(mappedAssignments);
     }
+  }
+
+  private async _getTcs(assignment: IAssignmentDbRefModel): Promise<Array<ITcDbRefModel>> {
+    // TODO Refactor this shit
+    // get those tcs by document references from collection service
+    const tcs = new Array<ITcDbRefModel>();
+
+    assignment.tcs?.forEach(async tcDocRef => {
+      const tc = (await tcDocRef.get()).data();
+
+      if (tc)
+        tcs.push(tc)
+    });
+    return tcs;
   }
 }

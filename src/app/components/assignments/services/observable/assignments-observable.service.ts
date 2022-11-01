@@ -13,4 +13,13 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
   ) {
     super(new Array<IAssignmentAccordionModel>(), observableMapperService);
   }
+
+  setOpened(item: IAssignmentAccordionModel, value: boolean) {
+    let assignment = this.observableSubjectValue.data.find(x => x.assignment.id === item.assignment.id);
+
+    if (assignment) {
+      assignment.opened = value;
+      this.next();
+    }
+  }
 }

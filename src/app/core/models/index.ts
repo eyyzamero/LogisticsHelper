@@ -11,3 +11,5 @@ export * from './collections/permissions/permission-db-ref.model';
 export * from './collections/roles/irole-db-ref.model';
 export * from './collections/roles/role-db-ref.model';
 export * from "./collections/assignments/iassignment-db-ref.model";
+export * from "./collections/tcs/itc-db-ref.model";
+export * from "./collections/tcs/tc-db-ref.model";

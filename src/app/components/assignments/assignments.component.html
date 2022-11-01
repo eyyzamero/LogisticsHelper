@@ -2,7 +2,7 @@
   <b class="section-label" translate>tabs.assignments</b>
   <app-loader *ngIf="(assignments$ | async).communicationState !== CommunicationState.LOADED"></app-loader>
   <ion-accordion-group *ngIf="(assignments$ | async).communicationState === CommunicationState.LOADED" class="accordions" [multiple]="true">
-    <ion-accordion *ngFor="let assignmentAccordion of (assignments$ | async).data" class="accordion">
+    <ion-accordion *ngFor="let assignmentAccordion of (assignments$ | async).data" class="accordion" (click)="toggle(assignmentAccordion)">
       <ion-item slot="header">
         <div class="label">
           <ion-icon name="document-outline"></ion-icon>

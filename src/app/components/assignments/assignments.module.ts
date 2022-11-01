@@ -5,6 +5,7 @@ import { AssignmentsRoutingModule } from './assignments-routing.module';
 import { AssignmentsComponent } from './assignments.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
+import { LoaderModule } from '../common/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { IonicModule } from '@ionic/angular';
     CommonModule,
     TranslateModule.forChild(),
     IonicModule,
+    LoaderModule,
     AssignmentsRoutingModule
   ]
 })

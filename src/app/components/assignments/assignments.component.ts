@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { FirestoreCollection } from 'src/app/core/enums';
+import { CommunicationState, FirestoreCollection } from 'src/app/core/enums';
 import { IAssignmentDbRefModel, IBaseObservableModel } from 'src/app/core/models';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { AuthObservableService } from 'src/app/core/services/observable/auth/auth-observable.service';
@@ -18,6 +18,8 @@ import { AssignmentsObservableService } from './services/observable/assignments-
 export class AssignmentsComponent {
 
   assignments$: Observable<IBaseObservableModel<Array<AssignmentAccordionModel>>> = this._assignmentsObservableService.observable;
+
+  readonly CommunicationState = CommunicationState;
 
   private _assignmentsCollectionService: FirestoreCollectionService<IAssignmentDbRefModel>
   

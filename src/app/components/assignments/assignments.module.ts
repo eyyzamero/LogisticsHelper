@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { AssignmentsRoutingModule } from './assignments-routing.module';
 import { AssignmentsComponent } from './assignments.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -10,6 +12,8 @@ import { AssignmentsComponent } from './assignments.component';
   ],
   imports: [
     CommonModule,
+    TranslateModule.forChild(),
+    IonicModule,
     AssignmentsRoutingModule
   ]
 })

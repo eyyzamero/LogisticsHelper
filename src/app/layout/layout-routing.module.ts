@@ -16,6 +16,13 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'assignments',
+        loadChildren: () => import('../components/assignments/assignments.module').then(m => m.AssignmentsModule),
+        canLoad: [
+          AuthGuard
+        ]
+      },
+      {
         path: 'login',
         loadChildren: () => import('../components/login/login.module').then(m => m.LoginModule)
       },

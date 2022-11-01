@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 export class AssignmentsComponent {
 
   constructor() { }
+
+  toggleAccordionState() {
+    
+  }
 }

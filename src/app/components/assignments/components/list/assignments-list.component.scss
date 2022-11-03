@@ -1,0 +1,88 @@
+.assignments-list-container {
+  display: flex;
+  flex-direction: column;
+
+  .section-label {
+    color: var(--ion-color-primary);
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .accordions {
+    .accordion {
+      &.accordion-expanded {
+        ion-item {
+          --background: var(--ion-color-light-shade);
+        }
+      }
+
+      ion-item {
+        --background: var(--ion-color-light);
+
+        .label {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          font-weight: bold;
+          align-items: center;
+          width: 100%;
+
+          ion-icon {
+            font-size: 24px;
+            margin-right: 8px;
+          }
+
+          ion-progress-bar {
+            width: 100%;
+            margin-top: 8px;
+
+            @media(min-width: 400px) {
+              width: 100px;
+              margin: 0 0 0 auto;
+            }
+
+            @media(min-width: 768px) {
+              width: 200px;
+            }
+          }
+        }
+      }
+
+      .content {
+        padding: 16px;
+
+        .tcs-label {
+          font-size: 16px;
+          font-weight: bold;
+        }
+
+        .tcs {
+          display: flex;
+          flex-direction: column;
+          margin-left: 16px;
+
+          .no-tcs {
+            margin-top: 4px;
+            font-size: 16px;
+            font-weight: bold;
+          }
+
+          .tc {
+            display: flex;
+            margin-top: 4px;
+
+            ion-icon {
+              font-size: 16px;
+              margin-right: 8px;
+            }
+
+            .name {
+              font-size: 16px;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}

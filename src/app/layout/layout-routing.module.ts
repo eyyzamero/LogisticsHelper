@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthObservableModelObtainedGuard } from '../core/guards/auth-observable-model-obtained.guard';
 import { FireAuthGuard } from '../core/guards/fire-auth.guard';
 import { LayoutComponent } from './layout.component';
 
@@ -19,7 +20,8 @@ const routes: Routes = [
         path: 'assignments',
         loadChildren: () => import('../components/assignments/assignments.module').then(m => m.AssignmentsModule),
         canLoad: [
-          FireAuthGuard
+          FireAuthGuard,
+          AuthObservableModelObtainedGuard
         ]
       },
       {

@@ -7,10 +7,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { LoaderModule } from '../common/loader/loader.module';
 import { DirectivesModule } from 'src/app/core/directives/directives.module';
+import { AssignmentsListComponent } from './components/list/assignments-list.component';
 
 @NgModule({
   declarations: [
-    AssignmentsComponent
+    AssignmentsComponent,
+    AssignmentsListComponent
   ],
   imports: [
     CommonModule,

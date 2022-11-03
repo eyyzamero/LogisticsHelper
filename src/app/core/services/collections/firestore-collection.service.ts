@@ -4,6 +4,10 @@ import { documentId } from '@angular/fire/firestore';
 import { firstValueFrom } from 'rxjs';
 import { FirestoreCollection } from '../../enums';
 
+type KeysInGenericType<T> = {
+  [K in keyof T]: K
+}[keyof T]
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,6 +42,12 @@ export class FirestoreCollectionService<T> {
 
     const userDocRef = await this._firestore.collection('users').doc(userId).ref;
     const collection = this._getCollection(ref => ref.where(fieldName, '==', userDocRef));
+    const documents = await firstValueFrom(collection.valueChanges());
+    return documents;
+  }
+
+  async getWhereFieldEqualsValue(field: KeysInGenericType<T>, value: string): Promise<Array<T> | undefined> {
+    const collection = this._getCollection(ref => ref.where(field as string, '==', value));
     const documents = await firstValueFrom(collection.valueChanges());
     return documents;
   }

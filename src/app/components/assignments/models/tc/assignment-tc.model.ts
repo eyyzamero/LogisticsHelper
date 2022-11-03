@@ -4,6 +4,7 @@ export class AssignmentTcModel implements IAssignmentTcModel {
 
   constructor(
     public id: string = '',
+    public assignmentId: string = '',
     public name: string = '',
     public width: number = 0,
     public height: number = 0,

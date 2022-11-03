@@ -34,7 +34,7 @@ export class AssignmentsMapperService {
   }
 
   private _ITcDbRefModelToIAssignmentTcModel(src: ITcDbRefModel): IAssignmentTcModel {
-    const dest = new AssignmentTcModel(src.id, src.name, src.width, src.height, src.inners, src.limit);
+    const dest = new AssignmentTcModel(src.id, src.assignmentId, src.name, src.width, src.height, src.inners, src.limit);
     return dest;
   }
 }

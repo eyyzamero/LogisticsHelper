@@ -5,7 +5,6 @@ export class AssignmentDbRefModel implements IAssignmentDbRefModel {
 
   constructor(
     public id: string = '',
-    public user: DocumentReference<IUserDbRefModel>,
-    public tcIds: Array<string>
+    public user: DocumentReference<IUserDbRefModel>
   ) { }
 }

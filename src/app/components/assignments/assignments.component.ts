@@ -43,24 +43,7 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
     this._initObservables();
   }
 
-  getProgressBarClass(value: string) {
-    const number = Number(value);
-    let className: string = '';
-
-    if (!isNaN(number)) {
-      if (number <= 0.33)
-        className = 'low';
-      else if (number <= 0.66)
-        className = 'medium';
-      else if (number <= 0.99)
-        className = 'high';
-      else
-        className = 'complete';
-    }
-    return className;
-  }
-
-  async toggle(item: AssignmentAccordionModel) {
+  async toggle(item: AssignmentAccordionModel): Promise<void> {
     const opened = !item.opened;
     this._assignmentsObservableService.setOpened(item, opened);
   }
@@ -76,7 +59,7 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
     this._subscriptions.push(assignmentsSubscription);
   }
 
-  private async _getAssignments() {
+  private async _getAssignments(): Promise<void> {
     const userId = this._authObservableService.observableSubjectValue.data?.id;
     const assignments = await this._assignmentsCollectionService.getByUserRef(userId);
 
@@ -84,13 +67,13 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
       let mappedAssignments = this._assignmentsMapperService.ArrayOfIAssignmentDbRefModelToArrayOfIAssignmentAccordionModel(assignments);
       this._assignmentsObservableService.addWithoutNext(mappedAssignments);
 
-      assignments.forEach(async assignment => await this._getTcs(assignment.id, assignment.tcIds));
+      assignments.forEach(async assignment => await this._getTcs(assignment.id));
       this._assignmentsObservableService.next();
     }
   }
 
-  private async _getTcs(assignmentId: string, tcIds: Array<string>): Promise<void> {
-    const tcs = await this._tcsCollectionService.getByDocIds(tcIds);
+  private async _getTcs(assignmentId: string): Promise<void> {
+    const tcs = await this._tcsCollectionService.getWhereFieldEqualsValue('assignmentId', assignmentId);
     const mappedTcs = this._assignmentsMapperService.ArrayOfITcDbRefToArrayOfIAssignmentTcModel(tcs);
     this._assignmentsObservableService.addTcsWithoutNext(assignmentId, mappedTcs);
   }

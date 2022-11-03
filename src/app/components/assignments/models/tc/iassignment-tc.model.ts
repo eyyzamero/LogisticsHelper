@@ -1,5 +1,6 @@
 export interface IAssignmentTcModel {
   id: string;
+  assignmentId: string;
   name: string;
   width: number;
   height: number;

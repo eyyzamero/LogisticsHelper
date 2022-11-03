@@ -4,5 +4,4 @@ import { IUserDbRefModel } from "../..";
 export interface IAssignmentDbRefModel {
   id :string;
   user: DocumentReference<IUserDbRefModel>;
-  tcIds: Array<string>;
 }

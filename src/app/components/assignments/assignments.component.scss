@@ -36,22 +36,6 @@
             width: 100%;
             margin-top: 8px;
 
-            &.low {
-              --progress-background: #EB445A;
-            }
-
-            &.medium {
-              --progress-background: #FFC409;
-            }
-
-            &.high {
-              --progress-background: #3880FF;
-            }
-
-            &.complete {
-              --progress-background: #2DD36F;
-            }
-
             @media(min-width: 400px) {
               width: 100px;
               margin: 0 0 0 auto;

@@ -61,6 +61,12 @@
           flex-direction: column;
           margin-left: 16px;
 
+          .no-tcs {
+            margin-top: 4px;
+            font-size: 16px;
+            font-weight: bold;
+          }
+
           .tc {
             display: flex;
             margin-top: 4px;

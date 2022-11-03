@@ -11,9 +11,9 @@
         </div>
       </ion-item>
       <div slot="content" class="content">
-        <app-loader *ngIf="!assignmentAccordion.data.tcs.length"></app-loader>
         <b class="tcs-label">TCs</b>
         <div class="tcs">
+          <div *ngIf="!assignmentAccordion.data.tcs.length" class="no-tcs">No TCs</div>
           <div *ngFor="let tc of assignmentAccordion.data.tcs" class="tc">
             <ion-icon name="cube-outline"></ion-icon>
             <span class="name">{{ tc.name }}</span>

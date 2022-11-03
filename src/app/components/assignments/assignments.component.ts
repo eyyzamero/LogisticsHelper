@@ -6,7 +6,7 @@ import { CommunicationState, FirestoreCollection } from 'src/app/core/enums';
 import { IAssignmentDbRefModel, ITcDbRefModel } from 'src/app/core/models';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { AuthObservableService } from 'src/app/core/services/observable/auth/auth-observable.service';
-import { AssignmentAccordionModel, IAssignmentAccordionModel } from './models';
+import { IAssignmentModel } from './models';
 import { AssignmentsMapperService } from './services/mapper/assignments-mapper.service';
 import { AssignmentsObservableService } from './services/observable/assignments-observable.service';
 
@@ -19,7 +19,7 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
 
   @ViewChild('accordionGroup', { static: true }) accordionGroup!: IonAccordionGroup;
   
-  assignmentAccordions: Array<IAssignmentAccordionModel> = new Array<IAssignmentAccordionModel>();
+  assignments: Array<IAssignmentModel> = new Array<IAssignmentModel>();
   communicationState: CommunicationState = CommunicationState.NONE;
 
   readonly CommunicationState = CommunicationState;
@@ -43,17 +43,11 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
     this._initObservables();
   }
 
-  async toggle(item: AssignmentAccordionModel): Promise<void> {
-    const opened = !item.opened;
-    this._assignmentsObservableService.setOpened(item, opened);
-  }
-
   private _initObservables(): void {
     const assignmentsSubscription = this._assignmentsObservableService.observable.subscribe({
       next: (value) => {
-        this.assignmentAccordions = value.data;
+        this.assignments = value.data;
         this.communicationState = value.communicationState;
-        this.accordionGroup.value = this.assignmentAccordions.filter(x => x.opened).map(x => x.data.id);
       }
     });
     this._subscriptions.push(assignmentsSubscription);
@@ -64,11 +58,12 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
     const assignments = await this._assignmentsCollectionService.getByUserRef(userId);
 
     if (assignments) {
-      let mappedAssignments = this._assignmentsMapperService.ArrayOfIAssignmentDbRefModelToArrayOfIAssignmentAccordionModel(assignments);
+      let mappedAssignments = this._assignmentsMapperService.ArrayOfIAssignmentDbRefModelToArrayOfIAssignmentModel(assignments);
       this._assignmentsObservableService.addWithoutNext(mappedAssignments);
 
-      assignments.forEach(async assignment => await this._getTcs(assignment.id));
-      this._assignmentsObservableService.next();
+      Promise.all(assignments.map(assignment => this._getTcs(assignment.id))).then(
+        () => this._assignmentsObservableService.next()
+      );
     }
   }
 

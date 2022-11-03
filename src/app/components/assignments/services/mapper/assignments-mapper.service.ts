@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IAssignmentDbRefModel, ITcDbRefModel } from 'src/app/core/models';
-import { AssignmentAccordionModel, AssignmentModel, AssignmentTcModel, IAssignmentAccordionModel, IAssignmentModel, IAssignmentTcModel } from '../../models';
+import { AssignmentModel, AssignmentTcModel, IAssignmentModel, IAssignmentTcModel } from '../../models';
 
 @Injectable({
   providedIn: 'root'
@@ -9,23 +9,13 @@ export class AssignmentsMapperService {
 
   constructor() { }
 
-  ArrayOfIAssignmentDbRefModelToArrayOfIAssignmentAccordionModel(src: Array<IAssignmentDbRefModel>): Array<IAssignmentAccordionModel> {
-    const dest = new Array<IAssignmentAccordionModel>();
-    
-    src.forEach(x => {
-      const assignment = this._IAssignmentDbRefModelToIAssignmentAccordionModel(x);
-      dest.push(assignment);
-    });
+  ArrayOfIAssignmentDbRefModelToArrayOfIAssignmentModel(src?: Array<IAssignmentDbRefModel>): Array<IAssignmentModel> {
+    const dest = src?.map(this._IAssignmentDbRefModelToIAssignmentModel) ?? new Array<IAssignmentModel>();
     return dest;
   }
 
   ArrayOfITcDbRefToArrayOfIAssignmentTcModel(src?: Array<ITcDbRefModel>): Array<IAssignmentTcModel> {
     return src?.map(this._ITcDbRefModelToIAssignmentTcModel) ?? new Array<IAssignmentTcModel>();
-  }
-
-  private _IAssignmentDbRefModelToIAssignmentAccordionModel(src: IAssignmentDbRefModel): IAssignmentAccordionModel {
-    const dest =  new AssignmentAccordionModel(this._IAssignmentDbRefModelToIAssignmentModel(src));
-    return dest;
   }
 
   private _IAssignmentDbRefModelToIAssignmentModel(src: IAssignmentDbRefModel): IAssignmentModel {

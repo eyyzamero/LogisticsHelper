@@ -66,6 +66,32 @@
 
       .content {
         padding: 16px;
+
+        .tcs-label {
+          font-size: 16px;
+          font-weight: bold;
+        }
+
+        .tcs {
+          display: flex;
+          flex-direction: column;
+          margin-left: 16px;
+
+          .tc {
+            display: flex;
+            margin-top: 4px;
+
+            ion-icon {
+              font-size: 16px;
+              margin-right: 8px;
+            }
+
+            .name {
+              font-size: 16px;
+              font-weight: bold;
+            }
+          }
+        }
       }
     }
   }

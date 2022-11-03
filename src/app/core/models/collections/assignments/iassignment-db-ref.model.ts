@@ -1,8 +1,8 @@
 import { DocumentReference } from "@angular/fire/compat/firestore";
-import { IUserDbRefModel, ITcDbRefModel } from "../..";
+import { IUserDbRefModel } from "../..";
 
 export interface IAssignmentDbRefModel {
   id :string;
   user: DocumentReference<IUserDbRefModel>;
-  tcs: Array<DocumentReference<ITcDbRefModel>>;
+  tcIds: Array<string>;
 }

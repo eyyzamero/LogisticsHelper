@@ -19,8 +19,8 @@ export class AssignmentsMapperService {
     return dest;
   }
 
-  ArrayOfITcDbRefToArrayOfIAssignmentTcModel(src: Array<ITcDbRefModel>): Array<IAssignmentTcModel> {
-    return src.map(this._ITcDbRefModelToIAssignmentTcModel);
+  ArrayOfITcDbRefToArrayOfIAssignmentTcModel(src?: Array<ITcDbRefModel>): Array<IAssignmentTcModel> {
+    return src?.map(this._ITcDbRefModelToIAssignmentTcModel) ?? new Array<IAssignmentTcModel>();
   }
 
   private _IAssignmentDbRefModelToIAssignmentAccordionModel(src: IAssignmentDbRefModel): IAssignmentAccordionModel {

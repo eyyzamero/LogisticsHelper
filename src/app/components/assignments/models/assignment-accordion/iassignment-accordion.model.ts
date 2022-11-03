@@ -1,6 +1,6 @@
 import { IAssignmentModel } from "..";
 
 export interface IAssignmentAccordionModel {
-  assignment: IAssignmentModel;
+  data: IAssignmentModel;
   opened: boolean;
 }

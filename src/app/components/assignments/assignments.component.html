@@ -1,17 +1,24 @@
 <div class="assignments-container">
   <b class="section-label" translate>tabs.assignments</b>
-  <app-loader *ngIf="(assignments$ | async).communicationState !== CommunicationState.LOADED"></app-loader>
-  <ion-accordion-group *ngIf="(assignments$ | async).communicationState === CommunicationState.LOADED" class="accordions" [multiple]="true">
-    <ion-accordion *ngFor="let assignmentAccordion of (assignments$ | async).data" class="accordion" (click)="toggle(assignmentAccordion)">
+  <app-loader *ngIf="communicationState !== CommunicationState.LOADED"></app-loader>
+  <ion-accordion-group class="accordions" [multiple]="true" #accordionGroup>
+    <ion-accordion *ngFor="let assignmentAccordion of assignmentAccordions" class="accordion" (click)="toggle(assignmentAccordion)" [value]="assignmentAccordion.data.id">
       <ion-item slot="header">
         <div class="label">
           <ion-icon name="document-outline"></ion-icon>
-          <ion-text>{{ assignmentAccordion.assignment.id }}</ion-text>
-          <ion-progress-bar #bar [value]="randomProgressBarValue" [ngClass]="getProgressBarClass(bar.value)"></ion-progress-bar>
+          <ion-text>{{ assignmentAccordion.data.id }}</ion-text>
+          <ion-progress-bar #bar value="0.13" [ngClass]="getProgressBarClass(bar.value)"></ion-progress-bar>
         </div>
       </ion-item>
       <div slot="content" class="content">
-        <b>Content for {{ assignmentAccordion.assignment.id }}</b>
+        <app-loader *ngIf="!assignmentAccordion.data.tcs.length"></app-loader>
+        <b class="tcs-label">TCs</b>
+        <div class="tcs">
+          <div *ngFor="let tc of assignmentAccordion.data.tcs" class="tc">
+            <ion-icon name="cube-outline"></ion-icon>
+            <span class="name">{{ tc.name }}</span>
+          </div>
+        </div>
       </div>
     </ion-accordion>
   </ion-accordion-group>

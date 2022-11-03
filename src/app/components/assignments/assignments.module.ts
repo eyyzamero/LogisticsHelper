@@ -8,11 +8,13 @@ import { IonicModule } from '@ionic/angular';
 import { LoaderModule } from '../common/loader/loader.module';
 import { DirectivesModule } from 'src/app/core/directives/directives.module';
 import { AssignmentsListComponent } from './components/list/assignments-list.component';
+import { AssignmentsListTcsComponent } from './components/list/components/tcs/assignments-list-tcs.component';
 
 @NgModule({
   declarations: [
     AssignmentsComponent,
-    AssignmentsListComponent
+    AssignmentsListComponent,
+    AssignmentsListTcsComponent
   ],
   imports: [
     CommonModule,

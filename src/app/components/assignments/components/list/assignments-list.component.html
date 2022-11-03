@@ -1,8 +1,8 @@
 <div class="assignments-list-container">
   <b class="section-label" translate>tabs.assignments</b>
   <app-loader *ngIf="communicationState !== CommunicationState.LOADED"></app-loader>
-  <ion-accordion-group class="accordions" [multiple]="true" #accordionGroup>
-    <ion-accordion *ngFor="let assignment of assignments" class="accordion" [value]="assignment.id">
+  <ion-accordion-group class="accordions" [multiple]="true">
+    <ion-accordion *ngFor="let assignment of assignments" class="accordion">
       <ion-item slot="header">
         <div class="label">
           <ion-icon name="document-outline"></ion-icon>
@@ -11,14 +11,7 @@
         </div>
       </ion-item>
       <div slot="content" class="content">
-        <b class="tcs-label">TCs</b>
-        <div class="tcs">
-          <div *ngIf="!assignment.tcs.length" class="no-tcs">No TCs</div>
-          <div *ngFor="let tc of assignment.tcs" class="tc">
-            <ion-icon name="cube-outline"></ion-icon>
-            <span class="name">{{ tc.name }}</span>
-          </div>
-        </div>
+        <app-assignments-list-tcs [tcs]="assignment.tcs"></app-assignments-list-tcs>
       </div>
     </ion-accordion>
   </ion-accordion-group>

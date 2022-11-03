@@ -1,0 +1,10 @@
+<div class="assignments-list-tcs-container">
+  <b class="tcs-label">TCs</b>
+  <div class="tcs">
+    <div *ngIf="!tcs.length" class="no-tcs">No TCs</div>
+    <div *ngFor="let tc of tcs" class="tc">
+      <ion-icon name="cube-outline"></ion-icon>
+      <span class="name">{{ tc.name }}</span>
+    </div>
+  </div>
+</div>

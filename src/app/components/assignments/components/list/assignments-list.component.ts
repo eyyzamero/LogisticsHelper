@@ -16,8 +16,6 @@ import { AssignmentsObservableService } from '../../services/observable/assignme
   styleUrls: ['./assignments-list.component.scss'],
 })
 export class AssignmentsListComponent implements OnInit, OnDestroy {
-
-  @ViewChild('accordionGroup', { static: true }) accordionGroup!: IonAccordionGroup;
   
   assignments: Array<IAssignmentModel> = new Array<IAssignmentModel>();
   communicationState: CommunicationState = CommunicationState.NONE;

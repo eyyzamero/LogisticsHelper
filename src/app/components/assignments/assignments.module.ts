@@ -9,12 +9,14 @@ import { LoaderModule } from '../common/loader/loader.module';
 import { DirectivesModule } from 'src/app/core/directives/directives.module';
 import { AssignmentsListComponent } from './components/list/assignments-list.component';
 import { AssignmentsListTcsComponent } from './components/list/components/tcs/assignments-list-tcs.component';
+import { AssignmentFormComponent } from './components/form/assignment-form.component';
 
 @NgModule({
   declarations: [
     AssignmentsComponent,
     AssignmentsListComponent,
-    AssignmentsListTcsComponent
+    AssignmentsListTcsComponent,
+    AssignmentFormComponent
   ],
   imports: [
     CommonModule,

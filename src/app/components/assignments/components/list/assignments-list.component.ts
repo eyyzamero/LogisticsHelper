@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { IonAccordionGroup } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { CommunicationState, FirestoreCollection } from 'src/app/core/enums';
 import { IAssignmentDbRefModel, ITcDbRefModel } from 'src/app/core/models';

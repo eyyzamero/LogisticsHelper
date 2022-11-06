@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AssignmentModel, IAssignmentModel } from '../../models';
 import { AssignmentsObservableService } from '../../services/observable/assignments-observable.service';
@@ -17,12 +17,17 @@ export class AssignmentFormComponent implements OnInit, OnDestroy {
   private _subscriptions: Array<Subscription> = new Array<Subscription>();
 
   constructor(
+    private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _assignmentsObservableService: AssignmentsObservableService
   ) { }
 
   ngOnInit(): void {
     this._initObservables();
+  }
+
+  navigateBackToList(): void {
+    this._router.navigate(['/assignments']);
   }
 
   private _initObservables(): void {

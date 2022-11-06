@@ -1,13 +1,13 @@
 <div class="assignments-list-actions-container">
-    <ion-button fill="outline" color="primary" (click)="onButtonClick(AssignmentsButtonActionType.EDIT)">
+    <ion-button fill="outline" color="primary" strong="true" (click)="onButtonClick(AssignmentsButtonActionType.EDIT)">
       <ion-icon name="pencil-outline"></ion-icon>
       <span translate>common.edit</span>
     </ion-button>
-    <ion-button fill="outline" color="primary" (click)="onButtonClick(AssignmentsButtonActionType.MOVE_TO_HISTORY)">
+    <ion-button fill="outline" color="primary" strong="true" (click)="onButtonClick(AssignmentsButtonActionType.MOVE_TO_HISTORY)">
       <ion-icon name="book-outline"></ion-icon>
       <span translate>assignments.move-to-history</span>
     </ion-button>
-    <ion-button fill="outline" color="danger" (click)="onButtonClick(AssignmentsButtonActionType.DELETE)">
+    <ion-button fill="outline" color="danger" strong="true" (click)="onButtonClick(AssignmentsButtonActionType.DELETE)">
       <ion-icon name="trash-outline"></ion-icon>
       <span translate>common.delete</span>
     </ion-button>

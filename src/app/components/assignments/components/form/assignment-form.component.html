@@ -1,3 +1,13 @@
 <div class="assignment-form-container">
-  Edit for {{ assignment.id }}
+  <ion-button fill="outline" color="primary" strong="true" class="back-btn" (click)="navigateBackToList()" translate>common.back-to-list</ion-button>
+  <ion-card color="light">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-text translate>assignments.assignment</ion-text>: {{ assignment.id }}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <app-assignments-list-tcs [tcs]="assignment.tcs"></app-assignments-list-tcs>
+    </ion-card-content>
+  </ion-card>
 </div>

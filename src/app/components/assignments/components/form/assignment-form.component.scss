@@ -1,3 +1,16 @@
 .assignment-form-container {
+  .back-btn {
+    --padding-start: 8px;
+    --padding-end: 8px;
+  }
   
+  ion-card {
+    margin: 16px 0 0 0;
+
+    ion-card-header {
+      ion-card-title {
+        font-weight: bold;
+      }
+    }
+  }
 }

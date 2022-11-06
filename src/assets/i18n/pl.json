@@ -1,7 +1,8 @@
 {
   "common": {
     "edit": "Edytuj",
-    "delete": "Usuń"
+    "delete": "Usuń",
+    "back-to-list": "Powrót do listy"
   },
   "validation": {
     "field-required": "Pole wymagane",
@@ -17,6 +18,7 @@
     }
   },
   "assignments": {
+    "assignment": "Zlecenie",
     "move-to-history": "Przenieś do historii"
   },
   "tabs": {

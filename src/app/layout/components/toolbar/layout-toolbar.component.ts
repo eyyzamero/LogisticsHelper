@@ -29,6 +29,10 @@ export class LayoutToolbarComponent implements OnInit, OnDestroy {
       .then(() => this._router.navigate(['logout']));
   }
 
+  navigateToMainPage() {
+    this._router.navigate(['home']);
+  }
+
   private _initObservables(): void {
     const authStateSubscription = this._authService.authState.subscribe({
       next: (user) => this.isAuthenticated = user ? true : false 

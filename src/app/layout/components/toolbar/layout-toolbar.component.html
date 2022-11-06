@@ -3,7 +3,7 @@
     <ion-buttons *ngIf="isAuthenticated" slot="start" class="buttons-start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
-    <app-layout-toolbar-logo></app-layout-toolbar-logo>
+    <app-layout-toolbar-logo (clicked)="navigateToMainPage()"></app-layout-toolbar-logo>
     <ion-buttons *ngIf="isAuthenticated" slot="end" class="buttons-end">
       <ion-button color="primary" (click)="logout()" class="logout-btn">
         <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>

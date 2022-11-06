@@ -4,6 +4,10 @@
   flex-wrap: nowrap;
   align-items: center;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   img {  
     width: 48px;
     height: 48px;

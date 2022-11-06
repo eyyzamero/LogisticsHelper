@@ -10,12 +10,14 @@ import { DirectivesModule } from 'src/app/core/directives/directives.module';
 import { AssignmentsListComponent } from './components/list/assignments-list.component';
 import { AssignmentsListTcsComponent } from './components/list/components/tcs/assignments-list-tcs.component';
 import { AssignmentFormComponent } from './components/form/assignment-form.component';
+import { AssignmentsListActionsComponent } from './components/list/components/actions/assignments-list-actions.component';
 
 @NgModule({
   declarations: [
     AssignmentsComponent,
     AssignmentsListComponent,
     AssignmentsListTcsComponent,
+    AssignmentsListActionsComponent,
     AssignmentFormComponent
   ],
   imports: [

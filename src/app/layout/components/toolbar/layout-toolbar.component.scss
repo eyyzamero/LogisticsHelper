@@ -1,0 +1,12 @@
+ion-header {
+  ion-toolbar {
+    .buttons-end {
+      .logout-btn {
+        ion-icon {
+          color: white;
+          --ionicon-stroke-width: 48px;
+        }
+      }
+    }
+  }
+}

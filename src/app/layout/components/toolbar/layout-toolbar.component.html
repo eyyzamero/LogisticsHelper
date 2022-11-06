@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons *ngIf="isAuthenticated" slot="start">
+    <ion-buttons *ngIf="isAuthenticated" slot="start" class="buttons-start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <app-layout-toolbar-logo></app-layout-toolbar-logo>
-    <ion-buttons *ngIf="isAuthenticated" slot="end">
-      <ion-button color="primary" (click)="logout()">
-        <ion-icon slot="icon-only" name="log-out-outline" color="light"></ion-icon>
+    <ion-buttons *ngIf="isAuthenticated" slot="end" class="buttons-end">
+      <ion-button color="primary" (click)="logout()" class="logout-btn">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

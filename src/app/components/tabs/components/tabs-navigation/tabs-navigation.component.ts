@@ -36,7 +36,7 @@ export class TabsNavigationComponent extends TabsBase implements OnInit, OnDestr
     const urlSubscription = this._router.events.pipe(
       filter((event) => event instanceof NavigationEnd)
     ).subscribe({
-      next: () => this.currentRoute = this._router.url
+      next: () => this.currentRoute = `/${this._router.url?.split('/')[1]}`
     });
     this._subscriptions.push(urlSubscription);
   }

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommunicationState, FirestoreCollection } from 'src/app/core/enums';
 import { IAssignmentDbRefModel, ITcDbRefModel } from 'src/app/core/models';
@@ -27,6 +28,8 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
 
   constructor(
     firestore: AngularFirestore,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute,
     private _authObservableService: AuthObservableService,
     private _assignmentsObservableService: AssignmentsObservableService,
     private _assignmentsMapperService: AssignmentsMapperService
@@ -38,6 +41,20 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._initObservables();
+  }
+
+  navigateToForm(assignmentId: string) {
+    this._router.navigate([`./form/${assignmentId}`], {
+      relativeTo: this._activatedRoute
+    });
+  }
+
+  moveToHistory(assignmentId: string) {
+
+  }
+
+  delete(assignmentId: string) {
+
   }
 
   private _initObservables(): void {

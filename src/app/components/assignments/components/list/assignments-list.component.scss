@@ -50,6 +50,11 @@
 
       .content {
         padding: 16px;
+
+        app-assignments-list-actions {
+          display: block;
+          margin-bottom: 16px;
+        }
       }
     }
   }

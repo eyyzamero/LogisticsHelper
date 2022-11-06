@@ -1,3 +1,18 @@
 .assignments-list-actions-container {
-  
+  display: flex;
+  flex-wrap: wrap;
+
+  ion-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
+
+    &:not(&:last-of-type) {
+      margin-right: 8px;
+    }
+
+    span {
+      margin-left: 8px;
+      font-weight: bold;
+    }
+  }
 }

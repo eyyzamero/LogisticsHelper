@@ -1,4 +1,8 @@
 {
+  "common": {
+    "edit": "Edytuj",
+    "delete": "Usuń"
+  },
   "validation": {
     "field-required": "Pole wymagane",
     "email-invalid": "Nieprawidłowy adres email"
@@ -11,6 +15,9 @@
       "email": "Email",
       "password": "Hasło"
     }
+  },
+  "assignments": {
+    "move-to-history": "Przenieś do historii"
   },
   "tabs": {
     "home": "Strona startowa",

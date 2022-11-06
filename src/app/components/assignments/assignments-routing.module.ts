@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthObservableModelObtainedGuard } from 'src/app/core/guards/auth-observable-model-obtained.guard';
 import { AssignmentsComponent } from './assignments.component';
+import { AssignmentFormComponent } from './components/form/assignment-form.component';
 import { AssignmentsListComponent } from './components/list/assignments-list.component';
 
 const routes: Routes = [
@@ -12,6 +12,10 @@ const routes: Routes = [
       {
         path: '',
         component: AssignmentsListComponent
+      },
+      {
+        path: 'form/:id',
+        component: AssignmentFormComponent
       }
     ]
   }

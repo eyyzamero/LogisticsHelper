@@ -68,6 +68,8 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   }
 
   private async _getAssignments(): Promise<void> {
+    this._assignmentsObservableService.clearWithoutNext();
+    this._assignmentsObservableService.addCommunicationState(CommunicationState.LOADING);
     const userId = this._authObservableService.observableSubjectValue.data?.id;
     const assignments = await this._assignmentsCollectionService.getByUserRef(userId);
 

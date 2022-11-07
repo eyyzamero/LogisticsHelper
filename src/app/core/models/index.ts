@@ -13,3 +13,5 @@ export * from './collections/roles/role-db-ref.model';
 export * from "./collections/assignments/iassignment-db-ref.model";
 export * from "./collections/tcs/itc-db-ref.model";
 export * from "./collections/tcs/tc-db-ref.model";
+export * from "./collections/pallets/ipallet-db-ref.model";
+export * from "./collections/pallets/pallet-db-ref.model";

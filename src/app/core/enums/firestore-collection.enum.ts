@@ -4,5 +4,6 @@ export enum FirestoreCollection {
   USERS = 'users',
   ROLES = 'roles',
   PERMISSIONS = 'permissions',
-  TCS = 'tcs'
+  TCS = 'tcs',
+  PALLETS = 'pallets'
 }

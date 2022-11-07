@@ -52,9 +52,6 @@ const routes: Routes = [
   ],
   exports: [
     RouterModule
-  ],
-  providers: [
-    FireAuthGuard
   ]
 })
 export class LayoutRoutingModule { }

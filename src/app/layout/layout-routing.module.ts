@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserPermission } from '../core/enums';
 import { AuthObservableModelObtainedGuard } from '../core/guards/auth-observable-model-obtained.guard';
+import { AuthPermissionsGuard } from '../core/guards/auth-permissions.guard';
 import { FireAuthGuard } from '../core/guards/fire-auth.guard';
 import { LayoutComponent } from './layout.component';
 
@@ -21,8 +23,12 @@ const routes: Routes = [
         loadChildren: () => import('../components/assignments/assignments.module').then(m => m.AssignmentsModule),
         canLoad: [
           FireAuthGuard,
-          AuthObservableModelObtainedGuard
-        ]
+          AuthObservableModelObtainedGuard,
+          AuthPermissionsGuard
+        ],
+        data: {
+          requiredPermissions: new Array<UserPermission>(UserPermission.ASSIGNMENTS)
+        }
       },
       {
         path: 'login',

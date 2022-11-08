@@ -1,4 +1,6 @@
 .assignment-form-container {
+  position: relative;
+
   .back-btn {
     --padding-start: 8px;
     --padding-end: 8px;
@@ -10,6 +12,20 @@
     ion-card-header {
       ion-card-title {
         font-weight: bold;
+      }
+    }
+  }
+
+  .fabs {
+    display: flex;
+    top: 0;
+
+    .fab-button {
+      width: 40px;
+      height: 40px;
+
+      &:not(&:last-of-type) {
+        margin-right: 16px;
       }
     }
   }

@@ -56,16 +56,20 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     return documents;
   }
 
+  async add(item: T): Promise<void> {
+    const collection = this._getCollection();
+    item.id = this._firestore.createId();;
+
+    await collection.doc(item.id).set(item);
+  }
+
   async addMultiple(items: Array<T>): Promise<void> {
     const batch = this._firestore.firestore.batch();
     const collection = this._getCollection();
 
     items.forEach(item => {
-      const id = this._firestore.createId();
-      const docRef = collection.doc(id).ref;
-
-      item.id = id;
-
+      item.id = this._firestore.createId();
+      const docRef = collection.doc(item.id).ref;
       batch.set(docRef, { ...item });
     });
     await batch.commit();

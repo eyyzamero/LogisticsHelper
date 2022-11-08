@@ -1,4 +1,4 @@
-import { IAssignmentTcModel } from "..";
+import { IAssignmentPalletModel, IAssignmentTcModel } from "..";
 
 export class AssignmentTcModel implements IAssignmentTcModel {
 
@@ -9,6 +9,7 @@ export class AssignmentTcModel implements IAssignmentTcModel {
     public width: number = 0,
     public height: number = 0,
     public inners: number = 0,
-    public limit: number = 0
+    public limit: number = 0,
+    public pallets: Array<IAssignmentPalletModel> = new Array<IAssignmentPalletModel>()
   ) { }
 }

@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommunicationState, FirestoreCollection } from 'src/app/core/enums';
-import { IAssignmentDbRefModel, ITcDbRefModel } from 'src/app/core/models';
+import { IAssignmentDbRefModel, IPalletDbRefModel, ITcDbRefModel } from 'src/app/core/models';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { AuthObservableService } from 'src/app/core/services/observable/auth/auth-observable.service';
 import { IAssignmentModel } from '../../models';
@@ -24,6 +24,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
 
   private _assignmentsCollectionService: FirestoreCollectionService<IAssignmentDbRefModel>;
   private _tcsCollectionService: FirestoreCollectionService<ITcDbRefModel>;
+  private _palletsCollectionService: FirestoreCollectionService<IPalletDbRefModel>;
   private _subscriptions: Array<Subscription> = new Array<Subscription>();
 
   constructor(
@@ -36,6 +37,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   ) {
     this._assignmentsCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.ASSIGNMENTS);
     this._tcsCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.TCS);
+    this._palletsCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.PALLETS);
     this._getAssignments();
   }
 
@@ -77,16 +79,20 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
       let mappedAssignments = this._assignmentsMapperService.ArrayOfIAssignmentDbRefModelToArrayOfIAssignmentModel(assignments);
       this._assignmentsObservableService.addWithoutNext(mappedAssignments);
 
-      Promise.all(assignments.map(assignment => this._getTcs(assignment.id))).then(
+      Promise.all(assignments.map(assignment => this._getTcsAndPallets(assignment.id))).then(
         () => this._assignmentsObservableService.next()
       );
     }
   }
 
-  private async _getTcs(assignmentId: string): Promise<void> {
+  private async _getTcsAndPallets(assignmentId: string): Promise<void> {
     const tcs = await this._tcsCollectionService.getWhereFieldEqualsValue('assignmentId', assignmentId);
     const mappedTcs = this._assignmentsMapperService.ArrayOfITcDbRefToArrayOfIAssignmentTcModel(tcs);
     this._assignmentsObservableService.addTcsWithoutNext(assignmentId, mappedTcs);
+
+    const pallets = await this._palletsCollectionService.getWhereFieldEqualsValue('assignmentId', assignmentId);
+    const mappedPallets = this._assignmentsMapperService.ArrayOfIPalletDbRefToArrayOfIAssignmentPalletModel(pallets);
+    this._assignmentsObservableService.addPalletsToTcsWithoutNext(assignmentId, mappedPallets);
   }
 
   ngOnDestroy(): void {

@@ -1,3 +1,5 @@
+import { IAssignmentPalletModel } from "../pallet/iassignment-pallet.model";
+
 export interface IAssignmentTcModel {
   id: string;
   assignmentId: string;
@@ -6,4 +8,5 @@ export interface IAssignmentTcModel {
   height: number;
   inners: number;
   limit: number;
+  pallets: Array<IAssignmentPalletModel>;
 }

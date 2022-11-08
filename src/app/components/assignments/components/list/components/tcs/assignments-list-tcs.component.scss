@@ -3,55 +3,76 @@
     font-size: 16px;
     font-weight: bold;
   }
-  
+
   .tcs {
     display: flex;
     flex-direction: column;
     margin-left: 16px;
-  
+
     .no-tcs {
       margin-top: 4px;
       font-size: 16px;
       font-weight: bold;
     }
-  
+
     .tc {
       display: flex;
-      margin-top: 4px;
+      flex-direction: column;
+      margin-top: 8px;
       align-items: center;
 
-      ion-icon {
-        position: relative;
-        font-size: 16px;
-        line-height: 16px;
-        margin-right: 8px;
-        top: -1px;
-      }
-  
-      .name {
-        font-size: 16px;
-        font-weight: bold;
-        line-height: 16px;
-        margin-right: 8px;
+      @media(min-width: 400px) {
+        flex-direction: row;
       }
 
-      ion-progress-bar {
+      .row {
+        display: flex;
+        align-items: center;
         width: 100%;
-        margin-top: 8px;
 
         @media(min-width: 400px) {
-          width: 100px;
+          width: auto;
+        }
+
+        ion-icon {
+          position: relative;
+          font-size: 16px;
+          line-height: 16px;
+          margin-right: 8px;
+          top: -1px;
+        }
+
+        .name {
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 16px;
+          margin-right: 8px;
+        }
+
+        ion-progress-bar {
+          flex: 1;
           margin: 0 8px 0 0;
+
+          @media(min-width: 400px) {
+            width: 100px;
+          }
+
+          @media(min-width: 768px) {
+            width: 200px;
+          }
         }
 
-        @media(min-width: 768px) {
-          width: 200px;
+        .inners-count {
+          font-size: 14px;
+          line-height: 14px;
         }
-      }
 
-      .count {
-        font-size: 14px;
-        line-height: 14px;
+        .pallets-count {
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 16px;
+          margin-right: 8px;
+        }
       }
     }
   }

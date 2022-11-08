@@ -5,6 +5,8 @@
     <div *ngFor="let tc of tcs" class="tc">
       <ion-icon name="cube-outline"></ion-icon>
       <span class="name">{{ tc.name }}</span>
+      <ion-progress-bar ionProgressBarColor [value]="getInnersCountPercentage(tc)"></ion-progress-bar>
+      <span class="count">{{ getInnersCount(tc) }} / {{ tc.limit }}</span>
     </div>
   </div>
 </div>

@@ -59,6 +59,21 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
 
   }
 
+  getOverallPercentage(assignment: IAssignmentModel): string {
+    const count = assignment.tcs.reduce<number>((_, currentTc) => {
+      const inners = currentTc.pallets.reduce<number>((accumulator, currentPallet) => {
+        return accumulator + currentPallet.inners;
+      }, 0);
+      return inners;
+    }, 0);
+
+    const limit = assignment.tcs.reduce<number>((accumulator, current) => {
+      return accumulator + current.limit;
+    }, 0);
+
+    return isNaN(count / limit) ? '0' : (count / limit).toFixed(2);
+  }
+
   private _initObservables(): void {
     const assignmentsSubscription = this._assignmentsObservableService.observable.subscribe({
       next: (value) => {

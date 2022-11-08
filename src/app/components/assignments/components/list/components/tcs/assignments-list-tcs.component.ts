@@ -12,4 +12,16 @@ export class AssignmentsListTcsComponent {
   @Input() tcs: Array<IAssignmentTcModel> = new Array<IAssignmentTcModel>()
 
   constructor() { }
+
+  getInnersCount(tc: IAssignmentTcModel): number {
+    const count = tc.pallets.reduce<number>((accumulator, current) => {
+      return accumulator + current.inners
+    }, 0);
+    return count;
+  }
+
+  getInnersCountPercentage(tc: IAssignmentTcModel): string {
+    const count = this.getInnersCount(tc);
+    return (count / tc.limit).toFixed(2);
+  }
 }

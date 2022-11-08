@@ -18,16 +18,40 @@
     .tc {
       display: flex;
       margin-top: 4px;
-  
+      align-items: center;
+
       ion-icon {
+        position: relative;
         font-size: 16px;
+        line-height: 16px;
         margin-right: 8px;
+        top: -1px;
       }
   
       .name {
         font-size: 16px;
         font-weight: bold;
-        line-height: 17px;
+        line-height: 16px;
+        margin-right: 8px;
+      }
+
+      ion-progress-bar {
+        width: 100%;
+        margin-top: 8px;
+
+        @media(min-width: 400px) {
+          width: 100px;
+          margin: 0 8px 0 0;
+        }
+
+        @media(min-width: 768px) {
+          width: 200px;
+        }
+      }
+
+      .count {
+        font-size: 14px;
+        line-height: 14px;
       }
     }
   }

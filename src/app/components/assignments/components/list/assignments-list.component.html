@@ -7,7 +7,7 @@
         <div class="label">
           <ion-icon name="document-outline"></ion-icon>
           <ion-text>{{ assignment.id }}</ion-text>
-          <ion-progress-bar ionProgressBarColor value="1"></ion-progress-bar>
+          <ion-progress-bar ionProgressBarColor [value]="getOverallPercentage(assignment)"></ion-progress-bar>
         </div>
       </ion-item>
       <div slot="content" class="content">

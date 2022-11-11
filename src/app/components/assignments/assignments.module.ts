@@ -11,7 +11,7 @@ import { AssignmentsListComponent } from './components/list/assignments-list.com
 import { AssignmentsListTcsComponent } from './components/list/components/tcs/assignments-list-tcs.component';
 import { AssignmentFormComponent } from './components/form/assignment-form.component';
 import { AssignmentsListActionsComponent } from './components/list/components/actions/assignments-list-actions.component';
-import { AssignmentsFormAddTcsModalComponent } from './components/form/components/modals/assignments-form-add-tcs-modal/assignments-form-add-tcs-modal.component';
+import { AssignmentsFormAddTcsModalComponent } from './components/form/components/modals/add-tcs/assignments-form-add-tcs-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({

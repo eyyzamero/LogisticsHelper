@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActionSheetOptions, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { AssignmentsFormAddTcsModalComponent } from '../components/modals/assignments-form-add-tcs-modal/assignments-form-add-tcs-modal.component';
+import { AssignmentsFormAddTcsModalComponent } from '../components/modals/add-tcs/assignments-form-add-tcs-modal.component';
 
 @Injectable({
   providedIn: 'root'

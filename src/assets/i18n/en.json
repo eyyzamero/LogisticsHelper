@@ -1,8 +1,10 @@
 {
   "common": {
+    "add": "Add",
     "edit": "Edit",
     "delete": "Delete",
-    "back-to-list": "Back to list"
+    "back-to-list": "Back to list",
+    "settings": "Settings"
   },
   "validation": {
     "field-required": "Field required",
@@ -19,7 +21,12 @@
   },
   "assignments": {
     "assignment": "Assignment",
-    "move-to-history": "Move to history"
+    "move-to-history": "Move to history",
+    "add-pallet": "Add pallet",
+    "add-tc": "Add TC",
+    "tc-management-panel": "TC Management panel",
+    "show-event-logs": "Show event logs",
+    "delete": "Delete assignment"
   },
   "tabs": {
     "home": "Home",

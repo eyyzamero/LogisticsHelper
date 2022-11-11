@@ -11,11 +11,11 @@
     </ion-card-content>
   </ion-card>
   <ion-fab class="fabs" vertical="top" horizontal="end">
-    <ion-fab-button class="fab-button">
+    <ion-fab-button class="fab-button" (click)="add()">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button class="fab-button">
-      <ion-icon name="options-outline"></ion-icon>
+    <ion-fab-button class="fab-button" (click)="settings()">
+      <ion-icon name="settings-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </div>

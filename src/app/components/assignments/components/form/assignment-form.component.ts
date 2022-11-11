@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AssignmentModel, IAssignmentModel } from '../../models';
 import { AssignmentsObservableService } from '../../services/observable/assignments-observable.service';
+import { AssignmentsFormService } from './services/assignments-form.service';
 
 @Component({
   selector: 'app-assignment-form',
@@ -19,7 +21,9 @@ export class AssignmentFormComponent implements OnInit, OnDestroy {
   constructor(
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    private _assignmentsObservableService: AssignmentsObservableService
+    private _assignmentsObservableService: AssignmentsObservableService,
+    private _actionSheetController: ActionSheetController,
+    private _assignmentsFormService: AssignmentsFormService
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +32,20 @@ export class AssignmentFormComponent implements OnInit, OnDestroy {
 
   navigateBackToList(): void {
     this._router.navigate(['/assignments']);
+  }
+
+  async add(): Promise<void> {
+    const actionSheet = await this._actionSheetController.create(
+      this._assignmentsFormService.getAddActionSheetControllerOptions()
+    );
+    actionSheet.present();
+  }
+
+  async settings(): Promise<void> {
+    const actionSheet = await this._actionSheetController.create(
+      this._assignmentsFormService.getSettingsActionSheetControllerOptions()
+    );
+    actionSheet.present();
   }
 
   private _initObservables(): void {

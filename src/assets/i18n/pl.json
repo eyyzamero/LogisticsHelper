@@ -1,8 +1,10 @@
 {
   "common": {
+    "add": "Dodaj",
     "edit": "Edytuj",
     "delete": "Usuń",
-    "back-to-list": "Powrót do listy"
+    "back-to-list": "Powrót do listy",
+    "settings": "Ustawienia"
   },
   "validation": {
     "field-required": "Pole wymagane",
@@ -19,7 +21,12 @@
   },
   "assignments": {
     "assignment": "Zlecenie",
-    "move-to-history": "Przenieś do historii"
+    "move-to-history": "Przenieś do historii",
+    "add-pallet": "Dodaj paletę",
+    "add-tc": "Dodaj TC",
+    "tc-management-panel": "Panel zarządzania TC",
+    "show-event-logs": "Pokaż logi",
+    "delete": "Usuń zlecenie"
   },
   "tabs": {
     "home": "Strona startowa",

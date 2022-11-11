@@ -4,7 +4,13 @@
     "edit": "Edit",
     "delete": "Delete",
     "back-to-list": "Back to list",
-    "settings": "Settings"
+    "settings": "Settings",
+    "width": "Width",
+    "height": "Height",
+    "inners": "Inners",
+    "limit": "Limit",
+    "cancel": "Cancel",
+    "save": "Save"
   },
   "validation": {
     "field-required": "Field required",

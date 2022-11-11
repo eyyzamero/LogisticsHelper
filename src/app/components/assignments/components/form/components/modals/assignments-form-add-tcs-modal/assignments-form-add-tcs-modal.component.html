@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title translate>assignments.add-tc</ion-title>
+  </ion-toolbar>
+</ion-header>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="row">
+    <ion-item>
+      <ion-label position="floating">TC</ion-label>
+      <ion-input formControlName="tc"></ion-input>
+    </ion-item>
+  </div>
+  <div class="row margin-between-items">
+    <ion-item>
+      <ion-label position="floating" translate>common.width</ion-label>
+      <ion-input formControlName="width"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" translate>common.height</ion-label>
+      <ion-input formControlName="height"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" translate>common.inners</ion-label>
+      <ion-input formControlName="inners"></ion-input>
+    </ion-item>
+  </div>
+  <div class="row">
+    <ion-item>
+      <ion-label position="floating" translate>common.limit</ion-label>
+      <ion-input formControlName="limit"></ion-input>
+    </ion-item>
+  </div>
+  <div class="row">
+    <div class="buttons">
+      <ion-button type="button" class="cancel-btn" color="light" size="default" strong="true" (click)="close()" translate>common.cancel</ion-button>
+      <ion-button type="submit" class="save-btn" color="primary" size="default" strong="true" translate>common.save</ion-button>
+    </div>
+  </div>
+</form>

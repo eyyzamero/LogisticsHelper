@@ -4,7 +4,13 @@
     "edit": "Edytuj",
     "delete": "Usuń",
     "back-to-list": "Powrót do listy",
-    "settings": "Ustawienia"
+    "settings": "Ustawienia",
+    "width": "Szerokość",
+    "height": "Wysokość",
+    "inners": "Innery",
+    "limit": "Limit",
+    "cancel": "Anuluj",
+    "save": "Zapisz"
   },
   "validation": {
     "field-required": "Pole wymagane",

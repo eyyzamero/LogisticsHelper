@@ -15,20 +15,20 @@ export class AssignmentsMapperService {
   }
 
   ArrayOfITcDbRefToArrayOfIAssignmentTcModel(src?: Array<ITcDbRefModel>): Array<IAssignmentTcModel> {
-    return src?.map(this._ITcDbRefModelToIAssignmentTcModel) ?? new Array<IAssignmentTcModel>();
+    return src?.map(this.ITcDbRefModelToIAssignmentTcModel) ?? new Array<IAssignmentTcModel>();
   }
 
   ArrayOfIPalletDbRefToArrayOfIAssignmentPalletModel(src?: Array<IPalletDbRefModel>): Array<IAssignmentPalletModel> {
     return src?.map(this._IPalletDbRefModelToIAssignmentPalletModel) ?? new Array<IAssignmentPalletModel>();
   }
 
-  private _IAssignmentDbRefModelToIAssignmentModel(src: IAssignmentDbRefModel): IAssignmentModel {
-    const dest = new AssignmentModel(src.id);
+  ITcDbRefModelToIAssignmentTcModel(src: ITcDbRefModel): IAssignmentTcModel {
+    const dest = new AssignmentTcModel(src.id, src.assignmentId, src.name, src.width, src.height, src.inners, src.limit);
     return dest;
   }
 
-  private _ITcDbRefModelToIAssignmentTcModel(src: ITcDbRefModel): IAssignmentTcModel {
-    const dest = new AssignmentTcModel(src.id, src.assignmentId, src.name, src.width, src.height, src.inners, src.limit);
+  private _IAssignmentDbRefModelToIAssignmentModel(src: IAssignmentDbRefModel): IAssignmentModel {
+    const dest = new AssignmentModel(src.id);
     return dest;
   }
 

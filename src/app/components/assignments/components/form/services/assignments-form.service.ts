@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActionSheetOptions } from '@ionic/angular';
+import { ActionSheetOptions, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { AssignmentsFormAddTcsModalComponent } from '../components/modals/assignments-form-add-tcs-modal/assignments-form-add-tcs-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,11 @@ import { TranslateService } from '@ngx-translate/core';
 export class AssignmentsFormService {
 
   constructor(
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
+    private _modalController: ModalController
   ) { }
 
-  getAddActionSheetControllerOptions(): ActionSheetOptions {
+  getAddActionSheetControllerOptions(assignmentId: string): ActionSheetOptions {
     const options = {
       cssClass: 'action-sheet',
       buttons: [
@@ -23,7 +25,13 @@ export class AssignmentsFormService {
         {
           text: this._translateService.instant('assignments.add-tc'),
           icon: 'cube-outline',
-          handler: () => { }
+          handler: async () => (await this._modalController.create({
+            component: AssignmentsFormAddTcsModalComponent,
+            cssClass: 'modal',
+            componentProps: {
+              assignmentId: assignmentId
+            }
+          })).present()
         }
       ]
     };

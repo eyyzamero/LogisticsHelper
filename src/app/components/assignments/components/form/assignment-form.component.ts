@@ -36,7 +36,7 @@ export class AssignmentFormComponent implements OnInit, OnDestroy {
 
   async add(): Promise<void> {
     const actionSheet = await this._actionSheetController.create(
-      this._assignmentsFormService.getAddActionSheetControllerOptions()
+      this._assignmentsFormService.getAddActionSheetControllerOptions(this._assignmentId!)
     );
     actionSheet.present();
   }

@@ -60,7 +60,7 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     const collection = this._getCollection();
     item.id = this._firestore.createId();;
 
-    await collection.doc(item.id).set(item);
+    await collection.doc(item.id).set({ ...item });
   }
 
   async addMultiple(items: Array<T>): Promise<void> {

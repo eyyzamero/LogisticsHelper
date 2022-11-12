@@ -14,7 +14,7 @@ import { FirestoreCollectionService } from 'src/app/core/services/collections/fi
 @Component({
   selector: 'app-assignments-form-add-pallet-modal',
   templateUrl: './assignments-form-add-pallet-modal.component.html',
-  styleUrls: ['./assignments-form-add-pallet-modal.component.scss'],
+  styleUrls: ['./assignments-form-add-pallet-modal.component.scss']
 })
 export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy {
 
@@ -56,8 +56,17 @@ export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy
   }
 
   submit(): void {
-    if (this.form.valid)
-      this._addPallet();
+    if (this.form.valid) {
+      switch(this.form.controls['type'].value) {
+        case PalletType.SINGLE:
+          this._addSinglePallet();
+          break;
+        case PalletType.MULTIPLE:
+          break;
+        case PalletType.INCOMPLETE:
+          break;
+      }
+    }
   }
 
   private _initObservables() {
@@ -74,20 +83,20 @@ export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy
         switch(value) {
           case PalletType.SINGLE:
             console.log('Single pallet');
-            this.form.controls['count'].setValue(null);
-            this.form.controls['inners'].setValue(null);
+            this.form.controls['count'].setValue(0);
+            this.form.controls['inners'].setValue(0);
             break;
           case PalletType.MULTIPLE:
             console.log('Multiple pallets');
-            this.form.controls['inners'].setValue(null);
+            this.form.controls['inners'].setValue(0);
             break;
           case PalletType.INCOMPLETE:
             console.log('Incomplete pallet');
-            this.form.controls['count'].setValue(null);
+            this.form.controls['count'].setValue(0);
             break;
           default:
-            this.form.controls['count'].setValue(null);
-            this.form.controls['inners'].setValue(null);
+            this.form.controls['count'].setValue(0);
+            this.form.controls['inners'].setValue(0);
             break;
         }
       }
@@ -95,13 +104,18 @@ export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy
     this._subscriptions.push(tcSubscription, typeSubscription);
   }
 
-  private _addPallet(): void {
+  private _addSinglePallet(): void {
+    const tc = this._assignment.tcs.find(x => x.name === this.form.controls['tc'].value)!;
     const pallet = new PalletDbRefModel(
-
+      undefined,
+      this._assignment.id,
+      tc.name,
+      tc.width * tc.height * tc.inners,
+      true
     );
     this._palletsCollectionService.add(pallet).then(() => {
       const mappedPallet = this._assignmentsMapperService.IPalletDbRefModelToIAssignmentPalletModel(pallet);
-      this._assignmentsObservableService.addPallet(this._assignment.id, 'TC', mappedPallet);
+      this._assignmentsObservableService.addPallet(pallet.assignmentId, pallet.tc, mappedPallet);
       this.close();
     });
   }
@@ -114,8 +128,12 @@ export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy
       type: new FormControl(null, [
         Validators.required
       ]),
-      count: new FormControl(null),
-      inners: new FormControl(null)
+      count: new FormControl(0, [
+        Validators.required
+      ]),
+      inners: new FormControl(0, [
+        Validators.required
+      ])
     });
   }
 

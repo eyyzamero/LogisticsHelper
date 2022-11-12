@@ -67,9 +67,13 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
       return inners;
     }, 0);
 
+    console.log(assignment.tcs);
+
     const limit = assignment.tcs.reduce<number>((accumulator, current) => {
       return accumulator + current.limit;
     }, 0);
+
+    console.log(`Count: ${count}, Limit: ${limit}`);
 
     return isNaN(count / limit) ? '0' : (count / limit).toFixed(2);
   }

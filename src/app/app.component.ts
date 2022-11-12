@@ -51,10 +51,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this._getUserFromDb(user.uid);
       }
     });
-    const authSubscription = this._authObservableService.observable.subscribe({
-      next: (auth) => console.log(auth)
-    });
-    this._subscriptions.push(authStateSubscription), authSubscription;
+    this._subscriptions.push(authStateSubscription);
   }
 
   private async _getUserFromDb(userId: string): Promise<void> {

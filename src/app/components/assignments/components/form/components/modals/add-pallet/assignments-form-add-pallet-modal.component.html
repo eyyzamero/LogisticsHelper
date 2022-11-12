@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title translate>assignments.add-pallet</ion-title>
+  </ion-toolbar>
+</ion-header>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="row">
+    <ion-item>
+      <ion-label position="floating">TC</ion-label>
+      <ion-select formControlName="tc" [placeholder]="'assignments.select-tc-placeholder' | translate">
+        <ion-select-option *ngFor="let tc of tcs" [value]="tc">{{ tc }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <div *ngIf="tcFieldFilled" class="row">
+    <ion-item>
+      <ion-label position="floating" translate>assignments.pallet-type</ion-label>
+      <ion-select formControlName="type" [placeholder]="'assignments.select-pallet-type-placeholder' | translate">
+        <ion-select-option *ngFor="let palletType of palletTypes" [value]="palletType" translate>assignments.add-pallets.{{ palletType }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <div *ngIf="form.controls.type.value === PalletType.MULTIPLE" class="row">
+    <ion-item>
+      <ion-label position="floating" translate>assignments.pallets-count</ion-label>
+      <ion-input formControlName="count"></ion-input>
+    </ion-item>
+  </div>
+  <div *ngIf="form.controls.type.value === PalletType.INCOMPLETE" class="row">
+    <ion-item>
+      <ion-label position="floating" translate>assignments.inners-count</ion-label>
+      <ion-input formControlName="inners"></ion-input>
+    </ion-item>
+  </div>
+  <div class="row">
+    <div class="buttons">
+      <ion-button type="button" class="cancel-btn" color="light" size="default" strong="true" (click)="close()" translate>common.cancel</ion-button>
+      <ion-button type="submit" class="save-btn" color="primary" size="default" strong="true" translate>common.save</ion-button>
+    </div>
+  </div>
+</form>

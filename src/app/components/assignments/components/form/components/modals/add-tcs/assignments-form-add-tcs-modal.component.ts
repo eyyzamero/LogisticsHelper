@@ -15,7 +15,7 @@ import { FirestoreCollectionService } from 'src/app/core/services/collections/fi
 })
 export class AssignmentsFormAddTcsModalComponent {
 
-  @Input() assignmentId: string = '';
+  @Input() private _assignmentId: string = '';
   
   form: FormGroup = this._formDefinition();
 
@@ -42,7 +42,7 @@ export class AssignmentsFormAddTcsModalComponent {
   private _addTc() {
     const tc = new TcDbRefModel(
       undefined,
-      this.assignmentId,
+      this._assignmentId,
       this.form.controls['tc'].value,
       this.form.controls['width'].value,
       this.form.controls['height'].value,
@@ -51,7 +51,7 @@ export class AssignmentsFormAddTcsModalComponent {
     );
     this._tcsCollectionService.add(tc).then(() => {
       const mappedTc = this._assignmentsMapperService.ITcDbRefModelToIAssignmentTcModel(tc);
-      this._assignmentsObservableService.addTc(this.assignmentId, mappedTc);
+      this._assignmentsObservableService.addTc(this._assignmentId, mappedTc);
       this.close();
     });
   }

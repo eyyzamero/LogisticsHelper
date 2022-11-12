@@ -32,7 +32,17 @@
     "add-tc": "Dodaj TC",
     "tc-management-panel": "Panel zarządzania TC",
     "show-event-logs": "Pokaż logi",
-    "delete": "Usuń zlecenie"
+    "delete": "Usuń zlecenie",
+    "select-tc-placeholder": "Wybierz TC...",
+    "pallet-type": "Typ palety",
+    "select-pallet-type-placeholder": "Wybierz typ palety...",
+    "add-pallets": {
+      "SINGLE_FULL": "Dodaj pełną paletę",
+      "MULTIPLE_FULL": "Dodaj klika pełnych palet",
+      "SINGLE_INCOMPLETE": "Dodaj niekompletną paletę"
+    },
+    "pallets-count": "Ilość palet",
+    "inners-count": "Ilość innerów"
   },
   "tabs": {
     "home": "Strona startowa",

@@ -19,7 +19,7 @@ export class AssignmentsMapperService {
   }
 
   ArrayOfIPalletDbRefToArrayOfIAssignmentPalletModel(src?: Array<IPalletDbRefModel>): Array<IAssignmentPalletModel> {
-    return src?.map(this._IPalletDbRefModelToIAssignmentPalletModel) ?? new Array<IAssignmentPalletModel>();
+    return src?.map(this.IPalletDbRefModelToIAssignmentPalletModel) ?? new Array<IAssignmentPalletModel>();
   }
 
   ITcDbRefModelToIAssignmentTcModel(src: ITcDbRefModel): IAssignmentTcModel {
@@ -27,13 +27,13 @@ export class AssignmentsMapperService {
     return dest;
   }
 
+  IPalletDbRefModelToIAssignmentPalletModel(src: IPalletDbRefModel): IAssignmentPalletModel {
+   const dest = new AssignmentPalletModel(src.id, src.assignmentId, src.tc, src.inners, src.full);
+   return dest;
+ }
+
   private _IAssignmentDbRefModelToIAssignmentModel(src: IAssignmentDbRefModel): IAssignmentModel {
     const dest = new AssignmentModel(src.id);
-    return dest;
-  }
-
-  private _IPalletDbRefModelToIAssignmentPalletModel(src: IPalletDbRefModel): IAssignmentPalletModel {
-    const dest = new AssignmentPalletModel(src.id, src.assignmentId, src.tc, src.inners, src.full);
     return dest;
   }
 }

@@ -1,0 +1,6 @@
+export enum PalletType {
+  NONE = 'NONE',
+  SINGLE = 'SINGLE_FULL',
+  MULTIPLE = 'MULTIPLE_FULL',
+  INCOMPLETE = 'SINGLE_INCOMPLETE'
+}

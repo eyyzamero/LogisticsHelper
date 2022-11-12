@@ -1,0 +1,9 @@
+form {
+  .row {
+    ion-item {
+      ion-select::part(text) {
+        font-weight: bold;
+      }
+    }
+  }
+}

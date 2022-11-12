@@ -30,6 +30,19 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
       assignment.tcs = tcs;
   }
 
+  addPallet(assignmentId: string, tc: string, pallet: IAssignmentPalletModel): void {
+    const assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
+
+    if (assignment) {
+      const TC = assignment.tcs.find(x => x.name === tc);
+
+      if (TC) {
+        TC.pallets.push(pallet);
+        this.next();
+      }
+    }
+  }
+
   addPalletsToTcsWithoutNext(assignmentId: string, pallets: Array<IAssignmentPalletModel>): void {
     let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
 

@@ -13,6 +13,7 @@ import { AssignmentFormComponent } from './components/form/assignment-form.compo
 import { AssignmentsListActionsComponent } from './components/list/components/actions/assignments-list-actions.component';
 import { AssignmentsFormAddTcsModalComponent } from './components/form/components/modals/add-tcs/assignments-form-add-tcs-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AssignmentsFormAddPalletModalComponent } from './components/form/components/modals/add-pallet/assignments-form-add-pallet-modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AssignmentsListTcsComponent,
     AssignmentsListActionsComponent,
     AssignmentFormComponent,
-    AssignmentsFormAddTcsModalComponent
+    AssignmentsFormAddTcsModalComponent,
+    AssignmentsFormAddPalletModalComponent
   ],
   imports: [
     CommonModule,

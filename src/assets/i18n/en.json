@@ -32,7 +32,17 @@
     "add-tc": "Add TC",
     "tc-management-panel": "TC Management panel",
     "show-event-logs": "Show event logs",
-    "delete": "Delete assignment"
+    "delete": "Delete assignment",
+    "select-tc-placeholder": "Select TC...",
+    "pallet-type": "Pallet type",
+    "select-pallet-type-placeholder": "Select pallet type...",
+    "add-pallets": {
+      "SINGLE_FULL": "Single full",
+      "MULTIPLE_FULL": "Multiple full",
+      "SINGLE_INCOMPLETE": "Single incomplete"
+    },
+    "pallets-count": "Pallets count",
+    "inners-count": "Inners count"
   },
   "tabs": {
     "home": "Home",

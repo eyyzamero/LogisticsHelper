@@ -56,20 +56,11 @@ export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy
   }
 
   submit(): void {
-    if (this.form.valid) {
-      switch(this.form.controls['type'].value) {
-        case PalletType.SINGLE:
-          this._addSinglePallet();
-          break;
-        case PalletType.MULTIPLE:
-          break;
-        case PalletType.INCOMPLETE:
-          break;
-      }
-    }
+    if (this.form.valid)
+      this._addPallet();
   }
 
-  private _initObservables() {
+  private _initObservables(): void {
     const tcSubscription = this.form.controls['tc'].valueChanges.subscribe({
       next: (value: string) => {
         this.tcFieldFilled = value ? true : false;
@@ -82,16 +73,13 @@ export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy
       next: (value: PalletType) => {
         switch(value) {
           case PalletType.SINGLE:
-            console.log('Single pallet');
             this.form.controls['count'].setValue(0);
             this.form.controls['inners'].setValue(0);
             break;
           case PalletType.MULTIPLE:
-            console.log('Multiple pallets');
             this.form.controls['inners'].setValue(0);
             break;
           case PalletType.INCOMPLETE:
-            console.log('Incomplete pallet');
             this.form.controls['count'].setValue(0);
             break;
           default:
@@ -104,20 +92,46 @@ export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy
     this._subscriptions.push(tcSubscription, typeSubscription);
   }
 
-  private _addSinglePallet(): void {
+  private _addPallet(): void {
     const tc = this._assignment.tcs.find(x => x.name === this.form.controls['tc'].value)!;
-    const pallet = new PalletDbRefModel(
+    let pallet = new PalletDbRefModel(
       undefined,
       this._assignment.id,
       tc.name,
-      tc.width * tc.height * tc.inners,
+      (tc.width * tc.height * tc.inners) as number,
       true
     );
-    this._palletsCollectionService.add(pallet).then(() => {
-      const mappedPallet = this._assignmentsMapperService.IPalletDbRefModelToIAssignmentPalletModel(pallet);
-      this._assignmentsObservableService.addPallet(pallet.assignmentId, pallet.tc, mappedPallet);
-      this.close();
-    });
+
+    switch(this.form.controls['type'].value) {
+      case PalletType.SINGLE:
+        this._palletsCollectionService.add(pallet).then(() => {
+          const mappedPallet = this._assignmentsMapperService.IPalletDbRefModelToIAssignmentPalletModel(pallet);
+          this._assignmentsObservableService.addPallet(pallet.assignmentId, pallet.tc, mappedPallet);
+          this.close();
+        });
+        break;
+      case PalletType.MULTIPLE:
+        let pallets = new Array<PalletDbRefModel>();
+
+        for (let i = 0; i < +this.form.controls['count'].value; i++)
+          pallets.push(pallet);
+
+        this._palletsCollectionService.addMultiple(pallets).then(() => {
+          const mappedPallets = this._assignmentsMapperService.ArrayOfIPalletDbRefToArrayOfIAssignmentPalletModel(pallets);
+          this._assignmentsObservableService.addPalletsToTc(this._assignment.id, tc.name, mappedPallets);
+          this.close();
+        });
+        break;
+      case PalletType.INCOMPLETE:
+        pallet.inners = +this.form.controls['inners'].value;
+        pallet.full = false;
+        this._palletsCollectionService.add(pallet).then(() => {
+          const mappedPallet = this._assignmentsMapperService.IPalletDbRefModelToIAssignmentPalletModel(pallet);
+          this._assignmentsObservableService.addPallet(pallet.assignmentId, pallet.tc, mappedPallet);
+          this.close();
+        });
+        break;
+    }
   }
 
   private _formDefinition(): FormGroup {

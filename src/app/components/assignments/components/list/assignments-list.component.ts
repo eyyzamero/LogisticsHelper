@@ -60,20 +60,16 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   }
 
   getOverallPercentage(assignment: IAssignmentModel): string {
-    const count = assignment.tcs.reduce<number>((_, currentTc) => {
-      const inners = currentTc.pallets.reduce<number>((accumulator, currentPallet) => {
-        return accumulator + currentPallet.inners;
+    const count = assignment.tcs.reduce<number>((tcAccumulator, currentTc) => {
+      const inners = currentTc.pallets.reduce<number>((palletAccumulator, currentPallet) => {
+        return palletAccumulator + currentPallet.inners;
       }, 0);
-      return inners;
+      return tcAccumulator + inners;
     }, 0);
-
-    console.log(assignment.tcs);
 
     const limit = assignment.tcs.reduce<number>((accumulator, current) => {
       return accumulator + current.limit;
     }, 0);
-
-    console.log(`Count: ${count}, Limit: ${limit}`);
 
     return isNaN(count / limit) ? '0' : (count / limit).toFixed(2);
   }

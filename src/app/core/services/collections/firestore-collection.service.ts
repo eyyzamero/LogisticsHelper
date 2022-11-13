@@ -75,6 +75,17 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     await batch.commit();
   }
 
+  async updateProperty(id: string, property: KeysInGenericType<T>, value: any): Promise<void> {
+    const collection = this._getCollection();
+    const doc = await this.getByDocIdAsync(id);
+
+    if (doc) {
+      doc[property] = value;
+
+      await collection.doc(doc.id).set(doc, { merge: true });
+    }
+  }
+
   private _getCollection(query?: QueryFn): AngularFirestoreCollection<T> {
     return query
       ? this._firestore.collection(this._collectionName, query)

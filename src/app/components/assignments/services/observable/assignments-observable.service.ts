@@ -15,7 +15,7 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
     super(new Array<IAssignmentModel>(), observableMapperService);
   }
 
-  addTc(assignmentId: string, tc: IAssignmentTcModel) {
+  addTc(assignmentId: string, tc: IAssignmentTcModel): void {
     let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
 
     if (assignment) {
@@ -68,7 +68,7 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
     }
   }
 
-  setStatus(assignmentId: string, status: AssignmentStatus) {
+  setStatus(assignmentId: string, status: AssignmentStatus): void {
     let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
 
     if (assignment) {

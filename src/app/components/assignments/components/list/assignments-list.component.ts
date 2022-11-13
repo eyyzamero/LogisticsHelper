@@ -52,19 +52,19 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
     this._initObservables();
   }
 
-  navigateToForm(assignmentId: string) {
+  navigateToForm(assignmentId: string): void {
     this._router.navigate([`./form/${assignmentId}`], {
       relativeTo: this._activatedRoute
     });
   }
 
-  moveToHistory(assignmentId: string) {
+  moveToHistory(assignmentId: string): void {
     this._assignmentsCollectionService.updateProperty(assignmentId, 'status', AssignmentStatus.HISTORY).then(
       () => this._assignmentsObservableService.setStatus(assignmentId, AssignmentStatus.HISTORY)
     );
   }
 
-  delete(assignmentId: string) {
+  delete(assignmentId: string): void {
 
   }
 

@@ -12,7 +12,7 @@ export class IonProgressBarColorDirective {
     this._assignBackgroundColor(value);
   }
 
-  private _assignBackgroundColor(value: number) {
+  private _assignBackgroundColor(value: number): void {
     const number = Number(value);
     let color: ProgressBarColor = ProgressBarColor.NONE;
 

@@ -19,7 +19,7 @@ export class AssignmentsListActionsComponent {
 
   constructor() { }
 
-  onButtonClick(type: AssignmentsButtonActionType) {
+  onButtonClick(type: AssignmentsButtonActionType): void {
     if (type) {
       switch (type) {
         case AssignmentsButtonActionType.EDIT:

@@ -36,7 +36,7 @@ export class TabsBase {
       .then(() => this._navigate(['logout']));
   }
 
-  private _navigate(route: Array<string>) {
+  private _navigate(route: Array<string>): void {
     this._router.navigate(route);
   }
 }

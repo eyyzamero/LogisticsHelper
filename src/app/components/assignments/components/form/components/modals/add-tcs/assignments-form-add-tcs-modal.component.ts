@@ -30,16 +30,16 @@ export class AssignmentsFormAddTcsModalComponent {
     this._tcsCollectionService = new FirestoreCollectionService<ITcDbRefModel>(firestore, FirestoreCollection.TCS);
   }
 
-  close() {
+  close(): void {
     this._modalController.dismiss();
   }
 
-  submit() {
+  submit(): void {
     if (this.form.valid)
       this._addTc();
   }
 
-  private _addTc() {
+  private _addTc(): void {
     const tc = new TcDbRefModel(
       undefined,
       this._assignmentId,

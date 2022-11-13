@@ -86,6 +86,14 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     }
   }
 
+  async delete(id: string): Promise<void> {
+    const collection = this._getCollection();
+    const doc = await this.getByDocIdAsync(id);
+
+    if (doc) 
+      await collection.doc(doc.id).delete();
+  }
+
   private _getCollection(query?: QueryFn): AngularFirestoreCollection<T> {
     return query
       ? this._firestore.collection(this._collectionName, query)

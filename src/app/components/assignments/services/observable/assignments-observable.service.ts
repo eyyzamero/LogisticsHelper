@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ObservableMapperService } from 'src/app/core/services/mapper';
 import { BaseBehaviorSubjectObservableService } from 'src/app/core/services/observable/base-behavior-subject/base-behavior-subject-observable.service';
+import { AssignmentStatus } from '../../enums';
 import { IAssignmentModel, IAssignmentPalletModel, IAssignmentTcModel } from '../../models';
 
 @Injectable({
@@ -64,6 +65,15 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
         const palletsWithThisTc = pallets.filter(x => x.tc === tc.name);
         tc.pallets = palletsWithThisTc;
       });
+    }
+  }
+
+  setStatus(assignmentId: string, status: AssignmentStatus) {
+    let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
+
+    if (assignment) {
+      assignment.status = status;
+      this.next();
     }
   }
 }

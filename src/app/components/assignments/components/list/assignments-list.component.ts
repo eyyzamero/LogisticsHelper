@@ -59,7 +59,9 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   }
 
   moveToHistory(assignmentId: string) {
-
+    this._assignmentsCollectionService.updateProperty(assignmentId, 'status', AssignmentStatus.HISTORY).then(
+      () => this._assignmentsObservableService.setStatus(assignmentId, AssignmentStatus.HISTORY)
+    );
   }
 
   delete(assignmentId: string) {

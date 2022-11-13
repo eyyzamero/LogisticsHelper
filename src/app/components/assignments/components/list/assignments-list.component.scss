@@ -8,52 +8,58 @@
     margin-bottom: 16px;
   }
 
-  .accordions {
-    .accordion {
-      &.accordion-expanded {
+  .content {
+    .filter {
+      margin-bottom: 16px;
+    }
+
+    .accordions {
+      .accordion {
+        &.accordion-expanded {
+          ion-item {
+            --background: var(--ion-color-light-shade);
+          }
+        }
+  
         ion-item {
-          --background: var(--ion-color-light-shade);
-        }
-      }
-
-      ion-item {
-        --background: var(--ion-color-light);
-
-        .label {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          font-weight: bold;
-          align-items: center;
-          width: 100%;
-
-          ion-icon {
-            font-size: 24px;
-            margin-right: 8px;
-          }
-
-          ion-progress-bar {
+          --background: var(--ion-color-light);
+  
+          .label {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            font-weight: bold;
+            align-items: center;
             width: 100%;
-            margin-top: 8px;
-
-            @media(min-width: 400px) {
-              width: 100px;
-              margin: 0 0 0 auto;
+  
+            ion-icon {
+              font-size: 24px;
+              margin-right: 8px;
             }
-
-            @media(min-width: 768px) {
-              width: 200px;
+  
+            ion-progress-bar {
+              width: 100%;
+              margin-top: 8px;
+  
+              @media(min-width: 400px) {
+                width: 100px;
+                margin: 0 0 0 auto;
+              }
+  
+              @media(min-width: 768px) {
+                width: 200px;
+              }
             }
           }
         }
-      }
-
-      .content {
-        padding: 16px;
-
-        app-assignments-list-actions {
-          display: block;
-          margin-bottom: 16px;
+  
+        .content {
+          padding: 16px;
+  
+          app-assignments-list-actions {
+            display: block;
+            margin-bottom: 16px;
+          }
         }
       }
     }

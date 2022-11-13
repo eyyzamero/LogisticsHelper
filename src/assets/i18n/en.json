@@ -42,7 +42,13 @@
       "SINGLE_INCOMPLETE": "Single incomplete"
     },
     "pallets-count": "Pallets count",
-    "inners-count": "Inners count"
+    "inners-count": "Inners count",
+    "status": "Assignments status",
+    "select-status-placeholder": "Select assignments status...",
+    "statuses": {
+      "ACTIVE": "Active",
+      "HISTORY": "Historical"
+    }
   },
   "tabs": {
     "home": "Home",

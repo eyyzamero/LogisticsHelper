@@ -42,7 +42,13 @@
       "SINGLE_INCOMPLETE": "Dodaj niekompletną paletę"
     },
     "pallets-count": "Ilość palet",
-    "inners-count": "Ilość innerów"
+    "inners-count": "Ilość innerów",
+    "status": "Status zlecenia",
+    "select-status-placeholder": "Wybierz status zlecenia...",
+    "statuses": {
+      "ACTIVE": "Aktywne",
+      "HISTORY": "Historyczne"
+    }
   },
   "tabs": {
     "home": "Strona startowa",

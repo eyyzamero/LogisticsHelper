@@ -33,7 +33,7 @@ export class AssignmentsMapperService {
  }
 
   private _IAssignmentDbRefModelToIAssignmentModel(src: IAssignmentDbRefModel): IAssignmentModel {
-    const dest = new AssignmentModel(src.id);
+    const dest = new AssignmentModel(src.id, src.status);
     return dest;
   }
 }

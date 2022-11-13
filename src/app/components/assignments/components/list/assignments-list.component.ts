@@ -6,6 +6,7 @@ import { CommunicationState, FirestoreCollection } from 'src/app/core/enums';
 import { IAssignmentDbRefModel, IPalletDbRefModel, ITcDbRefModel } from 'src/app/core/models';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { AuthObservableService } from 'src/app/core/services/observable/auth/auth-observable.service';
+import { AssignmentStatus } from '../../enums';
 import { IAssignmentModel } from '../../models';
 import { AssignmentsMapperService } from '../../services/mapper/assignments-mapper.service';
 import { AssignmentsObservableService } from '../../services/observable/assignments-observable.service';
@@ -13,15 +14,21 @@ import { AssignmentsObservableService } from '../../services/observable/assignme
 @Component({
   selector: 'app-assignments-list',
   templateUrl: './assignments-list.component.html',
-  styleUrls: ['./assignments-list.component.scss'],
+  styleUrls: ['./assignments-list.component.scss']
 })
 export class AssignmentsListComponent implements OnInit, OnDestroy {
   
-  assignments: Array<IAssignmentModel> = new Array<IAssignmentModel>();
+  get assignments(): Array<IAssignmentModel> {
+    return this._assignments.filter(x => x.status === this.status);
+  }
+
+  status: AssignmentStatus = AssignmentStatus.ACTIVE;
+  statuses: Array<string> = Object.values(AssignmentStatus);
   communicationState: CommunicationState = CommunicationState.NONE;
 
   readonly CommunicationState = CommunicationState;
 
+  private _assignments: Array<IAssignmentModel> = new Array<IAssignmentModel>();
   private _assignmentsCollectionService: FirestoreCollectionService<IAssignmentDbRefModel>;
   private _tcsCollectionService: FirestoreCollectionService<ITcDbRefModel>;
   private _palletsCollectionService: FirestoreCollectionService<IPalletDbRefModel>;
@@ -77,7 +84,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   private _initObservables(): void {
     const assignmentsSubscription = this._assignmentsObservableService.observable.subscribe({
       next: (value) => {
-        this.assignments = value.data;
+        this._assignments = value.data;
         this.communicationState = value.communicationState;
       }
     });

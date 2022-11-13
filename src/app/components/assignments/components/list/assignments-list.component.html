@@ -1,19 +1,29 @@
 <div class="assignments-list-container">
   <b class="section-label" translate>tabs.assignments</b>
   <app-loader *ngIf="communicationState !== CommunicationState.LOADED"></app-loader>
-  <ion-accordion-group class="accordions" [multiple]="true">
-    <ion-accordion *ngFor="let assignment of assignments" class="accordion">
-      <ion-item slot="header">
-        <div class="label">
-          <ion-icon name="document-outline"></ion-icon>
-          <ion-text>{{ assignment.id }}</ion-text>
-          <ion-progress-bar ionProgressBarColor [value]="getOverallPercentage(assignment)"></ion-progress-bar>
-        </div>
+  <div *ngIf="communicationState === CommunicationState.LOADED" class="content">
+    <div class="filter">
+      <ion-item class="status">
+        <ion-label position="floating" translate>assignments.status</ion-label>
+        <ion-select [(ngModel)]="status" [placeholder]="'assignments.select-status-placeholder' | translate">
+          <ion-select-option *ngFor="let status of statuses" [value]="status" translate>assignments.statuses.{{ status }}</ion-select-option>
+        </ion-select>
       </ion-item>
-      <div slot="content" class="content">
-        <app-assignments-list-actions [assignmentId]="assignment.id" (edit)="navigateToForm($event)" (history)="moveToHistory($event)" (delete)="delete($event)"></app-assignments-list-actions>
-        <app-assignments-list-tcs [tcs]="assignment.tcs"></app-assignments-list-tcs>
-      </div>
-    </ion-accordion>
-  </ion-accordion-group>
+    </div>
+    <ion-accordion-group class="accordions" [multiple]="true">
+      <ion-accordion *ngFor="let assignment of assignments" class="accordion">
+        <ion-item slot="header">
+          <div class="label">
+            <ion-icon name="document-outline"></ion-icon>
+            <ion-text>{{ assignment.id }}</ion-text>
+            <ion-progress-bar ionProgressBarColor [value]="getOverallPercentage(assignment)"></ion-progress-bar>
+          </div>
+        </ion-item>
+        <div slot="content" class="content">
+          <app-assignments-list-actions [assignmentId]="assignment.id" (edit)="navigateToForm($event)" (history)="moveToHistory($event)" (delete)="delete($event)"></app-assignments-list-actions>
+          <app-assignments-list-tcs [tcs]="assignment.tcs"></app-assignments-list-tcs>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </div>
 </div>

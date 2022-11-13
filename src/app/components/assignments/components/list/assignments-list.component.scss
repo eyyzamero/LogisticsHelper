@@ -11,6 +11,12 @@
   .content {
     .filter {
       margin-bottom: 16px;
+
+      .status {
+        ion-select::part(text) {
+          font-weight: bold;
+        }
+      }
     }
 
     .accordions {

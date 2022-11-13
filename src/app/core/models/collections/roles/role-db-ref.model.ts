@@ -1,5 +1,5 @@
-import { UserRole } from "src/app/core/enums";
-import { IRoleDbRefModel } from "../..";
+import { UserRole } from 'src/app/core/enums';
+import { IRoleDbRefModel } from '../..';
 
 export class RoleDbRefModel implements IRoleDbRefModel {
 

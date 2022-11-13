@@ -1,4 +1,4 @@
-import { ITcDbRefModel } from "../..";
+import { ITcDbRefModel } from '../..';
 
 export class TcDbRefModel implements ITcDbRefModel {
 

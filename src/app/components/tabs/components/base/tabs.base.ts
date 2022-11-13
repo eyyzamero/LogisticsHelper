@@ -1,9 +1,9 @@
-import { Directive } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { Router } from "@angular/router";
-import { TabType } from "src/app/core/enums";
-import { ITabModel } from "../../models";
-import { TabsService } from "../../services/tabs/tabs.service";
+import { Directive } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
+import { TabType } from 'src/app/core/enums';
+import { ITabModel } from '../../models';
+import { TabsService } from '../../services/tabs/tabs.service';
 
 @Directive()
 export class TabsBase {

@@ -1,5 +1,5 @@
-import { IAssignmentModel, IAssignmentTcModel } from "..";
-import { AssignmentStatus } from "../../enums";
+import { IAssignmentModel, IAssignmentTcModel } from '..';
+import { AssignmentStatus } from '../../enums';
 
 export class AssignmentModel implements IAssignmentModel {
 

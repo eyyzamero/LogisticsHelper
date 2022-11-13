@@ -1,4 +1,4 @@
-import { UserPermission, UserRole } from "../../enums";
+import { UserPermission, UserRole } from '../../enums';
 
 export interface IAuthModel {
   id: string;

@@ -1,4 +1,4 @@
-import { IAssignmentPalletModel, IAssignmentTcModel } from "..";
+import { IAssignmentPalletModel, IAssignmentTcModel } from '..';
 
 export class AssignmentTcModel implements IAssignmentTcModel {
 

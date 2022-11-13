@@ -1,4 +1,4 @@
-import { IAssignmentPalletModel } from "../pallet/iassignment-pallet.model";
+import { IAssignmentPalletModel } from '../pallet/iassignment-pallet.model';
 
 export interface IAssignmentTcModel {
   id: string;

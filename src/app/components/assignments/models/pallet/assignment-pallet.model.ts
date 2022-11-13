@@ -1,4 +1,4 @@
-import { IAssignmentPalletModel } from "..";
+import { IAssignmentPalletModel } from '..';
 
 export class AssignmentPalletModel implements IAssignmentPalletModel {
 

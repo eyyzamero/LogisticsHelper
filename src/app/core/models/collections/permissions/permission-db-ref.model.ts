@@ -1,4 +1,4 @@
-import { IPermissionDbRefModel } from "../..";
+import { IPermissionDbRefModel } from '../..';
 
 export class PermissionDbRefModel implements IPermissionDbRefModel {
 

@@ -1,5 +1,5 @@
-import { TabType } from "src/app/core/enums";
-import { ITabModel } from ".";
+import { TabType } from 'src/app/core/enums';
+import { ITabModel } from '.';
 
 export class TabModel implements ITabModel {
 

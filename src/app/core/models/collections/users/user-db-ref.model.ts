@@ -1,4 +1,4 @@
-import { IUserDbRefModel } from "../..";
+import { IUserDbRefModel } from '../..';
 
 export class UserDbRefModel implements IUserDbRefModel {
 

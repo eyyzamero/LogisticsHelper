@@ -1,4 +1,4 @@
-import { IPalletDbRefModel } from "../..";
+import { IPalletDbRefModel } from '../..';
 
 export class PalletDbRefModel implements IPalletDbRefModel {
 

@@ -35,7 +35,7 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     if (!docIds || !docIds?.length)
       return undefined;
 
-    const collection = this._getCollection(ref => ref.where(documentId(), "in", docIds));
+    const collection = this._getCollection(ref => ref.where(documentId(), 'in', docIds));
     const documents = await firstValueFrom(collection.valueChanges());
     return documents;
   }

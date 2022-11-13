@@ -1,5 +1,5 @@
-import { IAssignmentTcModel } from "..";
-import { AssignmentStatus } from "../../enums";
+import { IAssignmentTcModel } from '..';
+import { AssignmentStatus } from '../../enums';
 
 export interface IAssignmentModel {
   id: string;

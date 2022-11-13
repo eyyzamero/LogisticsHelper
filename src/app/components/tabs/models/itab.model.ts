@@ -1,4 +1,4 @@
-import { TabType } from "../../../core/enums";
+import { TabType } from '../../../core/enums';
 
 export interface ITabModel {
   type: TabType;

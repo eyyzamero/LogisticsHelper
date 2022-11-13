@@ -21,7 +21,7 @@
         </ion-item>
         <div slot="content" class="content">
           <app-assignments-list-actions [assignmentId]="assignment.id" (edit)="navigateToForm($event)" (history)="moveToHistory($event)" (delete)="delete($event)"></app-assignments-list-actions>
-          <app-assignments-list-tcs [tcs]="assignment.tcs"></app-assignments-list-tcs>
+          <app-assignments-tcs [tcs]="assignment.tcs"></app-assignments-tcs>
         </div>
       </ion-accordion>
     </ion-accordion-group>

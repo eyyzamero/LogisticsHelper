@@ -8,7 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { LoaderModule } from '../common/loader/loader.module';
 import { DirectivesModule } from 'src/app/core/directives/directives.module';
 import { AssignmentsListComponent } from './components/list/assignments-list.component';
-import { AssignmentsListTcsComponent } from './components/list/components/tcs/assignments-list-tcs.component';
+import { AssignmentsTcsComponent } from './components/tcs/assignments-tcs.component';
 import { AssignmentFormComponent } from './components/form/assignment-form.component';
 import { AssignmentsListActionsComponent } from './components/list/components/actions/assignments-list-actions.component';
 import { AssignmentsFormAddTcsModalComponent } from './components/form/components/modals/add-tcs/assignments-form-add-tcs-modal.component';
@@ -19,7 +19,7 @@ import { AssignmentsFormAddPalletModalComponent } from './components/form/compon
   declarations: [
     AssignmentsComponent,
     AssignmentsListComponent,
-    AssignmentsListTcsComponent,
+    AssignmentsTcsComponent,
     AssignmentsListActionsComponent,
     AssignmentFormComponent,
     AssignmentsFormAddTcsModalComponent,

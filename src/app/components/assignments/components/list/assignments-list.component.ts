@@ -65,7 +65,9 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   }
 
   delete(assignmentId: string): void {
-
+    this._assignmentsCollectionService.delete(assignmentId).then(
+      () => this._assignmentsObservableService.delete(assignmentId)
+    );
   }
 
   getOverallPercentage(assignment: IAssignmentModel): string {

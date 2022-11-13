@@ -76,4 +76,13 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
       this.next();
     }
   }
+
+  delete(assignmentId: string): void {
+    let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
+
+    if (assignment) {
+      this.observableSubjectValue.data = this.observableSubjectValue.data.filter(x => x.id !== assignmentId);
+      this.next();
+    }
+  }
 }

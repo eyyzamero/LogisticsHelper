@@ -9,6 +9,20 @@
   }
 
   .content {
+    .actions {
+      display: flex;
+      margin-bottom: 16px;
+
+      ion-button {
+        --padding-start: 8px;
+        --padding-end: 8px;
+
+        span {
+          margin-left: 8px;
+        }
+      }
+    }
+
     .filter {
       margin-bottom: 16px;
 

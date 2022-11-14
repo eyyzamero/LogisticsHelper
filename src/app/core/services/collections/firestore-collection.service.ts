@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, QueryFn } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference, QueryFn } from '@angular/fire/compat/firestore';
 import { documentId } from '@angular/fire/firestore';
 import { firstValueFrom } from 'rxjs';
 import { FirestoreCollection } from '../../enums';
@@ -50,15 +50,25 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     return documents;
   }
 
+  getDocRefByDocId(docId?: string): DocumentReference<T> | undefined {
+    if (!docId)
+      return undefined;
+
+    const docRef = this._firestore.collection('users').doc<T>(docId).ref;
+    return docRef;
+  }
+
   async getWhereFieldEqualsValue(field: KeysInGenericType<T>, value: string): Promise<Array<T> | undefined> {
     const collection = this._getCollection(ref => ref.where(field as string, '==', value));
     const documents = await firstValueFrom(collection.valueChanges());
     return documents;
   }
 
-  async add(item: T): Promise<void> {
+  async add(item: T, id?: string): Promise<void> {
     const collection = this._getCollection();
-    item.id = this._firestore.createId();;
+
+    if (!id)
+      item.id = this._firestore.createId();;
 
     await collection.doc(item.id).set({ ...item });
   }

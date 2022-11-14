@@ -2,6 +2,12 @@
   <b class="section-label" translate>tabs.assignments</b>
   <app-loader *ngIf="communicationState !== CommunicationState.LOADED"></app-loader>
   <div *ngIf="communicationState === CommunicationState.LOADED" class="content">
+    <div class="actions">
+      <ion-button fill="solid" color="primary" strong="true" (click)="create()">
+        <ion-icon name="add-outline"></ion-icon>
+        <span translate>common.add</span>
+      </ion-button>
+    </div>
     <div class="filter">
       <ion-item class="status">
         <ion-label position="floating" translate>assignments.status</ion-label>

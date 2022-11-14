@@ -10,7 +10,7 @@ export class AssignmentsMapperService {
   constructor() { }
 
   ArrayOfIAssignmentDbRefModelToArrayOfIAssignmentModel(src?: Array<IAssignmentDbRefModel>): Array<IAssignmentModel> {
-    const dest = src?.map(this._IAssignmentDbRefModelToIAssignmentModel) ?? new Array<IAssignmentModel>();
+    const dest = src?.map(this.IAssignmentDbRefModelToIAssignmentModel) ?? new Array<IAssignmentModel>();
     return dest;
   }
 
@@ -32,7 +32,7 @@ export class AssignmentsMapperService {
    return dest;
  }
 
-  private _IAssignmentDbRefModelToIAssignmentModel(src: IAssignmentDbRefModel): IAssignmentModel {
+  IAssignmentDbRefModelToIAssignmentModel(src: IAssignmentDbRefModel): IAssignmentModel {
     const dest = new AssignmentModel(src.id, src.status);
     return dest;
   }

@@ -3,7 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommunicationState, FirestoreCollection } from 'src/app/core/enums';
-import { IAssignmentDbRefModel, IPalletDbRefModel, ITcDbRefModel } from 'src/app/core/models';
+import { IAssignmentDbRefModel, IPalletDbRefModel, ITcDbRefModel, IUserDbRefModel } from 'src/app/core/models';
+import { AssignmentDbRefModel } from 'src/app/core/models/collections/assignments/assignment-db-ref.model';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { AuthObservableService } from 'src/app/core/services/observable/auth/auth-observable.service';
 import { AssignmentStatus } from '../../enums';
@@ -32,6 +33,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   private _assignmentsCollectionService: FirestoreCollectionService<IAssignmentDbRefModel>;
   private _tcsCollectionService: FirestoreCollectionService<ITcDbRefModel>;
   private _palletsCollectionService: FirestoreCollectionService<IPalletDbRefModel>;
+  private _usersCollectionService: FirestoreCollectionService<IUserDbRefModel>;
   private _subscriptions: Array<Subscription> = new Array<Subscription>();
 
   constructor(
@@ -45,11 +47,23 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
     this._assignmentsCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.ASSIGNMENTS);
     this._tcsCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.TCS);
     this._palletsCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.PALLETS);
+    this._usersCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.USERS);
     this._getAssignments();
   }
 
   ngOnInit(): void {
     this._initObservables();
+  }
+
+  async create(): Promise<void> {
+    const id = await this._createNewUniqueAssignmentId();
+    const currentUserDocRef = this._usersCollectionService.getDocRefByDocId(this._authObservableService.observableSubjectValue.data!.id)!;
+    const assignment = new AssignmentDbRefModel(id, AssignmentStatus.ACTIVE, currentUserDocRef);
+    this._assignmentsCollectionService.add(assignment, id).then(() => {
+      const mappedAssignment = this._assignmentsMapperService.IAssignmentDbRefModelToIAssignmentModel(assignment);
+      this._assignmentsObservableService.addAssignment(mappedAssignment);
+      this.navigateToForm(id);
+    });
   }
 
   navigateToForm(assignmentId: string): void {
@@ -119,6 +133,18 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
     const pallets = await this._palletsCollectionService.getWhereFieldEqualsValue('assignmentId', assignmentId);
     const mappedPallets = this._assignmentsMapperService.ArrayOfIPalletDbRefToArrayOfIAssignmentPalletModel(pallets);
     this._assignmentsObservableService.addPalletsToTcsWithoutNext(assignmentId, mappedPallets);
+  }
+
+  private async _createNewUniqueAssignmentId(): Promise<string> {
+    const date = new Date();
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth()).padStart(2, '0');
+    const year = date.getFullYear();
+    const suffix = Math.random().toString().substring(2, 9);
+    const id = `${day}_${month}_${year}_${suffix}`;
+    const assignmentWithCreatedIdNotExists = (await this._assignmentsCollectionService.getByDocIdAsync(id)) === undefined;
+
+    return assignmentWithCreatedIdNotExists ? id : this._createNewUniqueAssignmentId();
   }
 
   ngOnDestroy(): void {

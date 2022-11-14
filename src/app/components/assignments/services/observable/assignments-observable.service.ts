@@ -14,6 +14,11 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
   ) {
     super(new Array<IAssignmentModel>(), observableMapperService);
   }
+  
+  addAssignment(assignment: IAssignmentModel) {
+    this.observableSubjectValue.data.push(assignment);
+    this.next();
+  }
 
   addTc(assignmentId: string, tc: IAssignmentTcModel): void {
     let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);

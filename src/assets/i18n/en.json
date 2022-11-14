@@ -10,7 +10,8 @@
     "inners": "Inners",
     "limit": "Limit",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "no-data": "No data"
   },
   "validation": {
     "field-required": "Field required",

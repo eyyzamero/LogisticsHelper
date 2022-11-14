@@ -19,6 +19,12 @@
       }
     }
 
+    .info {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 16px 0 0 16px;
+    }
+
     .accordions {
       .accordion {
         &.accordion-expanded {

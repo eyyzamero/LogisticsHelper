@@ -10,6 +10,7 @@
         </ion-select>
       </ion-item>
     </div>
+    <div *ngIf="!assignments.length" class="info" translate>common.no-data</div>
     <ion-accordion-group class="accordions" [multiple]="true">
       <ion-accordion *ngFor="let assignment of assignments" class="accordion">
         <ion-item slot="header">

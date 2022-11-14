@@ -10,7 +10,8 @@
     "inners": "Innery",
     "limit": "Limit",
     "cancel": "Anuluj",
-    "save": "Zapisz"
+    "save": "Zapisz",
+    "no-data": "Brak danych"
   },
   "validation": {
     "field-required": "Pole wymagane",

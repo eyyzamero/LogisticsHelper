@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IonAccordionGroup } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { CommunicationState, FirestoreCollection } from 'src/app/core/enums';
 import { IAssignmentDbRefModel, IPalletDbRefModel, ITcDbRefModel, IUserDbRefModel } from 'src/app/core/models';
@@ -19,6 +20,8 @@ import { AssignmentsObservableService } from '../../services/observable/assignme
 })
 export class AssignmentsListComponent implements OnInit, OnDestroy {
   
+  @ViewChild('accordionGroup', { static: false }) accordionGroupRef!: IonAccordionGroup;
+  
   get assignments(): Array<IAssignmentModel> {
     return this._assignments.filter(x => x.status === this.status);
   }
@@ -30,6 +33,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   readonly CommunicationState = CommunicationState;
 
   private _assignments: Array<IAssignmentModel> = new Array<IAssignmentModel>();
+  private _openedAssignmentAccordions: Array<string> = new Array<string>();
   private _assignmentsCollectionService: FirestoreCollectionService<IAssignmentDbRefModel>;
   private _tcsCollectionService: FirestoreCollectionService<ITcDbRefModel>;
   private _palletsCollectionService: FirestoreCollectionService<IPalletDbRefModel>;
@@ -99,11 +103,17 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
     return isNaN(count / limit) ? '0' : (count / limit).toFixed(2);
   }
 
+  toggleAccordion(id: string) {
+    const index = this._openedAssignmentAccordions.findIndex(x => x === id);
+    index > -1 ? this._openedAssignmentAccordions.splice(index, 1) : this._openedAssignmentAccordions.push(id);
+  }
+
   private _initObservables(): void {
     const assignmentsSubscription = this._assignmentsObservableService.observable.subscribe({
       next: (value) => {
         this._assignments = value.data;
         this.communicationState = value.communicationState;
+        this.accordionGroupRef.value = this._openedAssignmentAccordions;
       }
     });
     this._subscriptions.push(assignmentsSubscription);

@@ -18,7 +18,7 @@
     </div>
     <div *ngIf="!assignments.length" class="info" translate>common.no-data</div>
     <ion-accordion-group class="accordions" [multiple]="true">
-      <ion-accordion *ngFor="let assignment of assignments" class="accordion">
+      <ion-accordion *ngFor="let assignment of assignments" class="accordion" [value]="assignment.id" (click)="toggleAccordion(assignment.id)">
         <ion-item slot="header">
           <div class="label">
             <ion-icon name="document-outline"></ion-icon>

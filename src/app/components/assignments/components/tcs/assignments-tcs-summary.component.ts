@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IAssignmentTcModel } from 'src/app/components/assignments/models';
 
 @Component({
-  selector: 'app-assignments-tcs',
-  templateUrl: './assignments-tcs.component.html',
-  styleUrls: ['./assignments-tcs.component.scss'],
+  selector: 'app-assignments-tcs-summary',
+  templateUrl: './assignments-tcs-summary.component.html',
+  styleUrls: ['./assignments-tcs-summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AssignmentsTcsComponent {
+export class AssignmentsTcsSummaryComponent {
 
   @Input() tcs: Array<IAssignmentTcModel> = new Array<IAssignmentTcModel>()
 

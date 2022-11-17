@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AssignmentsTcsComponent } from './assignments-tcs.component';
+import { AssignmentsTcsSummaryComponent } from './assignments-tcs-summary.component';
 
-describe('AssignmentsTcsComponent', () => {
-  let component: AssignmentsTcsComponent;
-  let fixture: ComponentFixture<AssignmentsTcsComponent>;
+describe('AssignmentsTcsSummaryComponent', () => {
+  let component: AssignmentsTcsSummaryComponent;
+  let fixture: ComponentFixture<AssignmentsTcsSummaryComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [AssignmentsTcsComponent],
+      declarations: [AssignmentsTcsSummaryComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AssignmentsTcsComponent);
+    fixture = TestBed.createComponent(AssignmentsTcsSummaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

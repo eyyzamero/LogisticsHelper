@@ -113,7 +113,9 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
       next: (value) => {
         this._assignments = value.data;
         this.communicationState = value.communicationState;
-        this.accordionGroupRef.value = this._openedAssignmentAccordions;
+
+        if (this.accordionGroupRef)
+          this.accordionGroupRef.value = this._openedAssignmentAccordions;
       }
     });
     this._subscriptions.push(assignmentsSubscription);

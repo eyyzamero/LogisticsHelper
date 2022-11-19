@@ -150,7 +150,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   private async _createNewUniqueAssignmentId(): Promise<string> {
     const date = new Date();
     const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth()).padStart(2, '0');
+    const month = Number(String(date.getMonth()).padStart(2, '0')) + 1;
     const year = date.getFullYear();
     const suffix = Math.random().toString().substring(2, 9);
     const id = `${day}_${month}_${year}_${suffix}`;

@@ -44,10 +44,10 @@ export class AssignmentsFormAddTcsModalComponent {
       undefined,
       this._assignmentId,
       this.form.controls['tc'].value,
-      this.form.controls['width'].value as number,
-      this.form.controls['height'].value as number,
-      this.form.controls['inners'].value as number,
-      this.form.controls['limit'].value as number
+      Number(this.form.controls['width'].value),
+      Number(this.form.controls['height'].value),
+      Number(this.form.controls['inners'].value),
+      Number(this.form.controls['limit'].value)
     );
     this._tcsCollectionService.add(tc).then(() => {
       const mappedTc = this._assignmentsMapperService.ITcDbRefModelToIAssignmentTcModel(tc);

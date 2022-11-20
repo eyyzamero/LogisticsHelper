@@ -98,7 +98,7 @@ export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy
       undefined,
       this._assignment.id,
       tc.name,
-      (tc.width * tc.height * tc.inners) as number,
+      Number(tc.width * tc.height * tc.inners),
       true
     );
 

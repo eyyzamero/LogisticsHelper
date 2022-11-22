@@ -7,6 +7,7 @@
         <ion-icon name="cube-outline"></ion-icon>
         <span class="name">{{ tc.name }}</span>
         <span class="pallets-count">[{{ tc.pallets.length }}]</span>
+        <span class="diameters">({{ tc.width }}W x {{ tc.height }}H x {{ tc.inners }}IN)</span>
       </div>
       <div class="row">
         <ion-progress-bar ionProgressBarColor [value]="getInnersCountPercentage(tc)"></ion-progress-bar>

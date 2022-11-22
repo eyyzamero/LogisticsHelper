@@ -21,7 +21,7 @@
       margin-top: 8px;
       align-items: center;
 
-      @media(min-width: 400px) {
+      @media(min-width: 768px) {
         flex-direction: row;
       }
 
@@ -30,7 +30,7 @@
         align-items: center;
         width: 100%;
 
-        @media(min-width: 400px) {
+        @media(min-width: 768px) {
           width: auto;
         }
 
@@ -46,16 +46,11 @@
           font-size: 16px;
           font-weight: bold;
           line-height: 16px;
-          margin-right: 8px;
         }
 
         ion-progress-bar {
           flex: 1;
           margin: 0 8px 0 0;
-
-          @media(min-width: 400px) {
-            width: 100px;
-          }
 
           @media(min-width: 768px) {
             width: 200px;
@@ -67,10 +62,18 @@
           line-height: 14px;
         }
 
-        .pallets-count {
+        .pallets-count,
+        .diameters {
           font-size: 16px;
           font-weight: bold;
           line-height: 16px;
+        }
+
+        .pallets-count {
+          margin: 0 8px;
+        }
+
+        .diameters {
           margin-right: 8px;
         }
       }

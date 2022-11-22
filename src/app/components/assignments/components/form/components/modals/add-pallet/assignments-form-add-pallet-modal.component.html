@@ -23,7 +23,7 @@
   <div *ngIf="form.controls.type.value === PalletType.MULTIPLE" class="row">
     <ion-item>
       <ion-label position="floating" translate>assignments.pallets-count</ion-label>
-      <ion-input formControlName="count"></ion-input>
+      <ion-input type="number" formControlName="count"></ion-input>
     </ion-item>
   </div>
   <div *ngIf="form.controls.type.value === PalletType.INCOMPLETE" class="row">

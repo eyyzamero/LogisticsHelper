@@ -26,7 +26,8 @@ export class AssignmentsFormService {
             componentProps: {
               _assignmentId: assignmentId
             },
-            cssClass: 'modal'
+            cssClass: 'modal',
+            backdropDismiss: false
           })).present()
         },
         {
@@ -37,7 +38,8 @@ export class AssignmentsFormService {
             componentProps: {
               _assignmentId: assignmentId
             },
-            cssClass: 'modal'
+            cssClass: 'modal',
+            backdropDismiss: false
           })).present()
         }
       ]

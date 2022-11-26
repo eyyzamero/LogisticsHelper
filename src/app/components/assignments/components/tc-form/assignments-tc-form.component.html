@@ -1,4 +1,5 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
+<ion-spinner name="crescent" *ngIf="communicationState === CommunicationState.LOADING"></ion-spinner>
+<form *ngIf="communicationState !== CommunicationState.LOADING" [formGroup]="form" (ngSubmit)="submit()">
   <div class="row">
     <ion-item>
       <ion-label position="floating">TC</ion-label>

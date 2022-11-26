@@ -5,3 +5,4 @@ export * from './user-permission.enum';
 export * from './firestore-collection.enum';
 export * from './tab-type.enum';
 export * from './progress-bar-color.enum';
+export * from "./form-mode.enum";

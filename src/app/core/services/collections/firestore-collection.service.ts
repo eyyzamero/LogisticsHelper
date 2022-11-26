@@ -85,9 +85,9 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     await batch.commit();
   }
 
-  async update(id: string, item: T): Promise<void> {
+  async update(item: T): Promise<void> {
     const collection = this._getCollection();
-    const doc = await this.getByDocIdAsync(id);
+    const doc = await this.getByDocIdAsync(item.id);
 
     if (doc)
       await collection.doc(doc.id).set({ ...item });

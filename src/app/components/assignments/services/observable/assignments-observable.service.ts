@@ -73,6 +73,19 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
     }
   }
 
+  editTc(assignmentId: string, item: IAssignmentTcModel) {
+    const assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
+
+    if (assignment) {
+      let tc = assignment.tcs.find(x => x.id === item.id);
+
+      if (tc) {
+        tc = item;
+        this.next();
+      }
+    }
+  }
+
   setStatus(assignmentId: string, status: AssignmentStatus): void {
     let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
 

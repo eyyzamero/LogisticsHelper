@@ -3,6 +3,7 @@
     "add": "Dodaj",
     "edit": "Edytuj",
     "delete": "Usuń",
+    "delete-confirmation": "Czy jesteś pewny/a, że chcesz usunąć tą pozycję?",
     "back-to-list": "Powrót do listy",
     "settings": "Ustawienia",
     "width": "Szerokość",
@@ -11,7 +12,8 @@
     "limit": "Limit",
     "cancel": "Anuluj",
     "save": "Zapisz",
-    "no-data": "Brak danych"
+    "no-data": "Brak danych",
+    "confirm": "Potwierdź"
   },
   "validation": {
     "field-required": "Pole wymagane",

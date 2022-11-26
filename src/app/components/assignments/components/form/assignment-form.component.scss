@@ -11,7 +11,20 @@
 
     ion-card-header {
       ion-card-title {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        color: var(--ion-color-primary);
         font-weight: bold;
+
+        ion-icon,
+        ion-text {
+          color: black;
+        }
+
+        ion-icon {
+          margin-right: 8px;
+        }
       }
     }
   }

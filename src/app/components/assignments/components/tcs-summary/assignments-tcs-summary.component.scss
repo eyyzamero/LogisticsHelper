@@ -37,7 +37,7 @@
         ion-icon {
           position: relative;
           font-size: 16px;
-          line-height: 16px;
+          line-height: 24px;
           margin-right: 8px;
           top: -1px;
         }
@@ -45,7 +45,7 @@
         .name {
           font-size: 16px;
           font-weight: bold;
-          line-height: 16px;
+          line-height: 24px;
         }
 
         ion-progress-bar {
@@ -57,16 +57,11 @@
           }
         }
 
-        .inners-count {
-          font-size: 14px;
-          line-height: 14px;
-        }
-
+        .inners-count,
         .pallets-count,
         .diameters {
-          font-size: 16px;
-          font-weight: bold;
-          line-height: 16px;
+          font-size: 14px;
+          line-height: 24px;
         }
 
         .pallets-count {

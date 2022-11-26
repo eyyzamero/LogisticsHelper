@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AssignmentsFormAddPalletModalComponent } from './components/form/components/modals/add-pallet/assignments-form-add-pallet-modal.component';
 import { AssignmentsTcsManagementPanelComponent } from './components/tcs-management-panel/assignments-tcs-management-panel.component';
 import { AssignmentsTcFormComponent } from './components/tc-form/assignments-tc-form.component';
+import { CoreModalsModule } from 'src/app/core/components/modals/modals.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AssignmentsTcFormComponent } from './components/tc-form/assignments-tc-
     DirectivesModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreModalsModule,
     AssignmentsRoutingModule
   ]
 })

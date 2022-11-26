@@ -103,4 +103,17 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
       this.next();
     }
   }
+
+  deleteTc(assignmentId: string, tcId: string): void {
+    let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
+
+    if (assignment) {
+      const tcIndex = assignment.tcs.findIndex(x => x.id === tcId);
+
+      if (tcIndex !== -1) {
+        assignment.tcs.splice(tcIndex, 1);
+        this.next();
+      }
+    }
+  }
 }

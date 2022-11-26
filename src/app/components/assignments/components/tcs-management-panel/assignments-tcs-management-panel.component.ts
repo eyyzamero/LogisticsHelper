@@ -1,8 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { DeleteModalComponent } from 'src/app/core/components/modals/delete-modal/delete-modal.component';
+import { FirestoreCollection } from 'src/app/core/enums';
+import { ITcDbRefModel } from 'src/app/core/models';
+import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { IAssignmentModel, IAssignmentTcModel } from '../../models';
 import { AssignmentsObservableService } from '../../services/observable/assignments-observable.service';
 import { AssignmentsFormTcModalComponent } from '../form/components/modals/add-tcs/assignments-form-tc-modal.component';
@@ -17,14 +22,18 @@ export class AssignmentsTcsManagementPanelComponent implements OnInit, OnDestroy
   tcs: Array<IAssignmentTcModel> = new Array<IAssignmentTcModel>();
 
   private _assignmentId: string | null = null;
+  private _tcsCollectionService: FirestoreCollectionService<ITcDbRefModel>;
   private _subscriptions: Array<Subscription> = new Array<Subscription>();
 
   constructor(
+    firestore: AngularFirestore,
     private _translateService: TranslateService,
     private _activatedRoute: ActivatedRoute,
     private _assignmentsObservableService: AssignmentsObservableService,
     private _modalController: ModalController
-  ) { }
+  ) {
+    this._tcsCollectionService = new FirestoreCollectionService<ITcDbRefModel>(firestore, FirestoreCollection.TCS);
+  }
 
   ngOnInit(): void {
     this._initObservables();
@@ -43,8 +52,20 @@ export class AssignmentsTcsManagementPanelComponent implements OnInit, OnDestroy
     }).then(modal => modal.present());
   }
 
-  delete(tc: IAssignmentTcModel) {
-
+  async delete(tc: IAssignmentTcModel) {
+    const modal = await this._modalController.create({
+      component: DeleteModalComponent,
+      componentProps: {
+        tcId: tc.id
+      },
+      cssClass: 'modal',
+      backdropDismiss: false,
+    });
+    modal.onDidDismiss().then((data) => {
+      if (data)
+        this._deleteTc(tc.id);
+    });
+    modal.present();
   }
 
   private _initObservables(): void {
@@ -71,6 +92,12 @@ export class AssignmentsTcsManagementPanelComponent implements OnInit, OnDestroy
 
   private _getAssignment(): void {
 
+  }
+
+  private _deleteTc(id: string) {
+    this._tcsCollectionService.delete(id).then(() => {
+      this._assignmentsObservableService.deleteTc(this._assignmentId!, id);
+    });
   }
 
   ngOnDestroy(): void {

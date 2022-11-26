@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { ActionSheetOptions, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { FirestoreCollection } from 'src/app/core/enums';
+import { IAssignmentDbRefModel } from 'src/app/core/models';
+import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
+import { AssignmentsObservableService } from '../../../services/observable/assignments-observable.service';
 import { AssignmentsFormAddPalletModalComponent } from '../components/modals/add-pallet/assignments-form-add-pallet-modal.component';
 import { AssignmentsFormTcModalComponent } from '../components/modals/add-tcs/assignments-form-tc-modal.component';
 
@@ -10,11 +15,17 @@ import { AssignmentsFormTcModalComponent } from '../components/modals/add-tcs/as
 })
 export class AssignmentsFormService {
 
+  private _assignmentsCollectionService: FirestoreCollectionService<IAssignmentDbRefModel>;
+
   constructor(
+    firestore: AngularFirestore,
     private _router: Router,
     private _translateService: TranslateService,
-    private _modalController: ModalController
-  ) { }
+    private _modalController: ModalController,
+    private _assignmentsObservableService: AssignmentsObservableService
+  ) {
+    this._assignmentsCollectionService = new FirestoreCollectionService<IAssignmentDbRefModel>(firestore, FirestoreCollection.ASSIGNMENTS);
+  }
 
   getAddActionSheetControllerOptions(assignmentId: string): ActionSheetOptions {
     const options = {
@@ -66,7 +77,12 @@ export class AssignmentsFormService {
         {
           text: this._translateService.instant('assignments.delete'),
           icon: 'trash-outline',
-          handler: () => { }
+          handler: () => this._assignmentsCollectionService.delete(assignmentId).then(
+            () => {
+              this._assignmentsObservableService.delete(assignmentId);
+              this._router.navigate(['assignments']);
+            }
+          )
         }
       ]
     };

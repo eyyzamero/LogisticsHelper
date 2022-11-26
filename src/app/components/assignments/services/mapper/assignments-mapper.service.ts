@@ -28,7 +28,7 @@ export class AssignmentsMapperService {
   }
 
   IPalletDbRefModelToIAssignmentPalletModel(src: IPalletDbRefModel): IAssignmentPalletModel {
-   const dest = new AssignmentPalletModel(src.id, src.assignmentId, src.tc, src.inners, src.full);
+   const dest = new AssignmentPalletModel(src.id, src.assignmentId, src.tcId, src.inners, src.full);
    return dest;
  }
 

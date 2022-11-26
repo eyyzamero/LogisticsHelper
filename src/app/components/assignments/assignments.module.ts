@@ -11,7 +11,7 @@ import { AssignmentsListComponent } from './components/list/assignments-list.com
 import { AssignmentsTcsSummaryComponent } from './components/tcs-summary/assignments-tcs-summary.component';
 import { AssignmentFormComponent } from './components/form/assignment-form.component';
 import { AssignmentsListActionsComponent } from './components/list/components/actions/assignments-list-actions.component';
-import { AssignmentsFormAddTcsModalComponent } from './components/form/components/modals/add-tcs/assignments-form-add-tcs-modal.component';
+import { AssignmentsFormTcModalComponent } from './components/form/components/modals/add-tcs/assignments-form-tc-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AssignmentsFormAddPalletModalComponent } from './components/form/components/modals/add-pallet/assignments-form-add-pallet-modal.component';
 import { AssignmentsTcsManagementPanelComponent } from './components/tcs-management-panel/assignments-tcs-management-panel.component';
@@ -24,7 +24,7 @@ import { AssignmentsTcFormComponent } from './components/tc-form/assignments-tc-
     AssignmentsTcsSummaryComponent,
     AssignmentsListActionsComponent,
     AssignmentFormComponent,
-    AssignmentsFormAddTcsModalComponent,
+    AssignmentsFormTcModalComponent,
     AssignmentsFormAddPalletModalComponent,
     AssignmentsTcsManagementPanelComponent,
     AssignmentsTcFormComponent

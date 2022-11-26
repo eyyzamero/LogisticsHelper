@@ -17,10 +17,14 @@ import { BaseAssignmentsModal } from '../form/components/modals/base/assignments
 export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
 
   @Input() set tcId(id: string) {
-    this._mode = FormMode.EDIT;
-    this._assignTcFormValues(id);
+    this._tcId = id;
+
+    if (id) {
+      this._mode = FormMode.EDIT;
+      this._assignTcFormValues(id);
+    }
   }
-  @Input() private _assignmentId: string = '';
+  @Input() assignmentId: string = '';
   
   get mode() {
     return this._mode;
@@ -34,7 +38,7 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
   private get _filledTcDbRefModel(): TcDbRefModel {
     const tc = new TcDbRefModel(
       undefined,
-      this._assignmentId,
+      this.assignmentId,
       this.form.controls['tc'].value,
       this.form.controls['width'].value,
       this.form.controls['height'].value,
@@ -44,6 +48,7 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
     return tc;
   }
 
+  private _tcId: string = '';
   private _mode: FormMode = FormMode.CREATE;
   private _tcsCollectionService: FirestoreCollectionService<ITcDbRefModel>;
 
@@ -65,10 +70,10 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
   private _assignTcFormValues(id: string) : void {
     this.communicationState = CommunicationState.LOADING;
 
-    const assignment = this._assignmentsObservableService.observableSubjectValue.data.find(x => x.id === this._assignmentId);
+    const assignment = this._assignmentsObservableService.observableSubjectValue.data.find(x => x.id === this.assignmentId);
 
     if (assignment) {
-      const tc = assignment.tcs.find(x => x.id === this.tcId);
+      const tc = assignment.tcs.find(x => x.id === id);
 
       if (tc) {
         this.form.controls['tc'].setValue(tc.name);
@@ -90,18 +95,18 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
     const tc = this._filledTcDbRefModel;
     this._tcsCollectionService.add(tc).then(() => {
       const mappedTc = this._assignmentsMapperService.ITcDbRefModelToIAssignmentTcModel(tc);
-      this._assignmentsObservableService.addTc(this._assignmentId, mappedTc);
+      this._assignmentsObservableService.addTc(this.assignmentId, mappedTc);
       this.close();
     });
   }
 
   private _editTc(): void {
     let tc = this._filledTcDbRefModel;
-    tc.id = this.tcId;
+    tc.id = this._tcId;
 
     this._tcsCollectionService.update(tc).then(() => {
       const mappedTc = this._assignmentsMapperService.ITcDbRefModelToIAssignmentTcModel(tc);
-      this._assignmentsObservableService.editTc(this._assignmentId, mappedTc);
+      this._assignmentsObservableService.editTc(this.assignmentId, mappedTc);
       this.close();
     });
   }

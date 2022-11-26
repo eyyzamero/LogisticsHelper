@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActionSheetOptions, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { AssignmentsFormAddPalletModalComponent } from '../components/modals/add-pallet/assignments-form-add-pallet-modal.component';
-import { AssignmentsFormAddTcsModalComponent } from '../components/modals/add-tcs/assignments-form-add-tcs-modal.component';
+import { AssignmentsFormTcModalComponent } from '../components/modals/add-tcs/assignments-form-tc-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { AssignmentsFormAddTcsModalComponent } from '../components/modals/add-tc
 export class AssignmentsFormService {
 
   constructor(
+    private _router: Router,
     private _translateService: TranslateService,
     private _modalController: ModalController
   ) { }
@@ -34,7 +36,7 @@ export class AssignmentsFormService {
           text: this._translateService.instant('assignments.add-tc'),
           icon: 'cube-outline',
           handler: async () => (await this._modalController.create({
-            component: AssignmentsFormAddTcsModalComponent,
+            component: AssignmentsFormTcModalComponent,
             componentProps: {
               _assignmentId: assignmentId
             },
@@ -47,14 +49,14 @@ export class AssignmentsFormService {
     return options;
   }
 
-  getSettingsActionSheetControllerOptions(): ActionSheetOptions {
+  getSettingsActionSheetControllerOptions(assignmentId: string): ActionSheetOptions {
     const options = {
       cssClass: 'action-sheet',
       buttons: [
         {
           text: this._translateService.instant('assignments.tc-management-panel'),
           icon: 'cube-outline',
-          handler: () => { }
+          handler: () => this._router.navigate([`assignments/form/${assignmentId}/tcs`])
         },
         {
           text: this._translateService.instant('assignments.show-event-logs'),

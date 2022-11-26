@@ -40,7 +40,7 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
     const assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
 
     if (assignment) {
-      const TC = assignment.tcs.find(x => x.name === tc);
+      const TC = assignment.tcs.find(x => x.id === tc);
 
       if (TC) {
         TC.pallets.push(pallet);
@@ -53,7 +53,7 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
     let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
 
     if (assignment) {
-      const TC = assignment.tcs.find(x => x.name === tc);
+      const TC = assignment.tcs.find(x => x.id === tc);
 
       if (TC) {
         TC.pallets.push(...pallets);
@@ -67,7 +67,7 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
 
     if (assignment) {
       assignment.tcs.forEach(tc => {
-        const palletsWithThisTc = pallets.filter(x => x.tc === tc.name);
+        const palletsWithThisTc = pallets.filter(x => x.tcId === tc.id);
         tc.pallets = palletsWithThisTc;
       });
     }
@@ -77,10 +77,10 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
     const assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
 
     if (assignment) {
-      let tc = assignment.tcs.find(x => x.id === item.id);
+      let tcIndex = assignment.tcs.findIndex(x => x.id === item.id);
 
-      if (tc) {
-        tc = item;
+      if (tcIndex !== -1) {
+        assignment.tcs[tcIndex] = item;
         this.next();
       }
     }

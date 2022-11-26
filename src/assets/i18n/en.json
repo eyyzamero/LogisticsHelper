@@ -31,6 +31,7 @@
     "move-to-history": "Move to history",
     "add-pallet": "Add pallet",
     "add-tc": "Add TC",
+    "edit-tc": "Edit TC",
     "tc-management-panel": "TC Management panel",
     "show-event-logs": "Show event logs",
     "delete": "Delete assignment",

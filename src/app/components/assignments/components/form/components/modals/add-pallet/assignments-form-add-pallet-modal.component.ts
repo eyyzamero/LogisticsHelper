@@ -97,7 +97,7 @@ export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy
     let pallet = new PalletDbRefModel(
       undefined,
       this._assignment.id,
-      tc.name,
+      tc.id,
       tc.width * tc.height * tc.inners,
       true
     );
@@ -106,7 +106,7 @@ export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy
       case PalletType.SINGLE:
         this._palletsCollectionService.add(pallet).then(() => {
           const mappedPallet = this._assignmentsMapperService.IPalletDbRefModelToIAssignmentPalletModel(pallet);
-          this._assignmentsObservableService.addPallet(pallet.assignmentId, pallet.tc, mappedPallet);
+          this._assignmentsObservableService.addPallet(pallet.assignmentId, pallet.tcId, mappedPallet);
           this.close();
         });
         break;
@@ -127,7 +127,7 @@ export class AssignmentsFormAddPalletModalComponent implements OnInit, OnDestroy
         pallet.full = false;
         this._palletsCollectionService.add(pallet).then(() => {
           const mappedPallet = this._assignmentsMapperService.IPalletDbRefModelToIAssignmentPalletModel(pallet);
-          this._assignmentsObservableService.addPallet(pallet.assignmentId, pallet.tc, mappedPallet);
+          this._assignmentsObservableService.addPallet(pallet.assignmentId, pallet.tcId, mappedPallet);
           this.close();
         });
         break;

@@ -1,7 +1,7 @@
 export interface IAssignmentPalletModel {
   id: string;
   assignmentId: string;
-  tc: string;
+  tcId: string;
   inners: number;
   full: boolean;
 }

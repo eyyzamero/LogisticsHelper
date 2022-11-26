@@ -1,3 +1,34 @@
 <div class="assignments-tcs-management-panel-container">
-  
+  <ion-card *ngFor="let tc of tcs" class="tc">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="cube-outline"></ion-icon>
+        <span>{{ tc.name }}</span>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="row">
+        <span class="label">Width: </span>
+        <span class="value">{{ tc.width }}</span>
+      </div>
+      <div class="row">
+        <span class="label">Height: </span>
+        <span class="value">{{ tc.height }}</span>
+      </div>
+      <div class="row">
+        <span class="label">Inners: </span>
+        <span class="value">{{ tc.inners }}</span>
+      </div>
+      <div class="actions">
+        <ion-button fill="outline" color="primary" strong="true" (click)="edit(tc)">
+          <ion-icon name="pencil-outline"></ion-icon>
+          <span translate>common.edit</span>
+        </ion-button>
+        <ion-button fill="outline" color="danger" strong="true" (click)="delete(tc)">
+          <ion-icon name="trash-outline"></ion-icon>
+          <span translate>common.delete</span>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </div>

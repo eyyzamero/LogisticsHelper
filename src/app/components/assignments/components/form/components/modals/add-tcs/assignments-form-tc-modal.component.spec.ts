@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AssignmentsFormAddTcsModalComponent } from './assignments-form-add-tcs-modal.component';
+import { AssignmentsFormTcModalComponent } from './assignments-form-tc-modal.component';
 
-describe('AssignmentsFormAddTcsModalComponent', () => {
-  let component: AssignmentsFormAddTcsModalComponent;
-  let fixture: ComponentFixture<AssignmentsFormAddTcsModalComponent>;
+describe('AssignmentsFormTcModalComponent', () => {
+  let component: AssignmentsFormTcModalComponent;
+  let fixture: ComponentFixture<AssignmentsFormTcModalComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [AssignmentsFormAddTcsModalComponent],
+      declarations: [AssignmentsFormTcModalComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AssignmentsFormAddTcsModalComponent);
+    fixture = TestBed.createComponent(AssignmentsFormTcModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

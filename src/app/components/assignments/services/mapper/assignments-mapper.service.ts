@@ -37,13 +37,13 @@ export class AssignmentsMapperService {
     return dest;
   }
 
-  ArrayOfIAssignmentLogDbRefModelToArrayOfIAssignmentLogModel(src: Array<IAssignmentLogDbRefModel>): Array<IAssignmentLogModel> {
+  ArrayOfIAssignmentLogDbRefModelToArrayOfIAssignmentLogModel(src?: Array<IAssignmentLogDbRefModel>): Array<IAssignmentLogModel> {
     const dest = src?.map(this.IAssignmentLogDbRefModelToIAssignmentLogModel) ?? new Array<IAssignmentLogDbRefModel>();
     return dest;
   }
 
   IAssignmentLogDbRefModelToIAssignmentLogModel(src: IAssignmentLogDbRefModel): IAssignmentLogModel {
-    const dest = new AssignmentLogModel(src.id, src.type, src.date, src.text);
+    const dest = new AssignmentLogModel(src.id, src.assignmentId, src.type, src.date, src.text);
     return dest;
   }
 

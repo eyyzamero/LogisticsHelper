@@ -134,13 +134,13 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
       let mappedAssignments = this._assignmentsMapperService.ArrayOfIAssignmentDbRefModelToArrayOfIAssignmentModel(assignments);
       this._assignmentsObservableService.addWithoutNext(mappedAssignments);
 
-      Promise.all(assignments.map(assignment => this._getTcsAndPallets(assignment.id))).then(
+      Promise.all(assignments.map(assignment => this._getTcsAndPalletsAndLogs(assignment.id))).then(
         () => this._assignmentsObservableService.next()
       );
     }
   }
 
-  private async _getTcsAndPallets(assignmentId: string): Promise<void> {
+  private async _getTcsAndPalletsAndLogs(assignmentId: string): Promise<void> {
     const tcs = await this._tcsCollectionService.getWhereFieldEqualsValue('assignmentId', assignmentId);
     const mappedTcs = this._assignmentsMapperService.ArrayOfITcDbRefToArrayOfIAssignmentTcModel(tcs);
     this._assignmentsObservableService.addTcsWithoutNext(assignmentId, mappedTcs);
@@ -148,6 +148,10 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
     const pallets = await this._palletsCollectionService.getWhereFieldEqualsValue('assignmentId', assignmentId);
     const mappedPallets = this._assignmentsMapperService.ArrayOfIPalletDbRefToArrayOfIAssignmentPalletModel(pallets);
     this._assignmentsObservableService.addPalletsToTcsWithoutNext(assignmentId, mappedPallets);
+
+    const logs = await this._assignmentsLogsCollectionService.getWhereFieldEqualsValue('assignmentId', assignmentId);
+    const mappedLogs = this._assignmentsMapperService.ArrayOfIAssignmentLogDbRefModelToArrayOfIAssignmentLogModel(logs);
+    this._assignmentsObservableService.addLogs(assignmentId, mappedLogs);
   }
 
   private async _createNewUniqueAssignmentId(): Promise<string> {
@@ -163,7 +167,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   }
 
   private _logNewAssignmentCreation(assignmentId: string): void {
-    const log = new AssignmentLogModel(undefined, AssignmentLogType.ASSIGNMENT_CREATED, this._assignmentsMapperService.CurrentDateToString());
+    const log = new AssignmentLogModel(undefined, assignmentId, AssignmentLogType.ASSIGNMENT_CREATED, this._assignmentsMapperService.CurrentDateToString());
     this._assignmentsLogsCollectionService.add(log).then(() => {
       const mappedLog = this._assignmentsMapperService.IAssignmentLogDbRefModelToIAssignmentLogModel(log);
       this._assignmentsObservableService.addLog(assignmentId, mappedLog);

@@ -15,7 +15,7 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
     super(new Array<IAssignmentModel>(), observableMapperService);
   }
   
-  addAssignment(assignment: IAssignmentModel) {
+  addAssignment(assignment: IAssignmentModel): void {
     this.observableSubjectValue.data.push(assignment);
     this.next();
   }
@@ -73,7 +73,7 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
     }
   }
 
-  editTc(assignmentId: string, item: IAssignmentTcModel) {
+  editTc(assignmentId: string, item: IAssignmentTcModel): void {
     const assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
 
     if (assignment) {
@@ -117,11 +117,20 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
     }
   }
 
-  addLog(assignmentId: string, log: IAssignmentLogModel) {
+  addLog(assignmentId: string, log: IAssignmentLogModel): void {
     let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
 
     if (assignment) {
       assignment.logs.push(log);
+      this.next();
+    }
+  }
+
+  addLogs(assignmentId: string, logs: Array<IAssignmentLogModel>): void {
+    let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
+
+    if (assignment) {
+      assignment.logs.push(...logs);
       this.next();
     }
   }

@@ -35,12 +35,15 @@ export class AssignmentLogsComponent implements OnInit, OnDestroy {
     let icon: string = '';
     
     switch(type) {
-      case AssignmentLogType.ASSIGNMENT_CREATED:
+      case AssignmentLogType.CREATED:
         icon = 'document-outline';
         break;
       case AssignmentLogType.TC_ADDED:
       case AssignmentLogType.TC_EDITED:
         icon = 'cube-outline';
+        break;
+      case AssignmentLogType.MOVED_TO_HISTORY:
+        icon = 'book-outline';
         break;
     }
     return icon;

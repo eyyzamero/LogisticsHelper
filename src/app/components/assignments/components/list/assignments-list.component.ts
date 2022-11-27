@@ -81,7 +81,14 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
 
   moveToHistory(assignmentId: string): void {
     this._assignmentsCollectionService.updateProperty(assignmentId, 'status', AssignmentStatus.HISTORY).then(
-      () => this._assignmentsObservableService.setStatus(assignmentId, AssignmentStatus.HISTORY)
+      () => {
+        this._assignmentsObservableService.setStatus(assignmentId, AssignmentStatus.HISTORY);
+        const log = new AssignmentLogDbRef(undefined, assignmentId, AssignmentLogType.MOVED_TO_HISTORY);
+        this._assignmentsLogsCollectionService.add(log).then(() => {
+          const mappedLog = this._assignmentsMapperService.IAssignmentLogDbRefModelToIAssignmentLogModel(log);
+          this._assignmentsObservableService.addLog(assignmentId, mappedLog);
+        });
+      }
     );
   }
 
@@ -167,7 +174,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   }
 
   private _logNewAssignmentCreation(assignmentId: string): void {
-    const log = new AssignmentLogDbRef(undefined, assignmentId, AssignmentLogType.ASSIGNMENT_CREATED);
+    const log = new AssignmentLogDbRef(undefined, assignmentId, AssignmentLogType.CREATED);
     this._assignmentsLogsCollectionService.add(log).then(() => {
       const mappedLog = this._assignmentsMapperService.IAssignmentLogDbRefModelToIAssignmentLogModel(log);
       this._assignmentsObservableService.addLog(assignmentId, mappedLog);

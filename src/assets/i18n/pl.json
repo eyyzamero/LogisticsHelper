@@ -56,9 +56,10 @@
     "back-to-assignment": "Wróć do zlecenia",
     "event-logs": "Dzienniki zdarzeń",
     "logs": {
-      "ASSIGNMENT_CREATED": "Zlecenie zostało utworzone",
+      "CREATED": "Zlecenie zostało utworzone",
       "TC_ADDED": "Dodano TC",
-      "TC_EDITED": "Edytowano TC"
+      "TC_EDITED": "Edytowano TC",
+      "MOVED_TO_HISTORY": "Zlecenie zostało przeniesione do historii"
     }
   },
   "tabs": {

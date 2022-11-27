@@ -3,5 +3,6 @@ export enum AssignmentLogType {
   CREATED = 'CREATED',
   MOVED_TO_HISTORY = 'MOVED_TO_HISTORY',
   TC_ADDED = 'TC_ADDED',
-  TC_EDITED = 'TC_EDITED'
+  TC_EDITED = 'TC_EDITED',
+  TC_DELETED = 'TC_DELETED'
 }

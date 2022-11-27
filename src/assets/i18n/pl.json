@@ -59,7 +59,8 @@
       "CREATED": "Zlecenie zostało utworzone",
       "TC_ADDED": "Dodano TC",
       "TC_EDITED": "Edytowano TC",
-      "MOVED_TO_HISTORY": "Zlecenie zostało przeniesione do historii"
+      "MOVED_TO_HISTORY": "Zlecenie zostało przeniesione do historii",
+      "TC_DELETED": "Usunięto TC"
     }
   },
   "tabs": {

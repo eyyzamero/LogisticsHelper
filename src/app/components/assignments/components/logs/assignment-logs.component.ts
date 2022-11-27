@@ -40,6 +40,7 @@ export class AssignmentLogsComponent implements OnInit, OnDestroy {
         break;
       case AssignmentLogType.TC_ADDED:
       case AssignmentLogType.TC_EDITED:
+      case AssignmentLogType.TC_DELETED:
         icon = 'cube-outline';
         break;
       case AssignmentLogType.MOVED_TO_HISTORY:

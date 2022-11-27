@@ -49,7 +49,7 @@ export class AssignmentsFormService {
           handler: async () => (await this._modalController.create({
             component: AssignmentsFormTcModalComponent,
             componentProps: {
-              _assignmentId: assignmentId
+              assignmentId: assignmentId
             },
             cssClass: 'modal',
             backdropDismiss: false

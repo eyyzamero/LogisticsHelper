@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IonAccordionGroup } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { CommunicationState, FirestoreCollection } from 'src/app/core/enums';
-import { IAssignmentDbRefModel, IPalletDbRefModel, ITcDbRefModel, IUserDbRefModel } from 'src/app/core/models';
+import { IAssignmentDbRefModel, IAssignmentLogDbRefModel, IPalletDbRefModel, ITcDbRefModel, IUserDbRefModel } from 'src/app/core/models';
 import { AssignmentDbRefModel } from 'src/app/core/models/collections/assignments/assignment-db-ref.model';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { AuthObservableService } from 'src/app/core/services/observable/auth/auth-observable.service';
-import { AssignmentStatus } from '../../enums';
-import { IAssignmentModel } from '../../models';
+import { AssignmentLogType, AssignmentStatus } from '../../enums';
+import { AssignmentLogModel, IAssignmentModel } from '../../models';
 import { AssignmentsMapperService } from '../../services/mapper/assignments-mapper.service';
 import { AssignmentsObservableService } from '../../services/observable/assignments-observable.service';
 
@@ -38,6 +38,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   private _tcsCollectionService: FirestoreCollectionService<ITcDbRefModel>;
   private _palletsCollectionService: FirestoreCollectionService<IPalletDbRefModel>;
   private _usersCollectionService: FirestoreCollectionService<IUserDbRefModel>;
+  private _assignmentsLogsCollectionService: FirestoreCollectionService<IAssignmentLogDbRefModel>;
   private _subscriptions: Array<Subscription> = new Array<Subscription>();
 
   constructor(
@@ -52,6 +53,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
     this._tcsCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.TCS);
     this._palletsCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.PALLETS);
     this._usersCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.USERS);
+    this._assignmentsLogsCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.ASSIGNMENTS_LOGS);
     this._getAssignments();
   }
 
@@ -66,6 +68,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
     this._assignmentsCollectionService.add(assignment, id).then(() => {
       const mappedAssignment = this._assignmentsMapperService.IAssignmentDbRefModelToIAssignmentModel(assignment);
       this._assignmentsObservableService.addAssignment(mappedAssignment);
+      this._logNewAssignmentCreation(id);
       this.navigateToForm(id);
     });
   }
@@ -157,6 +160,14 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
     const assignmentWithCreatedIdNotExists = (await this._assignmentsCollectionService.getByDocIdAsync(id)) === undefined;
 
     return assignmentWithCreatedIdNotExists ? id : this._createNewUniqueAssignmentId();
+  }
+
+  private _logNewAssignmentCreation(assignmentId: string): void {
+    const log = new AssignmentLogModel(undefined, AssignmentLogType.ASSIGNMENT_CREATED, this._assignmentsMapperService.CurrentDateToString());
+    this._assignmentsLogsCollectionService.add(log).then(() => {
+      const mappedLog = this._assignmentsMapperService.IAssignmentLogDbRefModelToIAssignmentLogModel(log);
+      this._assignmentsObservableService.addLog(assignmentId, mappedLog);
+    });
   }
 
   ngOnDestroy(): void {

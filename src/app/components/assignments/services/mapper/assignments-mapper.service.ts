@@ -43,7 +43,15 @@ export class AssignmentsMapperService {
   }
 
   IAssignmentLogDbRefModelToIAssignmentLogModel(src: IAssignmentLogDbRefModel): IAssignmentLogModel {
-    const dest = new AssignmentLogModel(src.type, src.date, src.text);
+    const dest = new AssignmentLogModel(src.id, src.type, src.date, src.text);
     return dest;
   }
+
+  CurrentDateToString(): string {
+    const date = new Date();
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = Number(String(date.getMonth()).padStart(2, '0')) + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  } 
 }

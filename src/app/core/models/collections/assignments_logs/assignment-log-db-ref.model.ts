@@ -4,6 +4,7 @@ import { IAssignmentLogDbRefModel } from '../..';
 export class AssignmentLogDbRef implements IAssignmentLogDbRefModel {
 
   constructor(
+    public id: string = '',
     public type: AssignmentLogType = AssignmentLogType.NONE,
     public date: string = '',
     public text: string = ''

@@ -3,8 +3,10 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { CommunicationState, FirestoreCollection, FormMode } from 'src/app/core/enums';
-import { ITcDbRefModel, TcDbRefModel } from 'src/app/core/models';
+import { AssignmentLogDbRef, IAssignmentLogDbRefModel, ITcDbRefModel, TcDbRefModel } from 'src/app/core/models';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
+import { AssignmentLogType } from '../../enums';
+import { IAssignmentTcModel } from '../../models';
 import { AssignmentsMapperService } from '../../services/mapper/assignments-mapper.service';
 import { AssignmentsObservableService } from '../../services/observable/assignments-observable.service';
 import { BaseAssignmentsModal } from '../form/components/modals/base/assignments-modal.base';
@@ -25,7 +27,7 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
     }
   }
   @Input() assignmentId: string = '';
-  
+
   get mode() {
     return this._mode;
   }
@@ -50,7 +52,9 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
 
   private _tcId: string = '';
   private _mode: FormMode = FormMode.CREATE;
+  private _initialTc?: IAssignmentTcModel;
   private _tcsCollectionService: FirestoreCollectionService<ITcDbRefModel>;
+  private _assignmentLogsCollectionService: FirestoreCollectionService<IAssignmentLogDbRefModel>;
 
   constructor(
     firestore: AngularFirestore,
@@ -60,6 +64,7 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
   ) {
     super(modalController);
     this._tcsCollectionService = new FirestoreCollectionService<ITcDbRefModel>(firestore, FirestoreCollection.TCS);
+    this._assignmentLogsCollectionService = new FirestoreCollectionService<IAssignmentLogDbRefModel>(firestore, FirestoreCollection.ASSIGNMENTS_LOGS);
   }
 
   submit(): void {
@@ -67,7 +72,7 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
       this._mode === FormMode.CREATE ? this._addTc() : this._editTc();
   }
 
-  private _assignTcFormValues(id: string) : void {
+  private _assignTcFormValues(id: string): void {
     this.communicationState = CommunicationState.LOADING;
 
     const assignment = this._assignmentsObservableService.observableSubjectValue.data.find(x => x.id === this.assignmentId);
@@ -76,6 +81,8 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
       const tc = assignment.tcs.find(x => x.id === id);
 
       if (tc) {
+        this._initialTc = tc;
+
         this.form.controls['tc'].setValue(tc.name);
         this.form.controls['width'].setValue(tc.width);
         this.form.controls['height'].setValue(tc.height);
@@ -96,6 +103,7 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
     this._tcsCollectionService.add(tc).then(() => {
       const mappedTc = this._assignmentsMapperService.ITcDbRefModelToIAssignmentTcModel(tc);
       this._assignmentsObservableService.addTc(this.assignmentId, mappedTc);
+      this._addEventToLogs(mappedTc);
       this.close();
     });
   }
@@ -107,6 +115,7 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
     this._tcsCollectionService.update(tc).then(() => {
       const mappedTc = this._assignmentsMapperService.ITcDbRefModelToIAssignmentTcModel(tc);
       this._assignmentsObservableService.editTc(this.assignmentId, mappedTc);
+      this._addEventToLogs(mappedTc);
       this.close();
     });
   }
@@ -137,6 +146,23 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
         Validators.min(1),
         Validators.max(99999)
       ])
+    });
+  }
+
+  private _addEventToLogs(tc: IAssignmentTcModel) {
+    const log = new AssignmentLogDbRef(
+      undefined,
+      this.assignmentId,
+      this._mode === FormMode.CREATE ? AssignmentLogType.TC_ADDED : AssignmentLogType.TC_EDITED,
+      `${tc.name} - ${tc.width}W x ${tc.height}H x ${tc.inners}IN - ${tc.limit}L`
+    );
+
+    if (this.mode === FormMode.EDIT && this._initialTc)
+      log.text = `${this._initialTc.name} - ${this._initialTc.width}W x ${this._initialTc.height}H x ${this._initialTc.inners}IN - ${this._initialTc.limit}L --> ${log.text}`;
+
+    this._assignmentLogsCollectionService.add(log).then(() => {
+      const mappedLog = this._assignmentsMapperService.IAssignmentLogDbRefModelToIAssignmentLogModel(log);
+      this._assignmentsObservableService.addLog(this.assignmentId, mappedLog);
     });
   }
 }

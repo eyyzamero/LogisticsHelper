@@ -4,7 +4,7 @@
   <div class="header" translate>assignments.event-logs</div>
   <div class="logs">
     <div *ngFor="let log of logs" class="log">
-      <span class="date">{{ log.date }}</span>
+      <span class="datetime">{{ log.datetime }}</span>
       <ion-icon [name]="getIcon(log.type)"></ion-icon>
       <span class="label" translate>assignments.logs.{{ log.type }}</span>
       <span *ngIf="log.text" class="additional-text">{{ log.text }}</span>

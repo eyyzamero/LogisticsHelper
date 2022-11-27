@@ -38,6 +38,10 @@ export class AssignmentLogsComponent implements OnInit, OnDestroy {
       case AssignmentLogType.ASSIGNMENT_CREATED:
         icon = 'document-outline';
         break;
+      case AssignmentLogType.TC_ADDED:
+      case AssignmentLogType.TC_EDITED:
+        icon = 'cube-outline';
+        break;
     }
     return icon;
   }
@@ -56,9 +60,6 @@ export class AssignmentLogsComponent implements OnInit, OnDestroy {
 
   private _tryToGetAssignmentLogsFromObservable(): void {
     const assignment = this._assignmentsObservableService.observableSubjectValue.data.find(x => x.id === this._assignmentId);
-
-    console.log(assignment);
-    console.log(this._assignmentId);
 
     if (assignment) 
       this.logs = assignment.logs;

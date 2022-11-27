@@ -7,7 +7,7 @@ export class AssignmentLogModel implements IAssignmentLogModel {
     public id: string = '',
     public assignmentId: string = '',
     public type: AssignmentLogType = AssignmentLogType.NONE,
-    public date: string = '',
-    public text: string = ''
+    public text: string = '',
+    public datetime: string = '',
   ) { }
 }

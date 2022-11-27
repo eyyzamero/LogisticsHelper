@@ -38,17 +38,17 @@ export class AssignmentsMapperService {
   }
 
   ArrayOfIAssignmentLogDbRefModelToArrayOfIAssignmentLogModel(src?: Array<IAssignmentLogDbRefModel>): Array<IAssignmentLogModel> {
-    const dest = src?.map(this.IAssignmentLogDbRefModelToIAssignmentLogModel) ?? new Array<IAssignmentLogDbRefModel>();
+    const dest = src?.sort((a, b) => a.timestamp - b.timestamp).map(x => this.IAssignmentLogDbRefModelToIAssignmentLogModel(x)) ?? new Array<IAssignmentLogModel>();
     return dest;
   }
 
   IAssignmentLogDbRefModelToIAssignmentLogModel(src: IAssignmentLogDbRefModel): IAssignmentLogModel {
-    const dest = new AssignmentLogModel(src.id, src.assignmentId, src.type, src.date, src.text);
+    const dest = new AssignmentLogModel(src.id, src.assignmentId, src.type, src.text, this.TimestampToFormattedDateString(src.timestamp));
     return dest;
   }
 
-  CurrentDateToString(): string {
-    const date = new Date();
+  TimestampToFormattedDateString(src: number): string {
+    const date = new Date(src);
     const day = String(date.getDate()).padStart(2, '0');
     const month = Number(String(date.getMonth()).padStart(2, '0')) + 1;
     const year = date.getFullYear();

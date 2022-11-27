@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IonAccordionGroup } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { CommunicationState, FirestoreCollection } from 'src/app/core/enums';
-import { IAssignmentDbRefModel, IAssignmentLogDbRefModel, IPalletDbRefModel, ITcDbRefModel, IUserDbRefModel } from 'src/app/core/models';
+import { AssignmentLogDbRef, IAssignmentDbRefModel, IAssignmentLogDbRefModel, IPalletDbRefModel, ITcDbRefModel, IUserDbRefModel } from 'src/app/core/models';
 import { AssignmentDbRefModel } from 'src/app/core/models/collections/assignments/assignment-db-ref.model';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { AuthObservableService } from 'src/app/core/services/observable/auth/auth-observable.service';
 import { AssignmentLogType, AssignmentStatus } from '../../enums';
-import { AssignmentLogModel, IAssignmentModel } from '../../models';
+import { IAssignmentModel } from '../../models';
 import { AssignmentsMapperService } from '../../services/mapper/assignments-mapper.service';
 import { AssignmentsObservableService } from '../../services/observable/assignments-observable.service';
 
@@ -167,7 +167,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   }
 
   private _logNewAssignmentCreation(assignmentId: string): void {
-    const log = new AssignmentLogModel(undefined, assignmentId, AssignmentLogType.ASSIGNMENT_CREATED, this._assignmentsMapperService.CurrentDateToString());
+    const log = new AssignmentLogDbRef(undefined, assignmentId, AssignmentLogType.ASSIGNMENT_CREATED);
     this._assignmentsLogsCollectionService.add(log).then(() => {
       const mappedLog = this._assignmentsMapperService.IAssignmentLogDbRefModelToIAssignmentLogModel(log);
       this._assignmentsObservableService.addLog(assignmentId, mappedLog);

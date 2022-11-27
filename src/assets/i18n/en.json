@@ -56,7 +56,9 @@
     "back-to-assignment": "Back to assignment",
     "event-logs": "Event logs",
     "logs": {
-      "ASSIGNMENT_CREATED": "Assignment has been created"
+      "ASSIGNMENT_CREATED": "Assignment has been created",
+      "TC_ADDED": "TC has been added",
+      "TC_EDITED": "TC has been edited"
     }
   },
   "tabs": {

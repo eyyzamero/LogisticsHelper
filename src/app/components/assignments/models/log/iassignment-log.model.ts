@@ -4,6 +4,6 @@ export interface IAssignmentLogModel {
   id: string;
   assignmentId: string;
   type: AssignmentLogType;
-  date: string;
   text: string;
+  datetime: string;
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AssignmentsComponent } from './assignments.component';
 import { AssignmentFormComponent } from './components/form/assignment-form.component';
 import { AssignmentsListComponent } from './components/list/assignments-list.component';
+import { AssignmentLogsComponent } from './components/logs/assignment-logs.component';
 import { AssignmentsTcsManagementPanelComponent } from './components/tcs-management-panel/assignments-tcs-management-panel.component';
 
 const routes: Routes = [
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'form/:id/tcs',
         component: AssignmentsTcsManagementPanelComponent
+      },
+      {
+        path: 'form/:id/logs',
+        component: AssignmentLogsComponent
       }
     ]
   }

@@ -1,0 +1,13 @@
+<div class="assignment-logs-container">
+  <ion-button fill="outline" color="dark" strong="true" class="back-btn" (click)="navigateBackToAssignment()" translate>assignments.back-to-assignment</ion-button>
+  <div *ngIf="!logs.length" class="info" translate>common.no-data</div>
+  <div class="header" translate>assignments.event-logs</div>
+  <div class="logs">
+    <div *ngFor="let log of logs" class="log">
+      <span class="date">{{ log.date }}</span>
+      <ion-icon [name]="getIcon(log.type)"></ion-icon>
+      <span class="label" translate>assignments.logs.{{ log.type }}</span>
+      <span *ngIf="log.text" class="additional-text">{{ log.text }}</span>
+    </div>
+  </div>
+</div>

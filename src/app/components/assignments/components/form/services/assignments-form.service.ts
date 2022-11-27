@@ -72,7 +72,7 @@ export class AssignmentsFormService {
         {
           text: this._translateService.instant('assignments.show-event-logs'),
           icon: 'documents-outline',
-          handler: () => { }
+          handler: () => this._router.navigate([`assignments/form/${assignmentId}/logs`])
         },
         {
           text: this._translateService.instant('assignments.delete'),

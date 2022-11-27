@@ -1,0 +1,64 @@
+.assignment-logs-container {
+  .back-btn {
+    --padding-start: 8px;
+    --padding-end: 8px;
+  }
+
+  .info {
+    font-weight: bold;
+    margin-top: 16px;
+  }
+
+  .header {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 16px 0;
+    color: var(--ion-color-primary);
+  }
+
+  .logs {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+ 
+    .log {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      
+
+      :not(:last-child) {
+        margin-right: 8px;
+      }
+
+      &:not(&:last-of-type) {
+        margin-bottom: 8px;
+      }
+
+      .date,
+      .label,
+      .additional-text {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      .date {
+        opacity: 0.5;
+        font-size: 12px;
+      }
+
+      ion-icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      .label {
+        font-weight: bold;
+      }
+
+      .additional-text {
+        opacity: 0.8;
+      }
+    }
+  }
+}

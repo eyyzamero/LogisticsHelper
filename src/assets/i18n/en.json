@@ -52,6 +52,11 @@
     "statuses": {
       "ACTIVE": "Active",
       "HISTORY": "Historical"
+    },
+    "back-to-assignment": "Back to assignment",
+    "event-logs": "Event logs",
+    "logs": {
+      "ASSIGNMENT_CREATED": "Assignment has been created"
     }
   },
   "tabs": {

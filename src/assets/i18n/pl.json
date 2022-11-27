@@ -52,6 +52,11 @@
     "statuses": {
       "ACTIVE": "Aktywne",
       "HISTORY": "Historyczne"
+    },
+    "back-to-assignment": "Wróć do zlecenia",
+    "event-logs": "Dzienniki zdarzeń",
+    "logs": {
+      "ASSIGNMENT_CREATED": "Zlecenie zostało utworzone"
     }
   },
   "tabs": {

@@ -17,6 +17,7 @@ import { AssignmentsFormAddPalletModalComponent } from './components/form/compon
 import { AssignmentsTcsManagementPanelComponent } from './components/tcs-management-panel/assignments-tcs-management-panel.component';
 import { AssignmentsTcFormComponent } from './components/tc-form/assignments-tc-form.component';
 import { CoreModalsModule } from 'src/app/core/components/modals/modals.module';
+import { AssignmentLogsComponent } from './components/logs/assignment-logs.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CoreModalsModule } from 'src/app/core/components/modals/modals.module';
     AssignmentsFormTcModalComponent,
     AssignmentsFormAddPalletModalComponent,
     AssignmentsTcsManagementPanelComponent,
-    AssignmentsTcFormComponent
+    AssignmentsTcFormComponent,
+    AssignmentLogsComponent
   ],
   imports: [
     CommonModule,

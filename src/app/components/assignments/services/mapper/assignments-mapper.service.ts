@@ -52,6 +52,9 @@ export class AssignmentsMapperService {
     const day = String(date.getDate()).padStart(2, '0');
     const month = Number(String(date.getMonth()).padStart(2, '0')) + 1;
     const year = date.getFullYear();
-    return `${day}/${month}/${year} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
   } 
 }

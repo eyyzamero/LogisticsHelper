@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IAssignmentDbRefModel, IPalletDbRefModel, ITcDbRefModel } from 'src/app/core/models';
-import { AssignmentModel, AssignmentPalletModel, AssignmentTcModel, IAssignmentModel, IAssignmentPalletModel, IAssignmentTcModel } from '../../models';
+import { IAssignmentDbRefModel, IAssignmentLogDbRefModel, IPalletDbRefModel, ITcDbRefModel } from 'src/app/core/models';
+import { AssignmentLogModel, AssignmentModel, AssignmentPalletModel, AssignmentTcModel, IAssignmentLogModel, IAssignmentModel, IAssignmentPalletModel, IAssignmentTcModel } from '../../models';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,16 @@ export class AssignmentsMapperService {
 
   IAssignmentDbRefModelToIAssignmentModel(src: IAssignmentDbRefModel): IAssignmentModel {
     const dest = new AssignmentModel(src.id, src.status);
+    return dest;
+  }
+
+  ArrayOfIAssignmentLogDbRefModelToArrayOfIAssignmentLogModel(src: Array<IAssignmentLogDbRefModel>): Array<IAssignmentLogModel> {
+    const dest = src?.map(this.IAssignmentLogDbRefModelToIAssignmentLogModel) ?? new Array<IAssignmentLogDbRefModel>();
+    return dest;
+  }
+
+  IAssignmentLogDbRefModelToIAssignmentLogModel(src: IAssignmentLogDbRefModel): IAssignmentLogModel {
+    const dest = new AssignmentLogModel(src.type, src.date, src.text);
     return dest;
   }
 }

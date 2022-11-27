@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -21,12 +21,13 @@ export class AssignmentsTcsManagementPanelComponent implements OnInit, OnDestroy
 
   tcs: Array<IAssignmentTcModel> = new Array<IAssignmentTcModel>();
 
-  private _assignmentId: string | null = null;
+  assignmentId: string | null = null;
   private _tcsCollectionService: FirestoreCollectionService<ITcDbRefModel>;
   private _subscriptions: Array<Subscription> = new Array<Subscription>();
 
   constructor(
     firestore: AngularFirestore,
+    private _router: Router,
     private _translateService: TranslateService,
     private _activatedRoute: ActivatedRoute,
     private _assignmentsObservableService: AssignmentsObservableService,
@@ -44,12 +45,16 @@ export class AssignmentsTcsManagementPanelComponent implements OnInit, OnDestroy
       component: AssignmentsFormTcModalComponent,
       componentProps: {
         title: this._translateService.instant('assignments.edit-tc'),
-        assignmentId: this._assignmentId,
+        assignmentId: this.assignmentId,
         tcId: tc.id
       },
       cssClass: 'modal',
       backdropDismiss: false
     }).then(modal => modal.present());
+  }
+
+  navigateBackToAssignment(): void {
+    this._router.navigate([`assignments/form/${this.assignmentId}`]);
   }
 
   async delete(tc: IAssignmentTcModel) {
@@ -70,11 +75,11 @@ export class AssignmentsTcsManagementPanelComponent implements OnInit, OnDestroy
 
   private _initObservables(): void {
     const routeParamsSubscription = this._activatedRoute.paramMap.subscribe({
-      next: (paramMap) => this._assignmentId = paramMap.get('id')
+      next: (paramMap) => this.assignmentId = paramMap.get('id')
     });
     const assignmentsSubscription = this._assignmentsObservableService.observable.subscribe({
       next: (value) => {
-        if (this._assignmentId)
+        if (this.assignmentId)
           this._checkIfAssignmentIsInObservable(value.data);
       }
     });
@@ -82,7 +87,7 @@ export class AssignmentsTcsManagementPanelComponent implements OnInit, OnDestroy
   }
 
   private _checkIfAssignmentIsInObservable(assignments: Array<IAssignmentModel>): void {
-    const assignment = assignments.find(x => x.id === this._assignmentId);
+    const assignment = assignments.find(x => x.id === this.assignmentId);
 
     if (assignment)
       this.tcs = assignment.tcs;
@@ -96,7 +101,7 @@ export class AssignmentsTcsManagementPanelComponent implements OnInit, OnDestroy
 
   private _deleteTc(id: string) {
     this._tcsCollectionService.delete(id).then(() => {
-      this._assignmentsObservableService.deleteTc(this._assignmentId!, id);
+      this._assignmentsObservableService.deleteTc(this.assignmentId!, id);
     });
   }
 

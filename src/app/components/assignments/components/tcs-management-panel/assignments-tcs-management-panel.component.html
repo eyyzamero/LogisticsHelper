@@ -1,4 +1,7 @@
 <div class="assignments-tcs-management-panel-container">
+  <ion-button fill="outline" color="dark" strong="true" class="back-btn" (click)="navigateBackToAssignment()" translate>assignments.back-to-assignment</ion-button>
+  <div class="header" translate>assignments.tc-management-panel</div>
+  <div *ngIf="!tcs.length" class="info" translate>common.no-data</div>
   <ion-card *ngFor="let tc of tcs" class="tc">
     <ion-card-header>
       <ion-card-title>
@@ -8,16 +11,20 @@
     </ion-card-header>
     <ion-card-content>
       <div class="row">
-        <span class="label">Width: </span>
+        <span class="label">{{ 'common.width' | translate }}: </span>
         <span class="value">{{ tc.width }}</span>
       </div>
       <div class="row">
-        <span class="label">Height: </span>
+        <span class="label">{{ 'common.height' | translate }}: </span>
         <span class="value">{{ tc.height }}</span>
       </div>
       <div class="row">
-        <span class="label">Inners: </span>
+        <span class="label">{{ 'common.inners' | translate }}: </span>
         <span class="value">{{ tc.inners }}</span>
+      </div>
+      <div class="row">
+        <span class="label">{{ 'common.limit' | translate }}: </span>
+        <span class="value">{{ tc.limit }}</span>
       </div>
       <div class="actions">
         <ion-button fill="outline" color="primary" strong="true" (click)="edit(tc)">

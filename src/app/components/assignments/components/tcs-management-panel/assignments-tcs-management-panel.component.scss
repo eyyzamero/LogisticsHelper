@@ -1,4 +1,21 @@
 .assignments-tcs-management-panel-container {
+  .back-btn {
+    --padding-start: 8px;
+    --padding-end: 8px;
+  }
+
+  .info {
+    font-weight: bold;
+    margin-top: 16px;
+  }
+
+  .header {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 16px 0;
+    color: var(--ion-color-primary);
+  }
+  
   .tc {
     ion-card-header {
       ion-card-title {

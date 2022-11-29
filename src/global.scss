@@ -10,6 +10,8 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 .action-sheet {
+  --backdrop-opacity: 0.65;
+
   .action-sheet-wrapper {
     min-width: 100%;
   }
@@ -17,6 +19,8 @@
 
 .modal {
   --height: auto;
+  padding: 0 16px;
+  --backdrop-opacity: 0.65;
 
   ion-header {
     ion-toolbar {

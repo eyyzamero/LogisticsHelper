@@ -8,6 +8,7 @@ export class AssignmentLogDbRef implements IAssignmentLogDbRefModel {
     public assignmentId: string = '',
     public type: AssignmentLogType = AssignmentLogType.NONE,
     public text: string = '',
+    public second_text: string = '',
     public timestamp: number = Date.now(),
   ) { }
 }

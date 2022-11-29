@@ -30,7 +30,7 @@
   },
   "assignments": {
     "assignment": "Zlecenie",
-    "move-to-history": "Przenieś do historii",
+    "move-to-history": "Historia",
     "add-pallet": "Dodaj paletę",
     "add-tc": "Dodaj TC",
     "edit-tc": "Edytuj TC",

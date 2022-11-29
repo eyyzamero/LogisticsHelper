@@ -158,7 +158,7 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
     );
 
     if (this.mode === FormMode.EDIT && this._initialTc)
-      log.text = `${this._initialTc.name} - ${this._initialTc.width}W x ${this._initialTc.height}H x ${this._initialTc.inners}IN - ${this._initialTc.limit}L --> ${log.text}`;
+      log.second_text = `${this._initialTc.name} - ${this._initialTc.width}W x ${this._initialTc.height}H x ${this._initialTc.inners}IN - ${this._initialTc.limit}L`;
 
     this._assignmentLogsCollectionService.add(log).then(() => {
       const mappedLog = this._assignmentsMapperService.IAssignmentLogDbRefModelToIAssignmentLogModel(log);

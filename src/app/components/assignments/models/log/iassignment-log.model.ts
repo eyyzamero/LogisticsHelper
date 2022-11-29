@@ -5,5 +5,6 @@ export interface IAssignmentLogModel {
   assignmentId: string;
   type: AssignmentLogType;
   text: string;
+  second_text: string;
   datetime: string;
 }

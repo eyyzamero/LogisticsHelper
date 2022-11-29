@@ -8,6 +8,7 @@ export class AssignmentLogModel implements IAssignmentLogModel {
     public assignmentId: string = '',
     public type: AssignmentLogType = AssignmentLogType.NONE,
     public text: string = '',
+    public second_text: string = '',
     public datetime: string = '',
   ) { }
 }

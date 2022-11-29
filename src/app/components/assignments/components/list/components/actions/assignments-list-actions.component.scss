@@ -3,11 +3,18 @@
   flex-wrap: wrap;
 
   ion-button {
+    width: 100%;
     --padding-start: 8px;
     --padding-end: 8px;
 
-    &:not(&:last-of-type) {
-      margin-right: 8px;
+    @media(min-width: 768px) {
+      ion-button {
+        width: unset;
+      }
+
+      &:not(&:last-of-type) {
+        margin-right: 8px;
+      }
     }
 
     span {

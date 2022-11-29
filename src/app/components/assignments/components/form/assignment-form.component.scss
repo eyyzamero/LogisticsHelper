@@ -16,10 +16,23 @@
         align-items: center;
         color: var(--ion-color-primary);
         font-weight: bold;
+        justify-content: center;
+
+        @media(min-width: 768px) {
+          justify-content: initial;
+        }
 
         ion-icon,
         ion-text {
           color: black;
+        }
+
+        .colon {
+          display: none;
+
+          @media(min-width: 768px) {
+            display: block;
+          }
         }
 
         ion-icon {

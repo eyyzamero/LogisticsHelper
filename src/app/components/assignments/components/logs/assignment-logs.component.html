@@ -5,9 +5,12 @@
   <div class="logs">
     <div *ngFor="let log of logs" class="log">
       <span class="datetime">{{ log.datetime }}</span>
-      <ion-icon [name]="getIcon(log.type)"></ion-icon>
-      <span class="label" translate>assignments.logs.{{ log.type }}</span>
+      <div class="label">
+        <ion-icon [name]="getIcon(log.type)"></ion-icon>
+        <span class="label" translate>assignments.logs.{{ log.type }}</span>
+      </div>
       <span *ngIf="log.text" class="additional-text">{{ log.text }}</span>
+      <span *ngIf="log.second_text" class="additional-text">{{ log.second_text }}</span>
     </div>
   </div>
 </div>

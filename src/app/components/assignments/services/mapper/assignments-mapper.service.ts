@@ -43,7 +43,7 @@ export class AssignmentsMapperService {
   }
 
   IAssignmentLogDbRefModelToIAssignmentLogModel(src: IAssignmentLogDbRefModel): IAssignmentLogModel {
-    const dest = new AssignmentLogModel(src.id, src.assignmentId, src.type, src.text, this.TimestampToFormattedDateString(src.timestamp));
+    const dest = new AssignmentLogModel(src.id, src.assignmentId, src.type, src.text, src.second_text, this.TimestampToFormattedDateString(src.timestamp));
     return dest;
   }
 

@@ -30,7 +30,7 @@
   },
   "assignments": {
     "assignment": "Assignment",
-    "move-to-history": "Move to history",
+    "move-to-history": "History",
     "add-pallet": "Add pallet",
     "add-tc": "Add TC",
     "edit-tc": "Edit TC",

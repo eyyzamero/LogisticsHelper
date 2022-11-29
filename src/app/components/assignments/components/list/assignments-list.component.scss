@@ -41,12 +41,6 @@
 
     .accordions {
       .accordion {
-        &.accordion-expanded {
-          ion-item {
-            --background: var(--ion-color-light-shade);
-          }
-        }
-  
         ion-item {
           --background: var(--ion-color-light);
   

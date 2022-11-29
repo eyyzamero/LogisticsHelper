@@ -49,6 +49,7 @@ export class AssignmentsFormService {
           handler: async () => (await this._modalController.create({
             component: AssignmentsFormTcModalComponent,
             componentProps: {
+              title: this._translateService.instant('assignments.add-tc'),
               assignmentId: assignmentId
             },
             cssClass: 'modal',

@@ -20,8 +20,8 @@ export class AssignmentsTcsSummaryComponent {
     return count;
   }
 
-  getInnersCountPercentage(tc: IAssignmentTcModel): string {
+  getInnersCountPercentage(tc: IAssignmentTcModel): number {
     const count = this.getInnersCount(tc);
-    return (count / tc.limit).toFixed(2);
+    return Number((count / tc.limit).toFixed(2));
   }
 }

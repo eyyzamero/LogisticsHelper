@@ -1,13 +1,9 @@
-import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BaseObservableService } from '../base-observable.service';
 import { IBaseBehaviorSubjectObservableService } from '..';
 import { ObservableMapperService } from '../../mapper';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class BaseBehaviorSubjectObservableService<T> extends BaseObservableService<T> implements IBaseBehaviorSubjectObservableService<T> {
+export abstract class BaseBehaviorSubjectObservableService<T> extends BaseObservableService<T> implements IBaseBehaviorSubjectObservableService<T> {
 
   constructor(
 		clearObject: T,

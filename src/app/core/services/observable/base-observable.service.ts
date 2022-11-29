@@ -1,5 +1,4 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import _ from 'lodash';
 import { Observable, Subject } from 'rxjs';
 import { CommunicationState } from 'src/app/core/enums';
@@ -7,9 +6,6 @@ import { BaseObservableModel, IBaseObservableModel } from 'src/app/core/models';
 import { IBaseObservableService } from '.';
 import { ObservableMapperService } from '../mapper';
 
-@Injectable({
-	providedIn: 'root'
-})
 export abstract class BaseObservableService<T> implements IBaseObservableService<T> {
 
 	protected _cleanObservableSubject: T;

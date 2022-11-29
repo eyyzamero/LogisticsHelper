@@ -39,3 +39,4 @@ npm-debug.log*
 src/configs/config.common.ts
 src/configs/config.ts
 src/configs/config.prod.ts
+/android

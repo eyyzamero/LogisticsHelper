@@ -98,7 +98,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  getOverallPercentage(assignment: IAssignmentModel): string {
+  getOverallPercentage(assignment: IAssignmentModel): number {
     const count = assignment.tcs.reduce<number>((tcAccumulator, currentTc) => {
       const inners = currentTc.pallets.reduce<number>((palletAccumulator, currentPallet) => {
         return palletAccumulator + currentPallet.inners;
@@ -110,7 +110,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
       return accumulator + current.limit;
     }, 0);
 
-    return isNaN(count / limit) ? '0' : (count / limit).toFixed(2);
+    return Number(isNaN(count / limit) ? '0' : (count / limit).toFixed(2));
   }
 
   toggleAccordion(id: string) {

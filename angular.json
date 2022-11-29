@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "logistics-helper": {
+    "app": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -88,17 +88,17 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "logistics-helper:build"
+            "browserTarget": "app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "logistics-helper:build:production"
+              "browserTarget": "app:build:production"
             },
             "ci": {
               "progress": false
             },
             "development": {
-              "browserTarget": "logistics-helper:build:development"
+              "browserTarget": "app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -167,7 +167,7 @@
           "options": {
             "prerender": false,
             "ssr": false,
-            "browserTarget": "logistics-helper:build:production",
+            "browserTarget": "app:build:production",
             "firebaseProject": "logisticshelperdb",
             "firebaseHostingSite": "logisticshelperdb"
           }

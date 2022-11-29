@@ -26,7 +26,8 @@
     "placeholders": {
       "email": "Email",
       "password": "Password"
-    }
+    },
+    "error-while-signing-in": "Invalid credentials"
   },
   "assignments": {
     "assignment": "Assignment",

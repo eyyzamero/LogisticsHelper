@@ -1,6 +1,7 @@
 <div class="login-container">
   <app-logo></app-logo>
   <div class="info" translate>auth.sign-in</div>
+  <div *ngIf="error" class="error" translate>auth.error-while-signing-in</div>
   <form [formGroup]="form" (ngSubmit)="login()">
     <input formControlName="login" type="email" autocomplete="off" [placeholder]="'auth.placeholders.email' | translate">
     <div *ngIf="formControls['login'].dirty && formControls['login'].errors && formControls['login'].errors['required']" class="error" translate>validation.field-required</div>

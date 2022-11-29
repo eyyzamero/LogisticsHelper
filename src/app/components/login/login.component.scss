@@ -18,6 +18,13 @@ $margin-between-items: 16px;
     color: var(--ion-color-primary);
   }
 
+  .error {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--ion-color-danger);
+    margin-top: 8px;
+  }
+
   form {
     display: flex;
     flex-direction: column;

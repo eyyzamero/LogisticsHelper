@@ -26,7 +26,8 @@
     "placeholders": {
       "email": "Email",
       "password": "Hasło"
-    }
+    },
+    "error-while-signing-in": "Nieprawidłowe dane logowania"
   },
   "assignments": {
     "assignment": "Zlecenie",

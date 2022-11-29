@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
@@ -6,12 +6,12 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
   form: FormGroup = this._initForm();
+  error: boolean = false;
 
   get formControls() {
     return this.form.controls;
@@ -23,14 +23,18 @@ export class LoginComponent {
   ) { }
 
   login(): void {
+    this.error = false;
     if (this.form.valid) {
       this._authService.signInWithEmailAndPassword(
         this.formControls['login'].value,
         this.formControls['password'].value
-      ).then(result => {
-        if (result.user)
-          this._navigateToHomePage();
-      });
+      ).then(
+        result => {
+          if (result.user)
+            this._navigateToHomePage();
+        },
+        () => this.error = true
+      );
     }
   }
 

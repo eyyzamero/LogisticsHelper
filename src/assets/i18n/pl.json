@@ -35,7 +35,6 @@
     "add-tc": "Dodaj TC",
     "edit-tc": "Edytuj TC",
     "tc-management-panel": "Panel zarządzania TC",
-    "show-event-logs": "Pokaż logi",
     "delete": "Usuń zlecenie",
     "select-tc-placeholder": "Wybierz TC...",
     "pallet-type": "Typ palety",
@@ -61,7 +60,8 @@
       "TC_EDITED": "Edytowano TC",
       "MOVED_TO_HISTORY": "Zlecenie zostało przeniesione do historii",
       "TC_DELETED": "Usunięto TC"
-    }
+    },
+    "pallets": "Palety"
   },
   "tabs": {
     "home": "Strona startowa",

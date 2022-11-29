@@ -71,7 +71,12 @@ export class AssignmentsFormService {
           handler: () => this._router.navigate([`assignments/form/${assignmentId}/tcs`])
         },
         {
-          text: this._translateService.instant('assignments.show-event-logs'),
+          text: this._translateService.instant('assignments.pallets'),
+          icon: 'layers-outline',
+          handler: () => {}
+        },
+        {
+          text: this._translateService.instant('assignments.event-logs'),
           icon: 'documents-outline',
           handler: () => this._router.navigate([`assignments/form/${assignmentId}/logs`])
         },

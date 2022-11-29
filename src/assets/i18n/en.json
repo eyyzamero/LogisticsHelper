@@ -34,8 +34,7 @@
     "add-pallet": "Add pallet",
     "add-tc": "Add TC",
     "edit-tc": "Edit TC",
-    "tc-management-panel": "TC Management panel",
-    "show-event-logs": "Show event logs",
+    "tc-management-panel": "TCs",
     "delete": "Delete assignment",
     "select-tc-placeholder": "Select TC...",
     "pallet-type": "Pallet type",
@@ -61,7 +60,8 @@
       "TC_EDITED": "TC has been edited",
       "MOVED_TO_HISTORY": "Assignment has been moved to history",
       "TC_DELETED": "TC has been deleted"
-    }
+    },
+    "pallets": "Pallets"
   },
   "tabs": {
     "home": "Home",

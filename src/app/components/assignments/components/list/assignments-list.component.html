@@ -27,6 +27,14 @@
           </div>
         </ion-item>
         <div slot="content" class="content">
+          <div class="chips">
+            <ion-chip *ngIf="assignment.status === AssignmentStatus.ACTIVE" class="chip active">
+              <ion-label translate>assignments.statuses.ACTIVE</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="assignment.status === AssignmentStatus.HISTORY" class="chip history">
+              <ion-label translate>assignments.statuses.HISTORY</ion-label>
+            </ion-chip> 
+          </div>
           <app-assignments-list-actions [assignmentId]="assignment.id" (edit)="navigateToForm($event)" (history)="moveToHistory($event)" (delete)="delete($event)"></app-assignments-list-actions>
           <app-assignments-tcs-summary [tcs]="assignment.tcs"></app-assignments-tcs-summary>
         </div>

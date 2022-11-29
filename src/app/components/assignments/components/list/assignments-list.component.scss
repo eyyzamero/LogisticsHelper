@@ -72,10 +72,35 @@
             }
           }
         }
-  
+
         .content {
-          padding: 16px;
+          padding: 2px 8px 16px 8px;
+
+          @media(min-width: 768px) {
+            padding: 16px;
+          }
   
+          .chips {
+            display: flex;
+            flex-wrap: wrap;
+  
+            .chip {
+              ion-label {
+                font-weight: bold;
+              }
+
+              &.active {
+                --background: var(--ion-color-primary);
+                --color: white;
+              }
+  
+              &.history {
+                --background: var(--ion-color-warning);
+                --color: white;
+              }
+            }
+          }
+
           app-assignments-list-actions {
             display: block;
             margin-bottom: 16px;

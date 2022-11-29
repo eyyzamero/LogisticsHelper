@@ -31,6 +31,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
   communicationState: CommunicationState = CommunicationState.NONE;
 
   readonly CommunicationState = CommunicationState;
+  readonly AssignmentStatus = AssignmentStatus;
 
   private _assignments: Array<IAssignmentModel> = new Array<IAssignmentModel>();
   private _openedAssignmentAccordions: Array<string> = new Array<string>();

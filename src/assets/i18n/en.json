@@ -62,7 +62,8 @@
       "MOVED_TO_HISTORY": "Assignment has been moved to history",
       "TC_DELETED": "TC has been deleted"
     },
-    "pallets": "Pallets"
+    "pallets": "Pallets",
+    "full-pallet": "Full pallet"
   },
   "tabs": {
     "home": "Home",

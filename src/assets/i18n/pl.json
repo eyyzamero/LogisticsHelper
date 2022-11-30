@@ -62,7 +62,8 @@
       "MOVED_TO_HISTORY": "Zlecenie zostało przeniesione do historii",
       "TC_DELETED": "Usunięto TC"
     },
-    "pallets": "Palety"
+    "pallets": "Palety",
+    "full-pallet": "Pełna paleta"
   },
   "tabs": {
     "home": "Strona startowa",

@@ -1,0 +1,45 @@
+<div class="assignment-pallets-container">
+  <app-loader *ngIf="communicationState !== CommunicationState.LOADED; else content"></app-loader>
+  <ng-template #content>
+    <div class="actions">
+      <ion-button fill="outline" color="dark" strong="true" class="back-btn" (click)="navigateBackToAssignment()" translate>assignments.back-to-assignment</ion-button>
+    </div>
+    <div class="header" translate>assignments.pallets</div>
+    <div *ngIf="!pallets.length" class="info" translate>common.no-data</div>
+  </ng-template>
+  <div class="pallets">
+    <ion-card *ngFor="let pallet of pallets" class="pallet">
+      <div class="pallet-content">
+        <ion-card-header>
+          <ion-card-title>
+            <img src="assets/icon/assignments/pallet.png" alt="pallet">
+            <span>{{ pallet.tc?.name ?? '' }}</span>
+            <div class="chips">
+              <ion-chip *ngIf="pallet.full" class="chip full">
+                <ion-label translate>assignments.full-pallet</ion-label>
+              </ion-chip>
+            </div>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="row">
+            <span class="label">{{ 'common.inners' | translate }}: </span>
+            <span class="value">{{ pallet.inners }}</span>
+          </div>
+          <div class="row">
+            <div class="chips">
+              <ion-chip *ngIf="pallet.full" class="chip full">
+                <ion-label translate>assignments.full-pallet</ion-label>
+              </ion-chip>
+            </div>
+          </div>
+        </ion-card-content>
+      </div>
+      <div class="pallet-actions">
+        <ion-button fill="clear" color="danger" strong="true" (click)="delete(pallet)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card>
+  </div>
+</div>

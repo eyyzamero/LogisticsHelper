@@ -1,4 +1,4 @@
-import { IAssignmentPalletModel } from '..';
+import { IAssignmentPalletModel, IAssignmentTcModel } from '..';
 
 export class AssignmentPalletModel implements IAssignmentPalletModel {
 
@@ -7,6 +7,7 @@ export class AssignmentPalletModel implements IAssignmentPalletModel {
     public assignmentId: string = '',
     public tcId: string = '',
     public inners: number = 0,
-    public full: boolean = false
+    public full: boolean = false,
+    public tc?: IAssignmentTcModel
   ) { }
 }

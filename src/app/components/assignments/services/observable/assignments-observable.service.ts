@@ -67,7 +67,8 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
 
     if (assignment) {
       assignment.tcs.forEach(tc => {
-        const palletsWithThisTc = pallets.filter(x => x.tcId === tc.id);
+        let palletsWithThisTc = pallets.filter(x => x.tcId === tc.id);
+        palletsWithThisTc.forEach(pallet => pallet.tc = tc);
         tc.pallets = palletsWithThisTc;
       });
     }
@@ -132,6 +133,36 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
     if (assignment) {
       assignment.logs.push(...logs);
       this.next();
+    }
+  }
+
+  getPallets(assignmentId: string): Array<IAssignmentPalletModel> {
+    let assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
+    let pallets: Array<IAssignmentPalletModel> = new Array<IAssignmentPalletModel>();
+
+    if (assignment) {
+      pallets = assignment.tcs.reduce<Array<IAssignmentPalletModel>>((accumulator, current) => {
+        accumulator.push(...current.pallets);
+        return accumulator;
+      }, new Array<IAssignmentPalletModel>()); 
+    }
+    return pallets;
+  }
+
+  deletePallet(assignmentId: string, pallet: IAssignmentPalletModel) {
+    const assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
+
+    if (assignment) {
+      const tc = assignment.tcs.find(x => x.id === pallet.tc?.id ?? '');
+
+      if (tc) {
+        const palletIndex = tc.pallets.findIndex(x => x.id === pallet.id);
+
+        if (pallet) {
+          tc.pallets.splice(palletIndex, 1);
+          this.next();
+        }
+      }
     }
   }
 }

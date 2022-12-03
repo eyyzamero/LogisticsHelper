@@ -1,0 +1,14 @@
+<div class="users-form-modal-container">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>{{ title }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="content">
+    <app-users-form></app-users-form>
+    <div class="buttons">
+      <ion-button type="button" class="cancel-btn" color="light" size="default" strong="true" (click)="close()" translate>common.cancel</ion-button>
+      <ion-button type="submit" class="save-btn" color="primary" size="default" strong="true" (click)="submit()" translate>common.save</ion-button>
+    </div>
+  </div>
+</div>

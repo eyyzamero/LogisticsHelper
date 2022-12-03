@@ -76,5 +76,8 @@
     "users": "Użytkownicy",
     "barcodes": "Kody kreskowe",
     "logout": "Wyloguj"
+  },
+  "users": {
+    "add": "Dodaj użytkownika"
   }
 }

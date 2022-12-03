@@ -76,5 +76,8 @@
     "users": "Users",
     "barcodes": "Barcodes",
     "logout": "Sign out"
+  },
+  "users": {
+    "add": "Add user"
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import _ from 'lodash';
 import { ObservableMapperService } from 'src/app/core/services/mapper';
 import { BaseBehaviorSubjectObservableService } from 'src/app/core/services/observable/base-behavior-subject/base-behavior-subject-observable.service';
 import { AssignmentStatus } from '../../enums';
@@ -81,7 +82,7 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
       let tcIndex = assignment.tcs.findIndex(x => x.id === item.id);
 
       if (tcIndex !== -1) {
-        assignment.tcs[tcIndex] = item;
+        assignment.tcs[tcIndex] = _.merge(assignment.tcs[tcIndex], item);
         this.next();
       }
     }

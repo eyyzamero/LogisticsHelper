@@ -68,7 +68,7 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     const collection = this._getCollection();
 
     if (!id)
-      item.id = collection.ref.id;
+      item.id = this._firestore.createId();
 
     await collection.doc(item.id).set({ ...item });
   }
@@ -78,7 +78,7 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     const collection = this._getCollection();
 
     items.forEach(item => {
-      item.id = collection.ref.id;
+      item.id = this._firestore.createId();
       const docRef = collection.doc(item.id).ref;
       batch.set(docRef, { ...item });
     });

@@ -65,8 +65,7 @@ export class AssignmentPalletsComponent implements OnInit, OnDestroy {
     const assignmentSubscription = this._assignmentsObservableService.observable.pipe(
       tap(value => this.communicationState = value.communicationState),
       mergeMap(value => value.data),
-      filter(value => value.id === this._assignmentId),
-      take(1)
+      filter(value => value.id === this._assignmentId)
     ).subscribe({
       next: (value) => this.pallets = this._extractPalletsFromAssignment(value)
     });

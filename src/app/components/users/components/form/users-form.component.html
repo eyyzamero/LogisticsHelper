@@ -1,3 +1,28 @@
 <div class="users-form-container">
-  
+  <form #formRef [formGroup]="form" class="form" (ngSubmit)="onFormSubmit()">
+    <div class="row">
+      <ion-item>
+        <ion-label position="floating" translate>common.nickname</ion-label>
+        <ion-input formControlName="nickname"></ion-input>
+      </ion-item>
+    </div>
+    <div class="row">
+      <ion-item>
+        <ion-label position="floating" translate>common.email</ion-label>
+        <ion-input formControlName="email"></ion-input>
+      </ion-item>
+    </div>
+    <div class="row">
+      <ion-item>
+        <ion-label position="floating" translate>common.password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+    </div>
+    <div class="row">
+      <ion-item>
+        <ion-label position="floating" translate>common.password-confirm</ion-label>
+        <ion-input type="password" formControlName="passwordConfirm"></ion-input>
+      </ion-item>
+    </div>
+  </form>
 </div>

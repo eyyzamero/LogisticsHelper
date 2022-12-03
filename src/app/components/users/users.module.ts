@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UsersFormComponent } from './components/form/users-form.component';
 import { IonicModule } from '@ionic/angular';
 import { UsersFormModalComponent } from './components/modals/users-form-modal/users-form-modal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { UsersFormModalComponent } from './components/modals/users-form-modal/us
     CommonModule,
     TranslateModule.forChild(),
     IonicModule,
+    FormsModule,
+    ReactiveFormsModule,
     UsersRoutingModule
   ]
 })

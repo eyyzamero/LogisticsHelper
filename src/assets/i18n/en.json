@@ -13,7 +13,11 @@
     "cancel": "Cancel",
     "save": "Save",
     "no-data": "No data",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "nickname": "Nickname",
+    "email": "Email",
+    "password": "Password",
+    "password-confirm": "Confirm password"
   },
   "validation": {
     "field-required": "Field required",

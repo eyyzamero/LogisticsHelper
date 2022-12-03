@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthModel, IAuthModel, IPermissionDbRefModel, IRoleDbRefModel, IUserDbRefModel } from 'src/app/core/models';
 import { ObservableMapperService } from '../../mapper';
 import { BaseBehaviorSubjectObservableService } from '../base-behavior-subject/base-behavior-subject-observable.service';
-import { CommunicationState, UserPermission } from 'src/app/core/enums';
+import { CommunicationState } from 'src/app/core/enums';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthMapperService } from '../../mapper/auth/auth-mapper.service';
 
@@ -22,7 +22,13 @@ export class AuthObservableService extends BaseBehaviorSubjectObservableService<
   override add(): void {
     this._authService.currentUser.then(user => {
       if (user) {
-        const authModel = new AuthModel(user.uid, user.displayName ?? user.email!, user.displayName ?? user.email!, user.email!, user.emailVerified, user.photoURL);
+        const authModel = new AuthModel(
+          user.uid,
+          user.displayName ?? user.email ?? '',
+          user.email ?? '',
+          user.emailVerified,
+          user.photoURL
+        );
         super.add(authModel);
       }
     });

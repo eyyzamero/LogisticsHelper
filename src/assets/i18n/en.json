@@ -23,9 +23,14 @@
     "sign-in": "Sign in",
     "sign-in-back": "Sign in back",
     "signed-out-correctly": "You have been signed out correctly",
+    "logged-in-as": "Logged in as:",
     "placeholders": {
       "email": "Email",
       "password": "Password"
+    },
+    "roles": {
+      "User": "User",
+      "Administrator": "Administrator"
     },
     "error-while-signing-in": "Invalid credentials"
   },

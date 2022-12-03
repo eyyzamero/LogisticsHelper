@@ -4,7 +4,7 @@ import { AppTranslateService } from './core/services/translate/app-translate.ser
 import { Subscription } from 'rxjs';
 import { AuthObservableService } from './core/services/observable/auth/auth-observable.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AuthModel, IPermissionDbRefModel, IRoleDbRefModel, IUserDbRefModel } from './core/models';
+import { IPermissionDbRefModel, IRoleDbRefModel, IUserDbRefModel } from './core/models';
 import { FirestoreCollectionService } from './core/services/collections/firestore-collection.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
@@ -47,8 +47,8 @@ export class AppComponent implements OnInit, OnDestroy {
         if (!user) {
           this._authObservableService.clear();
           return;
-        };
-        this._getUserFromDb(user.uid);
+        } else 
+          this._getUserFromDb(user.uid);
       }
     });
     this._subscriptions.push(authStateSubscription);
@@ -57,8 +57,8 @@ export class AppComponent implements OnInit, OnDestroy {
   private async _getUserFromDb(userId: string): Promise<void> {
     const user = await this._usersCollectionService.getByDocIdAsync(userId);
     const role = await this._rolesCollectionService.getByDocIdAsync(user?.roleId)
-    const permissions = await this._permissionsCollectionService.getByDocIds(role?.permissionIds)
-    
+    const permissions = await this._permissionsCollectionService.getByDocIds(role?.permissionIds);
+
     if (!this._authObservableService.observableSubjectValue.data)
       this._authObservableService.initModel();
 

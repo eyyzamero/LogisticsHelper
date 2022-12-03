@@ -23,9 +23,14 @@
     "sign-in": "Zaloguj się",
     "sign-in-back": "Zaloguj się ponownie",
     "signed-out-correctly": "Zostałeś prawidłowo wylogowany",
+    "logged-in-as": "Zalogowany jako:",
     "placeholders": {
       "email": "Email",
       "password": "Hasło"
+    },
+    "roles": {
+      "User": "Użytkownik",
+      "Administrator": "Administrator"
     },
     "error-while-signing-in": "Nieprawidłowe dane logowania"
   },

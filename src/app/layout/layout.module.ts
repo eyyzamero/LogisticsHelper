@@ -7,19 +7,23 @@ import { LayoutSideMenuComponent } from './components/side-menu/layout-side-menu
 import { IonicModule } from '@ionic/angular';
 import { TabsModule } from '../components/tabs/tabs.module';
 import { LayoutToolbarLogoComponent } from './components/toolbar/components/toolbar-logo/layout-toolbar-logo.component';
+import { LayoutSideMenuUserInfoComponent } from './components/side-menu/layout-side-menu-user-info/layout-side-menu-user-info.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
     LayoutComponent,
     LayoutToolbarLogoComponent,
     LayoutToolbarComponent,
-    LayoutSideMenuComponent
+    LayoutSideMenuComponent,
+    LayoutSideMenuUserInfoComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     TabsModule,
-    LayoutRoutingModule
+    LayoutRoutingModule,
+    TranslateModule.forChild()
   ]
 })
 export class LayoutModule { }

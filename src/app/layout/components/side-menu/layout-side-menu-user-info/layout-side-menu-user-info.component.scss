@@ -1,0 +1,37 @@
+.layout-side-menu-user-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+
+  :not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  .label {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .name,
+  .email {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  .role {
+    ion-chip {
+      font-weight: bold;
+
+      &.User {
+        --background: var(--ion-color-primary);
+        --color: white;
+      }
+  
+      &.Administrator {
+        --background: var(--ion-color-danger);
+        --color: white;
+      }
+    }
+  }
+}

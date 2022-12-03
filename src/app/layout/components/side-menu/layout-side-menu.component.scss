@@ -1,0 +1,11 @@
+ion-menu {
+  ion-content {
+    display: flex;
+    flex-direction: column;
+
+    app-layout-side-menu-user-info {
+      display: block;
+      margin-top: 16px;
+    }
+  }
+}

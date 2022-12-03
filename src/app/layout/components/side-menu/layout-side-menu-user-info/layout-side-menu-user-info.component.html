@@ -1,0 +1,10 @@
+<div *ngIf="(user$ | async) as user" class="layout-side-menu-user-info-container">
+  <div class="label" translate>auth.logged-in-as</div>
+  <div *ngIf="user.name" class="name">{{ user.name }}</div>
+  <div *ngIf="!user.name" class="email">{{ user.email }}</div>
+  <div class="role">
+    <ion-chip [ngClass]="user.role">
+      <ion-label translate>auth.roles.{{ user.role }}</ion-label>
+    </ion-chip>
+  </div>
+</div>

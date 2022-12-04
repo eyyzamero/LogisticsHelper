@@ -14,10 +14,11 @@
     "save": "Save",
     "no-data": "No data",
     "confirm": "Confirm",
-    "nickname": "Nickname",
     "email": "Email",
     "password": "Password",
-    "password-confirm": "Confirm password"
+    "password-confirm": "Confirm password",
+    "role": "Role",
+    "select-role": "Select role..."
   },
   "validation": {
     "field-required": "Field required",

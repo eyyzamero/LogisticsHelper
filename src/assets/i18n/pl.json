@@ -13,7 +13,12 @@
     "cancel": "Anuluj",
     "save": "Zapisz",
     "no-data": "Brak danych",
-    "confirm": "Potwierdź"
+    "confirm": "Potwierdź",
+    "email": "Email",
+    "password": "Hasło",
+    "password-confirm": "Potwierdź hasło",
+    "role": "Rola",
+    "select-role": "Wybierz rolę..."
   },
   "validation": {
     "field-required": "Pole wymagane",

@@ -2,12 +2,6 @@
   <form #formRef [formGroup]="form" class="form" (ngSubmit)="onFormSubmit()">
     <div class="row">
       <ion-item>
-        <ion-label position="floating" translate>common.nickname</ion-label>
-        <ion-input formControlName="nickname"></ion-input>
-      </ion-item>
-    </div>
-    <div class="row">
-      <ion-item>
         <ion-label position="floating" translate>common.email</ion-label>
         <ion-input formControlName="email"></ion-input>
       </ion-item>
@@ -22,6 +16,14 @@
       <ion-item>
         <ion-label position="floating" translate>common.password-confirm</ion-label>
         <ion-input type="password" formControlName="passwordConfirm"></ion-input>
+      </ion-item>
+    </div>
+    <div class="row">
+      <ion-item>
+        <ion-label position="floating" translate>common.role</ion-label>
+        <ion-select formControlName="role" [placeholder]="'common.select-role' | translate">
+          <ion-select-option *ngFor="let role of roles" [value]="role">{{ role.name }}</ion-select-option>
+        </ion-select>
       </ion-item>
     </div>
   </form>

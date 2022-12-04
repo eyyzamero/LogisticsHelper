@@ -22,6 +22,6 @@ export class UsersFormModalComponent {
   }
 
   submit() {
-    this._usersFormRef?.submitClicked();
+    this._usersFormRef?.submit();
   }
 }

@@ -22,6 +22,12 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     private _collectionName: FirestoreCollection
   ) { }
 
+  async getAll(): Promise<Array<T> | undefined> {
+    const collection = this._getCollection();
+    const documents = await firstValueFrom(collection.valueChanges());
+    return documents;
+  }
+
   async getByDocIdAsync(docId?: string): Promise<T | undefined> {
     if (!docId)
       return undefined;

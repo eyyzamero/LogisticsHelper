@@ -16,13 +16,22 @@ export class UsersFormComponent implements OnInit {
 
   @ViewChild('formRef', { static: true }) formRef?: HTMLFormElement;
 
-  @Input() userId: string = '';
+  @Input() set userId(value: string) {
+    if (value) {
+      this._mode = FormMode.EDIT;
+      this._userId = value;
+  
+      this.form.removeControl('password');
+      this.form.removeControl('passwordConfirm');
+    }
+  }
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
 
   form: FormGroup = this._formDefinition();
   roles: Array<IRoleDbRefModel> = new Array<IRoleDbRefModel>();
 
   private _mode: FormMode = FormMode.CREATE;
+  private _userId: string = '';
   private _rolesCollectionService: FirestoreCollectionService<IRoleDbRefModel>;
   private _usersCollectionService: FirestoreCollectionService<IUserDbRefModel>;
 

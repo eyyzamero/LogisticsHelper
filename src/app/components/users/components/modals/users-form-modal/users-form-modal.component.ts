@@ -12,6 +12,7 @@ export class UsersFormModalComponent {
   @ViewChild(UsersFormComponent, { static: false }) private _usersFormRef?: UsersFormComponent;
 
   @Input() title: string = '';
+  @Input() userId: string = '';
 
   constructor(
     private _modalController: ModalController

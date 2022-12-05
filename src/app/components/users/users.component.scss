@@ -1,3 +1,14 @@
 .users-container {
-  
+  display: flex;
+  flex-direction: column;
+
+  .section-label {
+    color: var(--ion-color-primary);
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .actions {
+    margin-bottom: 16px;
+  }
 }

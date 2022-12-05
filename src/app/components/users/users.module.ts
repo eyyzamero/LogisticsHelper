@@ -8,12 +8,18 @@ import { UsersFormComponent } from './components/form/users-form.component';
 import { IonicModule } from '@ionic/angular';
 import { UsersFormModalComponent } from './components/modals/users-form-modal/users-form-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsersListComponent } from './components/list/users-list.component';
+import { UsersListTableComponent } from './components/list/components/table/users-list-table.component';
+import { UsersListAccordionsComponent } from './components/list/components/accordions/users-list-accordions.component';
 
 @NgModule({
   declarations: [
     UsersComponent,
     UsersFormComponent,
-    UsersFormModalComponent
+    UsersFormModalComponent,
+    UsersListComponent,
+    UsersListTableComponent,
+    UsersListAccordionsComponent
   ],
   imports: [
     CommonModule,

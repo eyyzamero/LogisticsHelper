@@ -1,0 +1,22 @@
+.users-list-container {
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    app-users-list-table {
+      display: none;
+  
+      @media(min-width: 768px) {
+        display: block;
+      }
+    }
+  
+    app-users-list-accordions {
+      display: block;
+
+      @media(min-width: 768px) {
+        display: none;
+      }
+    }
+  }
+}

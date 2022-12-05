@@ -1,0 +1,14 @@
+<div class="users-list-table-container">
+  <ion-row class="header">
+    <ion-col size="4" translate>common.email</ion-col>
+    <ion-col size="4">ID</ion-col>
+    <ion-col size="2" translate>common.role</ion-col>
+    <ion-col size="2" translate>common.actions</ion-col>
+  </ion-row>
+  <ion-row *ngFor="let user of users" class="user">
+    <ion-col size="4">{{ user.email }}</ion-col>
+    <ion-col size="4">{{ user.id }}</ion-col>
+    <ion-col size="2">{{ user.role }}</ion-col>
+    <ion-col size="2"></ion-col>
+  </ion-row>
+</div>

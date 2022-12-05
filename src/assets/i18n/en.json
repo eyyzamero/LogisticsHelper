@@ -18,7 +18,8 @@
     "password": "Password",
     "password-confirm": "Confirm password",
     "role": "Role",
-    "select-role": "Select role..."
+    "select-role": "Select role...",
+    "actions": "Actions"
   },
   "validation": {
     "field-required": "Field required",

@@ -18,7 +18,8 @@
     "password": "Hasło",
     "password-confirm": "Potwierdź hasło",
     "role": "Rola",
-    "select-role": "Wybierz rolę..."
+    "select-role": "Wybierz rolę...",
+    "actions": "Akcje"
   },
   "validation": {
     "field-required": "Pole wymagane",

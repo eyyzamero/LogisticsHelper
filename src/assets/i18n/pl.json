@@ -85,6 +85,7 @@
     "logout": "Wyloguj"
   },
   "users": {
-    "add": "Dodaj użytkownika"
+    "add": "Dodaj użytkownika",
+    "reset-password": "Zresetuj hasło"
   }
 }

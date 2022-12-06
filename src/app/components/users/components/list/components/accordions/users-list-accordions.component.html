@@ -1,3 +1,45 @@
 <div class="users-list-accordions-container">
-  
+  <ion-accordion-group class="users" [multiple]="true">
+    <ion-accordion *ngFor="let user of users" class="user" [value]="user.id" (click)="toggleAccordion(user.id)">
+      <ion-item slot="header">
+        <div class="label">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-text>{{ user.email }}</ion-text>
+          <ion-chip class="chip" [ngClass]="user.role">
+            <ion-label translate>auth.roles.{{ user.role }}</ion-label>
+          </ion-chip>
+        </div>
+      </ion-item>
+      <div slot="content" class="content">
+        <div class="buttons">
+          <ion-button fill="outline" color="primary" strong="true" (click)="edit(user)">
+            <ion-icon name="pencil-outline"></ion-icon>
+            <span translate>common.edit</span>
+          </ion-button>
+          <ion-button fill="outline" color="primary" strong="true" (click)="resetPassword(user)">
+            <ion-icon name="mail-outline"></ion-icon>
+            <span translate>users.reset-password</span>
+          </ion-button>
+          <ion-button fill="outline" color="danger" strong="true" (click)="delete(user)">
+            <ion-icon name="trash-outline"></ion-icon>
+            <span translate>common.delete</span>
+          </ion-button>
+        </div>
+        <div class="data">
+          <div class="row">
+            <span class="label">{{ 'common.nickname' | translate }}: </span>
+            <span class="value">{{ user.nickname }}</span>
+          </div>
+          <div class="row">
+            <span class="label">{{ 'common.email' | translate }}: </span>
+            <span class="value">{{ user.email }}</span>
+          </div>
+          <div class="row">
+            <span class="label">{{ 'common.role' | translate }}: </span>
+            <span class="value" translate>auth.roles.{{ user.role }}</span>
+          </div>
+        </div>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
 </div>

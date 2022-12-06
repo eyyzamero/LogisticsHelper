@@ -18,4 +18,8 @@ export class UsersListAccordionsComponent extends BaseUsersList {
   ) {
     super(firestore, authService, usersListObservableService);
   }
+
+  toggleAccordion(userId: string) {
+    
+  }
 }

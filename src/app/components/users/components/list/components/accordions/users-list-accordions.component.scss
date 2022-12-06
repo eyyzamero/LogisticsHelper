@@ -1,3 +1,87 @@
 .users-list-accordions-container {
-  
+  .users {
+    .user {
+      ion-item {
+        --background: var(--ion-color-light);
+
+        .label {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          font-weight: bold;
+          align-items: center;
+          width: 100%;
+
+          ion-icon {
+            font-size: 24px;
+            margin-right: 8px;
+          }
+
+          ion-chip {
+            font-weight: bold;
+            margin: 0 0 0 8px;
+      
+            &.User {
+              --background: var(--ion-color-primary);
+              --color: white;
+            }
+        
+            &.Administrator {
+              --background: var(--ion-color-danger);
+              --color: white;
+            }
+          }
+        }
+      }
+
+      .content {
+        padding: 2px 8px 16px 8px;
+
+        @media(min-width: 768px) {
+          padding: 16px;
+        }
+
+        .buttons {
+          display: flex;
+          flex-wrap: wrap;
+
+          ion-button {
+            width: 100%;
+            --padding-start: 8px;
+            --padding-end: 8px;
+        
+            span {
+              margin-left: 8px;
+            }
+          }
+          
+          @media(min-width: 768px) {
+            ion-button {
+              width: unset;
+        
+              &:not(&:last-of-type) {
+                margin-right: 8px;
+              }
+            }
+          }
+        }
+
+        .data {
+          display: flex;
+          flex-direction: column;
+          margin-top: 16px;
+
+          .row {
+            &:not(&:last-of-type) {
+              margin-bottom: 8px;
+            }
+            
+            .label {
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+  }
 }

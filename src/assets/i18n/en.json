@@ -15,6 +15,7 @@
     "no-data": "No data",
     "confirm": "Confirm",
     "email": "Email",
+    "nickname": "Nickname",
     "password": "Password",
     "password-confirm": "Confirm password",
     "role": "Role",

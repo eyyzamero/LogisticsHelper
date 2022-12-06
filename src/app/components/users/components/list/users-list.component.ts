@@ -9,10 +9,11 @@ import { UsersListObservableService } from '../../services/observable/list/users
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss'],
+  styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
 
+  private _roles: Array<IRoleDbRefModel> = new Array<IRoleDbRefModel>();
   private _usersCollectionService: FirestoreCollectionService<IUserDbRefModel>;
   private _rolesCollectionService: FirestoreCollectionService<IRoleDbRefModel>;
 
@@ -26,7 +27,15 @@ export class UsersListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._getRoles();
     this._getUsers();
+  }
+
+  private async _getRoles(): Promise<void> {
+    const roles = await this._rolesCollectionService.getAll();
+
+    if (roles)
+      this._roles = roles;
   }
 
   private async _getUsers(): Promise<void> {
@@ -35,15 +44,14 @@ export class UsersListComponent implements OnInit {
     if (users) {
       let mappedUsers = this._usersMapperService.ArrayOfIUserDbRefModelToArrayOfIUserModel(users);
 
-      users.forEach(async (user) => {
-        const role = await this._rolesCollectionService.getByDocIdAsync(user.roleId);
-        console.log(role);
+      users.forEach(user => {
         let mappedUser = mappedUsers.find(x => x.id === user.id);
 
-        if (mappedUser)
-          mappedUser.role = role?.name.toUpperCase() as UserRole;
+        if (mappedUser) {
+          const role = this._roles.find(x => x.id === user.roleId)!;
+          mappedUser.role = role.name as UserRole;
+        }
       });
-
       this._usersListObservableService.add(mappedUsers);
     };
   }

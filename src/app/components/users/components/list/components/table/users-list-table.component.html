@@ -1,14 +1,30 @@
 <div class="users-list-table-container">
   <ion-row class="header">
-    <ion-col size="4" translate>common.email</ion-col>
-    <ion-col size="4">ID</ion-col>
+    <ion-col size="3" translate>common.nickname</ion-col>
+    <ion-col size="5" translate>common.email</ion-col>
     <ion-col size="2" translate>common.role</ion-col>
     <ion-col size="2" translate>common.actions</ion-col>
   </ion-row>
   <ion-row *ngFor="let user of users" class="user">
-    <ion-col size="4">{{ user.email }}</ion-col>
-    <ion-col size="4">{{ user.id }}</ion-col>
-    <ion-col size="2">{{ user.role }}</ion-col>
-    <ion-col size="2"></ion-col>
+    <ion-col size="3">{{ user.nickname }}</ion-col>
+    <ion-col size="5">{{ user.email }}</ion-col>
+    <ion-col size="2">
+      <ion-chip class="chip" [ngClass]="user.role">
+        <ion-label translate>auth.roles.{{ user.role }}</ion-label>
+      </ion-chip>
+    </ion-col>
+    <ion-col size="2">
+      <ion-buttons class="actions">
+        <ion-button color="primary" (click)="edit(user)" class="edit-btn">
+          <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="primary" (click)="resetPassword(user)" class="reset-password-btn">
+          <ion-icon slot="icon-only" name="mail-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="delete(user)" class="delete-btn">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-col>
   </ion-row>
 </div>

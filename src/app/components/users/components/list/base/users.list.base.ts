@@ -31,6 +31,18 @@ export class BaseUsersList implements OnInit, OnDestroy {
     this._initObservables();
   }
 
+  edit(user: IUserModel) {
+
+  }
+
+  resetPassword(user: IUserModel) {
+
+  }
+
+  delete(user: IUserModel) {
+    
+  }
+
   private _initObservables() {
     const usersSubscription = this._usersListObservableService.observable.subscribe({
       next: (value) => {

@@ -14,9 +14,8 @@ export class UsersMapperService {
     return dest;
   }
 
-  IUserDbRefModelToIUserModel(src: IUserDbRefModel, dest: IUserModel = new UserModel()): IUserModel {
-    if (src.email) dest.email = src.email;
-    if (src.id) dest.id = src.id;
+  IUserDbRefModelToIUserModel(src: IUserDbRefModel): IUserModel {
+    const dest = new UserModel(src.id, src.nickname, src.email, src.emailVerified);
     return dest;
   }
 }

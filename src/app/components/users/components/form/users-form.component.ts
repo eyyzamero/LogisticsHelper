@@ -60,6 +60,9 @@ export class UsersFormComponent implements OnInit {
 
   private _formDefinition(): FormGroup {
     return new FormGroup({
+      nickname: new FormControl(null, [
+        Validators.required
+      ]),
       email: new FormControl(null, [
         Validators.required,
         Validators.email
@@ -95,7 +98,9 @@ export class UsersFormComponent implements OnInit {
     const dbUser = new UserDbRefModel(
       newUser.user?.uid,
       this.form.controls['email'].value,
-      (this.form.controls['role'].value as IRoleDbRefModel).id
+      false,
+      (this.form.controls['role'].value as IRoleDbRefModel).id,
+      this.form.controls['nickname'].value
     );
     await this._usersCollectionService.add(dbUser, newUser.user?.uid);
     this.closeModal.emit();

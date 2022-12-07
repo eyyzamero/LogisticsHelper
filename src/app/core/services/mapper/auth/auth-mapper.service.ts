@@ -10,8 +10,9 @@ export class AuthMapperService {
   constructor() { }
 
   IUserDbRefModelToIAuthModel(src: IUserDbRefModel, dest: IAuthModel = new AuthModel()): IAuthModel {
-    dest.id = src.id,
-    dest.email = src.email
+    dest.id = src.id;
+    dest.email = src.email;
+    dest.name = src.nickname;
     return dest;
   }
 

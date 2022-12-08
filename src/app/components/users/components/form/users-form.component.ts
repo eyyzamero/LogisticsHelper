@@ -1,18 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import firebase from 'firebase/compat/app';
-import { FirestoreCollection, FormMode } from 'src/app/core/enums';
-import { IRoleDbRefModel, IUserDbRefModel, UserDbRefModel } from 'src/app/core/models';
+import { CommunicationState, FirestoreCollection, FormMode } from 'src/app/core/enums';
+import { IRoleDbRefModel, IUserDbRefModel } from 'src/app/core/models';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { config } from 'src/configs/config';
+import { UsersMapperService } from '../../services/mapper/users-mapper.service';
 
 @Component({
   selector: 'app-users-form',
   templateUrl: './users-form.component.html',
   styleUrls: ['./users-form.component.scss']
 })
-export class UsersFormComponent implements OnInit {
+export class UsersFormComponent {
 
   @ViewChild('formRef', { static: true }) formRef?: HTMLFormElement;
 
@@ -20,15 +21,22 @@ export class UsersFormComponent implements OnInit {
     if (value) {
       this._mode = FormMode.EDIT;
       this._userId = value;
-  
-      this.form.removeControl('password');
-      this.form.removeControl('passwordConfirm');
+      this._getUser();
+
+      setTimeout(() => {
+        this.form.removeControl('email');
+        this.form.removeControl('password');
+        this.form.removeControl('passwordConfirm');
+      });
     }
   }
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
 
   form: FormGroup = this._formDefinition();
   roles: Array<IRoleDbRefModel> = new Array<IRoleDbRefModel>();
+  communicationState: CommunicationState = CommunicationState.LOADED;
+
+  readonly CommunicationState = CommunicationState;
 
   private _mode: FormMode = FormMode.CREATE;
   private _userId: string = '';
@@ -36,19 +44,29 @@ export class UsersFormComponent implements OnInit {
   private _usersCollectionService: FirestoreCollectionService<IUserDbRefModel>;
 
   constructor(
-    firestore: AngularFirestore
+    firestore: AngularFirestore,
+    private _usersMapperService: UsersMapperService
   ) {
     this._rolesCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.ROLES);
     this._usersCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.USERS);
-  }
-
-  ngOnInit(): void {
     this._getRoles();
   }
 
   submit() {
     if (this.form.valid) 
       this._mode === FormMode.CREATE ? this._addUser() : this._editUser(this.userId);
+  }
+
+  private _getUser() {
+    this.communicationState = CommunicationState.LOADING;
+    this._usersCollectionService.getByDocIdAsync(this._userId).then(user => {
+      if (user) {
+        this.form.controls['nickname'].setValue(user.nickname);
+        const role = this.roles.find(x => x.id === user.roleId)!;
+        this.form.controls['role'].setValue(role);
+        this.communicationState = CommunicationState.LOADED;
+      }
+    });
   }
 
   private async _getRoles() {
@@ -59,7 +77,7 @@ export class UsersFormComponent implements OnInit {
   }
 
   private _formDefinition(): FormGroup {
-    return new FormGroup({
+    const form = new FormGroup({
       nickname: new FormControl(null, [
         Validators.required
       ]),
@@ -81,6 +99,7 @@ export class UsersFormComponent implements OnInit {
         Validators.required
       ])
     });
+    return form;
   }
 
   private _getSecondaryAppInstance(): firebase.app.App  {
@@ -95,19 +114,14 @@ export class UsersFormComponent implements OnInit {
       this.form.controls['email'].value,
       this.form.controls['password'].value
     );
-    const dbUser = new UserDbRefModel(
-      newUser.user?.uid,
-      this.form.controls['email'].value,
-      false,
-      (this.form.controls['role'].value as IRoleDbRefModel).id,
-      this.form.controls['nickname'].value
-    );
+    const dbUser = this._usersMapperService.UsersFormGroupToIUserDbRefModel(this.form, newUser.user?.uid);
     await this._usersCollectionService.add(dbUser, newUser.user?.uid);
     this.closeModal.emit();
     appInstance.delete();
   }
 
   private _editUser(userId: string) {
-
+    // const user = this._usersMapperService.UsersFormGroupToIUserDbRefModel(this.form);
+    // this._usersCollectionService.update()
   }
 }

@@ -1,12 +1,15 @@
 import { Directive, OnDestroy, OnInit } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { ModalController } from "@ionic/angular";
+import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
 import { CommunicationState, FirestoreCollection, UserRole } from "src/app/core/enums";
 import { IUserDbRefModel } from "src/app/core/models";
 import { FirestoreCollectionService } from "src/app/core/services/collections/firestore-collection.service";
 import { IUserModel } from "../../../models";
 import { UsersListObservableService } from "../../../services/observable/list/users-list-observable.service";
+import { UsersFormModalComponent } from "../../modals/users-form-modal/users-form-modal.component";
 
 @Directive()
 export class BaseUsersList implements OnInit, OnDestroy {
@@ -26,7 +29,9 @@ export class BaseUsersList implements OnInit, OnDestroy {
   constructor(
     firestore: AngularFirestore,
     private _authService: AngularFireAuth,
-    private _usersListObservableService: UsersListObservableService
+    private _usersListObservableService: UsersListObservableService,
+    private _modalController: ModalController,
+    private _translateService: TranslateService
   ) {
     this._usersCollectionService = new FirestoreCollectionService<IUserDbRefModel>(firestore, FirestoreCollection.USERS);
   }
@@ -36,11 +41,23 @@ export class BaseUsersList implements OnInit, OnDestroy {
   }
 
   edit(user: IUserModel) {
-
+    this._modalController.create({
+      component: UsersFormModalComponent,
+      componentProps: {
+        title: this._translateService.instant('users.edit'),
+        userId: user.id
+      },
+      cssClass: 'modal',
+      backdropDismiss: false
+    }).then(x => x.present()); 
   }
 
   resetPassword(user: IUserModel) {
 
+  }
+
+  changeEmail(user: IUserModel) {
+    
   }
 
   delete(user: IUserModel) {

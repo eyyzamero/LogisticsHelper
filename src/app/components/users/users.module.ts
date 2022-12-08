@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersListComponent } from './components/list/users-list.component';
 import { UsersListTableComponent } from './components/list/components/table/users-list-table.component';
 import { UsersListAccordionsComponent } from './components/list/components/accordions/users-list-accordions.component';
+import { LoaderModule } from '../common/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { UsersListAccordionsComponent } from './components/list/components/accor
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
+    LoaderModule,
     UsersRoutingModule
   ]
 })

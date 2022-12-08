@@ -39,7 +39,7 @@ export class UsersListComponent implements OnInit {
   }
 
   private async _getUsers(): Promise<void> {
-    const users = await this._usersCollectionService.getAll()
+    const users = await this._usersCollectionService.getAll();
 
     if (users) {
       let mappedUsers = this._usersMapperService.ArrayOfIUserDbRefModelToArrayOfIUserModel(users);

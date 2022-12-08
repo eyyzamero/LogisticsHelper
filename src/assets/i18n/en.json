@@ -86,6 +86,7 @@
   },
   "users": {
     "add": "Add user",
+    "edit": "Edit user",
     "reset-password": "Reset password"
   }
 }

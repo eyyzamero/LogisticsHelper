@@ -1,36 +1,39 @@
 <div class="users-form-container">
-  <form #formRef [formGroup]="form" class="form" (ngSubmit)="onFormSubmit()">
-    <div class="row">
-      <ion-item>
-        <ion-label position="floating" translate>common.nickname</ion-label>
-        <ion-input formControlName="nickname"></ion-input>
-      </ion-item>
-    </div>
-    <div class="row">
-      <ion-item>
-        <ion-label position="floating" translate>common.email</ion-label>
-        <ion-input formControlName="email"></ion-input>
-      </ion-item>
-    </div>
-    <div class="row">
-      <ion-item>
-        <ion-label position="floating" translate>common.password</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
-      </ion-item>
-    </div>
-    <div class="row">
-      <ion-item>
-        <ion-label position="floating" translate>common.password-confirm</ion-label>
-        <ion-input type="password" formControlName="passwordConfirm"></ion-input>
-      </ion-item>
-    </div>
-    <div class="row">
-      <ion-item>
-        <ion-label position="floating" translate>common.role</ion-label>
-        <ion-select formControlName="role" [placeholder]="'common.select-role' | translate">
-          <ion-select-option *ngFor="let role of roles" [value]="role">{{ role.name }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </div>
-  </form>
+  <app-loader *ngIf="communicationState !== CommunicationState.LOADED; else content"></app-loader>
+  <ng-template #content>
+    <form #formRef [formGroup]="form" class="form" (ngSubmit)="onFormSubmit()">
+      <div class="row">
+        <ion-item>
+          <ion-label position="floating" translate>common.nickname</ion-label>
+          <ion-input formControlName="nickname"></ion-input>
+        </ion-item>
+      </div>
+      <div *ngIf="form.controls['email']" class="row">
+        <ion-item>
+          <ion-label position="floating" translate>common.email</ion-label>
+          <ion-input formControlName="email"></ion-input>
+        </ion-item>
+      </div>
+      <div *ngIf="form.controls['password']" class="row">
+        <ion-item>
+          <ion-label position="floating" translate>common.password</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+      </div>
+      <div *ngIf="form.controls['passwordConfirm']" class="row">
+        <ion-item>
+          <ion-label position="floating" translate>common.password-confirm</ion-label>
+          <ion-input type="password" formControlName="passwordConfirm"></ion-input>
+        </ion-item>
+      </div>
+      <div class="row">
+        <ion-item>
+          <ion-label position="floating" translate>common.role</ion-label>
+          <ion-select formControlName="role" [placeholder]="'common.select-role' | translate">
+            <ion-select-option *ngFor="let role of roles" [value]="role">{{ role.name }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+    </form>
+  </ng-template>
 </div>

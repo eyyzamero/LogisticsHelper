@@ -21,7 +21,7 @@ export class UsersMapperService {
     return dest;
   }
 
-  UsersFormGroupToIUserDbRefModel(src: FormGroup, id?: string): IUserDbRefModel {
+  UsersFormGroupToIUserDbRefModel(src: FormGroup, id: string): IUserDbRefModel {
     const dest = new UserDbRefModel(
       id,
       src.controls['email'].value,

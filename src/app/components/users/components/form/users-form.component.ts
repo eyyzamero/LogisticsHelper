@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import firebase from 'firebase/compat/app';
 import { CommunicationState, FirestoreCollection, FormMode } from 'src/app/core/enums';
-import { IRoleDbRefModel, IUserDbRefModel } from 'src/app/core/models';
+import { IRoleDbRefModel, IUserDbRefModel, RoleDbRefModel, UserDbRefModel } from 'src/app/core/models';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { config } from 'src/configs/config';
 import { UsersMapperService } from '../../services/mapper/users-mapper.service';
@@ -40,6 +40,7 @@ export class UsersFormComponent {
 
   private _mode: FormMode = FormMode.CREATE;
   private _userId: string = '';
+  private _initialUser: IUserDbRefModel = new UserDbRefModel();
   private _rolesCollectionService: FirestoreCollectionService<IRoleDbRefModel>;
   private _usersCollectionService: FirestoreCollectionService<IUserDbRefModel>;
 
@@ -54,13 +55,14 @@ export class UsersFormComponent {
 
   submit() {
     if (this.form.valid) 
-      this._mode === FormMode.CREATE ? this._addUser() : this._editUser(this.userId);
+      this._mode === FormMode.CREATE ? this._addUser() : this._editUser();
   }
 
   private _getUser() {
     this.communicationState = CommunicationState.LOADING;
     this._usersCollectionService.getByDocIdAsync(this._userId).then(user => {
       if (user) {
+        this._initialUser = user;
         this.form.controls['nickname'].setValue(user.nickname);
         const role = this.roles.find(x => x.id === user.roleId)!;
         this.form.controls['role'].setValue(role);
@@ -114,14 +116,18 @@ export class UsersFormComponent {
       this.form.controls['email'].value,
       this.form.controls['password'].value
     );
-    const dbUser = this._usersMapperService.UsersFormGroupToIUserDbRefModel(this.form, newUser.user?.uid);
+    const dbUser = this._usersMapperService.UsersFormGroupToIUserDbRefModel(this.form, this._userId);
     await this._usersCollectionService.add(dbUser, newUser.user?.uid);
     this.closeModal.emit();
     appInstance.delete();
   }
 
-  private _editUser(userId: string) {
-    // const user = this._usersMapperService.UsersFormGroupToIUserDbRefModel(this.form);
-    // this._usersCollectionService.update()
+  private _editUser() {
+    let user = this._initialUser;
+    user.nickname = this.form.controls['nickname'].value;
+    user.roleId = (this.form.controls['role'].value as RoleDbRefModel).id;
+
+    this._usersCollectionService.update(user);
+    this.closeModal.emit();
   }
 }

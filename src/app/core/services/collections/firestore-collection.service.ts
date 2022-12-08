@@ -96,7 +96,7 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     const doc = await this.getByDocIdAsync(item.id);
 
     if (doc)
-      await collection.doc(doc.id).set({ ...item });
+      await collection.doc(doc.id).set({ ...item }, { merge: true });
   }
 
   async updateProperty(id: string, property: KeysInGenericType<T>, value: any): Promise<void> {
@@ -106,7 +106,7 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
     if (doc) {
       doc[property] = value;
 
-      await collection.doc(doc.id).set(doc, { merge: true });
+      await collection.doc(doc.id).set(doc);
     }
   }
 

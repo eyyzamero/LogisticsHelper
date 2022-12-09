@@ -9,7 +9,7 @@ import { IUserDbRefModel } from "src/app/core/models";
 import { FirestoreCollectionService } from "src/app/core/services/collections/firestore-collection.service";
 import { IUserModel } from "../../../models";
 import { UsersListObservableService } from "../../../services/observable/list/users-list-observable.service";
-import { UsersFormModalComponent } from "../../modals/users-form-modal/users-form-modal.component";
+import { UsersFormModalComponent } from "../../modals/users-form/users-form-modal.component";
 
 @Directive()
 export class BaseUsersList implements OnInit, OnDestroy {
@@ -57,7 +57,7 @@ export class BaseUsersList implements OnInit, OnDestroy {
   }
 
   changeEmail(user: IUserModel) {
-    
+
   }
 
   delete(user: IUserModel) {

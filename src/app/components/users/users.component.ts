@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { UsersFormModalComponent } from './components/modals/users-form-modal/users-form-modal.component';
+import { UsersFormModalComponent } from './components/modals/users-form/users-form-modal.component';
 
 @Component({
   selector: 'app-users',

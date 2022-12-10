@@ -7,7 +7,7 @@ import { IRoleDbRefModel, IUserDbRefModel, RoleDbRefModel, UserDbRefModel } from
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { exactTo } from 'src/app/core/validators';
 import { config } from 'src/configs/config';
-import { UsersMapperService } from '../../services/mapper/users-mapper.service';
+import { UsersMapperService } from '../../../services/mapper/users-mapper.service';
 
 @Component({
   selector: 'app-users-form',

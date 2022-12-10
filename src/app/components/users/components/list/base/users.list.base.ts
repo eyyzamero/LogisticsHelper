@@ -9,6 +9,7 @@ import { IUserDbRefModel } from "src/app/core/models";
 import { FirestoreCollectionService } from "src/app/core/services/collections/firestore-collection.service";
 import { IUserModel } from "../../../models";
 import { UsersListObservableService } from "../../../services/observable/list/users-list-observable.service";
+import { UsersChangePasswordFormModalComponent } from "../../modals/users-change-password/users-change-password-form-modal.component";
 import { UsersFormModalComponent } from "../../modals/users-form/users-form-modal.component";
 
 @Directive()
@@ -52,8 +53,16 @@ export class BaseUsersList implements OnInit, OnDestroy {
     }).then(x => x.present()); 
   }
 
-  resetPassword(user: IUserModel) {
-
+  changePassword(user: IUserModel) {
+    this._modalController.create({
+      component: UsersChangePasswordFormModalComponent,
+      componentProps: {
+        title: this._translateService.instant('users.change-password'),
+        userId: user.id
+      },
+      cssClass: 'modal',
+      backdropDismiss: false
+    }).then(x => x.present());
   }
 
   changeEmail(user: IUserModel) {

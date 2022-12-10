@@ -93,6 +93,7 @@
   "users": {
     "add": "Dodaj użytkownika",
     "edit": "Edytuj użytkownika",
-    "reset-password": "Zresetuj hasło"
+    "reset-password": "Zresetuj hasło",
+    "change-password": "Zmień hasło"
   }
 }

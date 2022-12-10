@@ -96,6 +96,7 @@
   "users": {
     "add": "Add user",
     "edit": "Edit user",
-    "reset-password": "Reset password"
+    "reset-password": "Reset password",
+    "change-password": "Change password"
   }
 }

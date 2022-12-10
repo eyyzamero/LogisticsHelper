@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { UsersFormComponent } from '../../form/users-form.component';
+import { UsersFormComponent } from '../../forms/form/users-form.component';
 
 @Component({
   selector: 'app-users-form-modal',

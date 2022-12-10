@@ -1,7 +1,7 @@
 <div class="users-form-container">
   <app-loader *ngIf="communicationState !== CommunicationState.LOADED; else content"></app-loader>
   <ng-template #content>
-    <form #formRef [formGroup]="form" class="form" (ngSubmit)="onFormSubmit()">
+    <form #formRef [formGroup]="form" class="form">
       <div class="row">
         <ion-item>
           <ion-label position="floating" translate>common.nickname</ion-label>

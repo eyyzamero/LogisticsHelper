@@ -5,6 +5,7 @@ import firebase from 'firebase/compat/app';
 import { CommunicationState, FirestoreCollection, FormMode } from 'src/app/core/enums';
 import { IRoleDbRefModel, IUserDbRefModel, RoleDbRefModel, UserDbRefModel } from 'src/app/core/models';
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
+import { exactTo } from 'src/app/core/validators';
 import { config } from 'src/configs/config';
 import { UsersMapperService } from '../../services/mapper/users-mapper.service';
 
@@ -54,6 +55,9 @@ export class UsersFormComponent {
   }
 
   submit() {
+    this.form.updateValueAndValidity();
+    this.form.markAllAsTouched();
+
     if (this.form.valid) 
       this._mode === FormMode.CREATE ? this._addUser() : this._editUser();
   }
@@ -81,7 +85,8 @@ export class UsersFormComponent {
   private _formDefinition(): FormGroup {
     const form = new FormGroup({
       nickname: new FormControl(null, [
-        Validators.required
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9_]+$/)
       ]),
       email: new FormControl(null, [
         Validators.required,
@@ -100,6 +105,8 @@ export class UsersFormComponent {
       role: new FormControl(null, [
         Validators.required
       ])
+    }, {
+      validators: exactTo('password', 'passwordConfirm')
     });
     return form;
   }

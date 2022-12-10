@@ -20,7 +20,16 @@
     "password-confirm": "Confirm password",
     "role": "Role",
     "select-role": "Select role...",
-    "actions": "Actions"
+    "actions": "Actions",
+    "validation": {
+      "required": "Field is required",
+      "invalid-email": "This is not a valid email address",
+      "regex-did-not-match": "Invalid characters in text field",
+      "passwords-are-not-the-same": "Passwords are not the same",
+      "minimum-length": "Minimum length of input is: ",
+      "maximum-length": "Maximum length of input is: ",
+      "characters": "characters"
+    }
   },
   "validation": {
     "field-required": "Field required",

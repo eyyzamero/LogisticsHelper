@@ -20,7 +20,13 @@
     "password-confirm": "Potwierdź hasło",
     "role": "Rola",
     "select-role": "Wybierz rolę...",
-    "actions": "Akcje"
+    "actions": "Akcje",
+    "validation": {
+      "required": "Pole jest wymagane",
+      "invalid-email": "Nieprawidłowy adres email",
+      "regex-did-not-match": "Nieprawidłowe znaki w polu tekstowym",
+      "passwords-are-not-the-same": "Hasła nie są jednakowe"
+    }
   },
   "validation": {
     "field-required": "Pole wymagane",

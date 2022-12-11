@@ -18,7 +18,7 @@ import { UsersListObservableService } from '../../../services/observable/list/us
 })
 export class UsersChangePasswordFormComponent {
 
-  @Input() user: IUserModel = new UserModel();
+  @Input() private _user: IUserModel = new UserModel();
 
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
 
@@ -38,16 +38,16 @@ export class UsersChangePasswordFormComponent {
   submit(): void {
     const temporaryAppInstance = firebase.initializeApp(config.firebase, "temporary");
 
-    const oldPasswordDecrypted = this._cryptoService.decrypt(this.user.password);
+    const oldPasswordDecrypted = this._cryptoService.decrypt(this._user.password);
     const newPasswordNotEncrypted = this.form.controls['password'].value;
-    const newPasswordEncrypted = this._cryptoService.encrypt(this.user.password);
+    const newPasswordEncrypted = this._cryptoService.encrypt(this._user.password);
 
     temporaryAppInstance.auth()
-      .signInWithEmailAndPassword(this.user.email, oldPasswordDecrypted)
+      .signInWithEmailAndPassword(this._user.email, oldPasswordDecrypted)
       .then(user => {
         user.user?.updatePassword(newPasswordNotEncrypted).then(() => {
-          this._usersCollectionService.updateProperty(this.user.id, 'password', newPasswordEncrypted).then(() => {
-            this._usersListObservableService.updatePassword(this.user.id, newPasswordEncrypted);
+          this._usersCollectionService.updateProperty(this._user.id, 'password', newPasswordEncrypted).then(() => {
+            this._usersListObservableService.updatePassword(this._user.id, newPasswordEncrypted);
             temporaryAppInstance.delete();
             this.closeModal.emit();
           });

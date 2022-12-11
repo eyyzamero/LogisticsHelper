@@ -5,7 +5,7 @@
     </ion-toolbar>
   </ion-header>
   <div class="content">
-    <app-users-form [userId]="userId" (closeModal)="close()"></app-users-form>
+    <app-users-form [userId]="user.id" (closeModal)="close()"></app-users-form>
     <div class="buttons">
       <ion-button type="button" class="cancel-btn" color="light" size="default" strong="true" (click)="close()" translate>common.cancel</ion-button>
       <ion-button type="submit" class="save-btn" color="primary" size="default" strong="true" (click)="submit()" translate>common.save</ion-button>

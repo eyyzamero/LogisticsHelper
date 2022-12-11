@@ -38,7 +38,7 @@ export class BaseUsersList implements OnInit, OnDestroy {
       component: UsersFormModalComponent,
       componentProps: {
         title: this._translateService.instant('users.edit'),
-        userId: user.id
+        user: user
       },
       cssClass: 'modal',
       backdropDismiss: false

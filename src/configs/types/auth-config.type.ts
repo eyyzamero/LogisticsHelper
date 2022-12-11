@@ -1,3 +1,3 @@
 export type AuthConfig = {
-  jwtSecret: string;
+  secret: string;
 }

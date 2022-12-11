@@ -57,8 +57,8 @@ export class BaseUsersList implements OnInit, OnDestroy {
     this._modalController.create({
       component: UsersChangePasswordFormModalComponent,
       componentProps: {
-        title: this._translateService.instant('users.change-password'),
-        userId: user.id
+        title: `${this._translateService.instant('users.change-password-for')}: ${user.email}`,
+        user: user
       },
       cssClass: 'modal',
       backdropDismiss: false

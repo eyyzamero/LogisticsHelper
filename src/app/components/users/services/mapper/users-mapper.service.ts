@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IRoleDbRefModel, IUserDbRefModel, UserDbRefModel } from 'src/app/core/models';
-import { config } from 'src/configs/config';
+import { CryptoService } from 'src/app/core/services/crypto/crypto.service';
 import { IUserModel, UserModel } from '../../models';
 
 @Injectable({
@@ -9,7 +9,9 @@ import { IUserModel, UserModel } from '../../models';
 })
 export class UsersMapperService {
 
-  constructor() { }
+  constructor(
+    private _cryptoService: CryptoService
+  ) { }
 
   ArrayOfIUserDbRefModelToArrayOfIUserModel(src: Array<IUserDbRefModel>): Array<IUserModel> {
     const dest = src?.map(x => this.IUserDbRefModelToIUserModel(x)) ?? new Array<IUserModel>();
@@ -17,7 +19,7 @@ export class UsersMapperService {
   }
 
   IUserDbRefModelToIUserModel(src: IUserDbRefModel): IUserModel {
-    const dest = new UserModel(src.id, src.nickname, src.email, src.emailVerified);
+    const dest = new UserModel(src.id, src.nickname, src.email, src.password, src.emailVerified);
     return dest;
   }
 
@@ -25,6 +27,7 @@ export class UsersMapperService {
     const dest = new UserDbRefModel(
       id,
       src.controls['email'].value,
+      this._cryptoService.encrypt(src.controls['password'].value),
       false,
       (src.controls['role'].value as IRoleDbRefModel).id,
       src.controls['nickname'].value

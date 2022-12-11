@@ -94,6 +94,7 @@
     "add": "Dodaj użytkownika",
     "edit": "Edytuj użytkownika",
     "reset-password": "Zresetuj hasło",
-    "change-password": "Zmień hasło"
+    "change-password": "Zmień hasło",
+    "change-password-for": "Zmień hasło dla"
   }
 }

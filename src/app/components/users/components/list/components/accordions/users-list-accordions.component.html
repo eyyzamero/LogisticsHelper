@@ -16,8 +16,12 @@
             <ion-icon name="pencil-outline"></ion-icon>
             <span translate>common.edit</span>
           </ion-button>
-          <ion-button fill="outline" color="primary" strong="true" (click)="changePassword(user)">
+          <ion-button fill="outline" color="primary" strong="true" (click)="changeEmail(user)">
             <ion-icon name="mail-outline"></ion-icon>
+            <span translate>users.change-email</span>
+          </ion-button>
+          <ion-button fill="outline" color="primary" strong="true" (click)="changePassword(user)">
+            <ion-icon name="lock-closed-outline"></ion-icon>
             <span translate>users.change-password</span>
           </ion-button>
           <ion-button fill="outline" color="danger" strong="true" (click)="delete(user)">

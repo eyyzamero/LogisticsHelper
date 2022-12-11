@@ -73,8 +73,7 @@ export class FirestoreCollectionService<T extends MandatoryFieldsInGenericType> 
   async add(item: T, id?: string): Promise<void> {
     const collection = this._getCollection();
 
-    if (!id)
-      item.id = this._firestore.createId();
+    id ? item.id = id : item.id = this._firestore.createId();
 
     await collection.doc(item.id).set({ ...item });
   }

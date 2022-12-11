@@ -9,6 +9,7 @@ import { CryptoService } from 'src/app/core/services/crypto/crypto.service';
 import { exactTo } from 'src/app/core/validators';
 import { config } from 'src/configs/config';
 import { IUserModel, UserModel } from '../../../models';
+import { UsersListObservableService } from '../../../services/observable/list/users-list-observable.service';
 
 @Component({
   selector: 'app-users-change-password-form',
@@ -27,7 +28,8 @@ export class UsersChangePasswordFormComponent {
 
   constructor(
     firestore: AngularFirestore,
-    private _cryptoService: CryptoService
+    private _cryptoService: CryptoService,
+    private _usersListObservableService: UsersListObservableService
   ) {
     this._usersCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.USERS);
 
@@ -36,16 +38,19 @@ export class UsersChangePasswordFormComponent {
   submit(): void {
     const temporaryAppInstance = firebase.initializeApp(config.firebase, "temporary");
 
-    const passwordEncrypted = this._cryptoService.encrypt(this.user.password);
-    const passwordDecrypted = this._cryptoService.decrypt(this.user.password);
+    const oldPasswordDecrypted = this._cryptoService.decrypt(this.user.password);
+    const newPasswordNotEncrypted = this.form.controls['password'].value;
+    const newPasswordEncrypted = this._cryptoService.encrypt(this.user.password);
 
     temporaryAppInstance.auth()
-      .signInWithEmailAndPassword(this.user.email, passwordDecrypted)
+      .signInWithEmailAndPassword(this.user.email, oldPasswordDecrypted)
       .then(user => {
-        user.user?.updatePassword(this.form.controls['password'].value).then(() => {
-          this._usersCollectionService.updateProperty(this.user.id, 'password', passwordEncrypted);
-          temporaryAppInstance.delete();
-          this.closeModal.emit();
+        user.user?.updatePassword(newPasswordNotEncrypted).then(() => {
+          this._usersCollectionService.updateProperty(this.user.id, 'password', newPasswordEncrypted).then(() => {
+            this._usersListObservableService.updatePassword(this.user.id, newPasswordEncrypted);
+            temporaryAppInstance.delete();
+            this.closeModal.emit();
+          });
         })
       });
   }

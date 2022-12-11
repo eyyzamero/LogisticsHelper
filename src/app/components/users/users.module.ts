@@ -14,6 +14,8 @@ import { UsersListAccordionsComponent } from './components/list/components/accor
 import { LoaderModule } from '../common/loader/loader.module';
 import { UsersChangePasswordFormModalComponent } from './components/modals/users-change-password/users-change-password-form-modal.component';
 import { UsersChangePasswordFormComponent } from './components/forms/change-password/users-change-password-form.component';
+import { UsersChangeEmailFormComponent } from './components/forms/change-email/users-change-email-form.component';
+import { UsersChangeEmailFormModalComponent } from './components/modals/change-email-form/users-change-email-form-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { UsersChangePasswordFormComponent } from './components/forms/change-pass
     UsersListTableComponent,
     UsersListAccordionsComponent,
     UsersChangePasswordFormComponent,
-    UsersChangePasswordFormModalComponent
+    UsersChangePasswordFormModalComponent,
+    UsersChangeEmailFormComponent,
+    UsersChangeEmailFormModalComponent
   ],
   imports: [
     CommonModule,

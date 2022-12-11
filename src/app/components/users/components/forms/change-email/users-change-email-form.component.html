@@ -1,0 +1,12 @@
+<div class="users-change-email-form-container">
+  <form [formGroup]="form" class="form">
+    <div class="row">
+      <ion-item>
+        <ion-label position="floating" translate>common.email</ion-label>
+        <ion-input formControlName="email"></ion-input>
+        <ion-note slot="error" *ngIf="form.get('email').hasError('required')" translate>common.validation.required</ion-note>
+        <ion-note slot="error" *ngIf="form.get('email').hasError('email')" translate>common.validation.invalid-email</ion-note>
+      </ion-item>
+    </div>
+  </form>
+</div>

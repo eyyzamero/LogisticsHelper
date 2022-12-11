@@ -98,6 +98,8 @@
     "edit": "Edit user",
     "reset-password": "Reset password",
     "change-password": "Change password",
-    "change-password-for": "Change password for"
+    "change-password-for": "Change password for",
+    "change-email": "Change email",
+    "change-email-for": "Change email for"
   }
 }

@@ -1,14 +1,11 @@
 import { Directive, OnDestroy, OnInit } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { ModalController } from "@ionic/angular";
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
-import { CommunicationState, FirestoreCollection, UserRole } from "src/app/core/enums";
-import { IUserDbRefModel } from "src/app/core/models";
-import { FirestoreCollectionService } from "src/app/core/services/collections/firestore-collection.service";
+import { CommunicationState, UserRole } from "src/app/core/enums";
 import { IUserModel } from "../../../models";
 import { UsersListObservableService } from "../../../services/observable/list/users-list-observable.service";
+import { UsersChangeEmailFormModalComponent } from "../../modals/change-email-form/users-change-email-form-modal.component";
 import { UsersChangePasswordFormModalComponent } from "../../modals/users-change-password/users-change-password-form-modal.component";
 import { UsersFormModalComponent } from "../../modals/users-form/users-form-modal.component";
 
@@ -24,18 +21,13 @@ export class BaseUsersList implements OnInit, OnDestroy {
   readonly CommunicationState = CommunicationState;
 
   private _users: Array<IUserModel> = new Array<IUserModel>();
-  private _usersCollectionService: FirestoreCollectionService<IUserDbRefModel>;
   private _subscriptions: Array<Subscription> = new Array<Subscription>();
 
   constructor(
-    firestore: AngularFirestore,
-    private _authService: AngularFireAuth,
     private _usersListObservableService: UsersListObservableService,
     private _modalController: ModalController,
     private _translateService: TranslateService
-  ) {
-    this._usersCollectionService = new FirestoreCollectionService<IUserDbRefModel>(firestore, FirestoreCollection.USERS);
-  }
+  ) { }
 
   ngOnInit(): void {
     this._initObservables();
@@ -50,7 +42,7 @@ export class BaseUsersList implements OnInit, OnDestroy {
       },
       cssClass: 'modal',
       backdropDismiss: false
-    }).then(x => x.present()); 
+    }).then(modal => modal.present()); 
   }
 
   changePassword(user: IUserModel) {
@@ -62,11 +54,19 @@ export class BaseUsersList implements OnInit, OnDestroy {
       },
       cssClass: 'modal',
       backdropDismiss: false
-    }).then(x => x.present());
+    }).then(modal => modal.present());
   }
 
   changeEmail(user: IUserModel) {
-
+    this._modalController.create({
+      component: UsersChangeEmailFormModalComponent,
+      componentProps: {
+        title: `${this._translateService.instant('users.change-email-for')}: ${user.email}`,
+        user: user
+      },
+      cssClass: 'modal',
+      backdropDismiss: false
+    }).then(modal => modal.present());
   }
 
   delete(user: IUserModel) {

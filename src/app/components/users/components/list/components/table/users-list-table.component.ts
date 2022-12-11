@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { UsersListObservableService } from 'src/app/components/users/services/observable/list/users-list-observable.service';
@@ -14,12 +12,10 @@ import { BaseUsersList } from '../../base/users.list.base';
 export class UsersListTableComponent extends BaseUsersList {
 
   constructor(
-    firestore: AngularFirestore,
-    authService: AngularFireAuth,
     usersListObservableService: UsersListObservableService,
     modalController: ModalController,
     translateService: TranslateService
   ) {
-    super(firestore, authService, usersListObservableService, modalController, translateService);
+    super(usersListObservableService, modalController, translateService);
   }
 }

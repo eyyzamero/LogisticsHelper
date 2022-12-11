@@ -95,6 +95,8 @@
     "edit": "Edytuj użytkownika",
     "reset-password": "Zresetuj hasło",
     "change-password": "Zmień hasło",
-    "change-password-for": "Zmień hasło dla"
+    "change-password-for": "Zmień hasło dla",
+    "change-email": "Zmień adres email",
+    "change-email-for": "Zmień adres email dla"
   }
 }

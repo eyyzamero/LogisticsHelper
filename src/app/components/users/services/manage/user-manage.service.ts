@@ -9,6 +9,7 @@ import { FirestoreCollection } from 'src/app/core/enums';
 import { UsersMapperService } from '../mapper/users-mapper.service';
 import { UsersListObservableService } from '../observable/list/users-list-observable.service';
 import { FirestoreAuthErrorCode } from '../../enums';
+import { IUserModel } from '../../models';
 
 @Injectable({
   providedIn: 'root'
@@ -67,7 +68,6 @@ export class UserManageService {
             errorMessage = 'Something went wrong!';
             break;
         }
-
         onError(errorMessage);
       }
     });
@@ -81,6 +81,36 @@ export class UserManageService {
       if (onSuccess)
         onSuccess();
     }).catch(e => onError ? onError('Something went wrong!') : null);
+  }
+
+  deleteUser(user: IUserModel, onSuccess?: Function, onError?: Function): void {
+    const appInstance = this._getSecondaryAppInstance();
+
+    appInstance.auth().signInWithEmailAndPassword(
+      user.email,
+      this._cryptoService.decrypt(user.password)
+    ).then(authUser => {
+      authUser.user?.delete().then(() => {
+        appInstance.delete();
+
+        this._usersCollectionService.delete(user.id).then(() => {
+          this._usersListObservableService.deleteUser(user.id);
+
+          if (onSuccess)
+            onSuccess();
+        }).catch(() => onError ? onError('Something went wrong!') : null)
+      }).catch(() => {
+        appInstance.delete();
+
+        if (onError)
+          onError('Something went wrong!');
+      });
+    }).catch(() => {
+      appInstance.delete();
+
+      if (onError)
+        onError('Something went wrong!');
+    });
   }
 
   private _getSecondaryAppInstance(): firebase.app.App {

@@ -4,6 +4,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
 import { CommunicationState, UserRole } from "src/app/core/enums";
 import { IUserModel } from "../../../models";
+import { UserManageService } from "../../../services/manage/user-manage.service";
 import { UsersListObservableService } from "../../../services/observable/list/users-list-observable.service";
 import { UsersChangeEmailFormModalComponent } from "../../modals/change-email-form/users-change-email-form-modal.component";
 import { UsersChangePasswordFormModalComponent } from "../../modals/users-change-password/users-change-password-form-modal.component";
@@ -26,7 +27,8 @@ export class BaseUsersList implements OnInit, OnDestroy {
   constructor(
     private _usersListObservableService: UsersListObservableService,
     private _modalController: ModalController,
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
+    private _userManageService: UserManageService
   ) { }
 
   ngOnInit(): void {
@@ -70,7 +72,7 @@ export class BaseUsersList implements OnInit, OnDestroy {
   }
 
   delete(user: IUserModel) {
-
+    this._userManageService.deleteUser(user);
   }
 
   private _initObservables() {

@@ -27,6 +27,15 @@ export class UsersListObservableService extends BaseBehaviorSubjectObservableSer
       this.next();
     }
   }
+
+  deleteUser(userId: string) {
+    const userIndex = this.observableSubjectValue.data.findIndex(x => x.id === userId);
+
+    if (userIndex !== -1) {
+      this.observableSubjectValue.data.splice(userIndex, 1);
+      this.next();
+    }
+  }
   
   updatePassword(id: string, password: string): void  {
     let user = this.observableSubjectValue.data.find(x => x.id === id);

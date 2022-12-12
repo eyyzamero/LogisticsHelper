@@ -17,3 +17,5 @@ export * from './collections/pallets/ipallet-db-ref.model';
 export * from './collections/pallets/pallet-db-ref.model';
 export * from './collections/assignments_logs/iassignment-log-db-ref.model';
 export * from './collections/assignments_logs/assignment-log-db-ref.model';
+export * from './auth/iuser-role-model';
+export * from './auth/user-role-model';

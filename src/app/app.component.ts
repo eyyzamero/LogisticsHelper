@@ -7,6 +7,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { IPermissionDbRefModel, IRoleDbRefModel, IUserDbRefModel } from './core/models';
 import { FirestoreCollectionService } from './core/services/collections/firestore-collection.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthMapperService } from './core/services/mapper/auth/auth-mapper.service';
+import { UserRolesObservableService } from './core/services/observable/roles/user-roles-observable.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +30,9 @@ export class AppComponent implements OnInit, OnDestroy {
     appTranslateService: AppTranslateService,
     firestore: AngularFirestore,
     private _authService: AngularFireAuth,
-    private _authObservableService: AuthObservableService
+    private _authObservableService: AuthObservableService,
+    private _authMapperService: AuthMapperService,
+    private _userRolesObservableService: UserRolesObservableService
   ) {
     appTranslateService.setDefaultLang(LanguageKind.EN);
 
@@ -39,6 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._initObservables();
+    this._getRoles();
   }
 
   private _initObservables(): void {
@@ -52,6 +57,13 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
     this._subscriptions.push(authStateSubscription);
+  }
+
+  private _getRoles() {
+    this._rolesCollectionService.getAll().then(roles => {
+      const mappedRoles = this._authMapperService.ArrayOfIRoleDbRefModelToArrayOfIUserRoleModel(roles);
+      this._userRolesObservableService.add(mappedRoles);
+    });
   }
 
   private async _getUserFromDb(userId: string): Promise<void> {

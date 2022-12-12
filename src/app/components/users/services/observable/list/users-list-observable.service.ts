@@ -13,6 +13,20 @@ export class UsersListObservableService extends BaseBehaviorSubjectObservableSer
   ) {
     super(new Array<IUserModel>(), observableMapperService);
   }
+
+  addUser(user: IUserModel) {
+    this.observableSubjectValue.data.push(user);
+    this.next();
+  }
+
+  editUser(value: IUserModel) {
+    let userIndex = this.observableSubjectValue.data.findIndex(x => x.id === value.id);
+
+    if (userIndex) {
+      this.observableSubjectValue.data[userIndex] = value;
+      this.next();
+    }
+  }
   
   updatePassword(id: string, password: string): void  {
     let user = this.observableSubjectValue.data.find(x => x.id === id);

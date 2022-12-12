@@ -8,6 +8,7 @@ import { FirestoreCollectionService } from 'src/app/core/services/collections/fi
 import { exactTo } from 'src/app/core/validators';
 import { config } from 'src/configs/config';
 import { UsersMapperService } from '../../../services/mapper/users-mapper.service';
+import { UsersListObservableService } from '../../../services/observable/list/users-list-observable.service';
 
 @Component({
   selector: 'app-users-form',
@@ -47,7 +48,8 @@ export class UsersFormComponent {
 
   constructor(
     firestore: AngularFirestore,
-    private _usersMapperService: UsersMapperService
+    private _usersMapperService: UsersMapperService,
+    private _usersListObservableService: UsersListObservableService
   ) {
     this._rolesCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.ROLES);
     this._usersCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.USERS);
@@ -58,7 +60,7 @@ export class UsersFormComponent {
     this.form.updateValueAndValidity();
     this.form.markAllAsTouched();
 
-    if (this.form.valid) 
+    if (this.form.valid)
       this._mode === FormMode.CREATE ? this._addUser() : this._editUser();
   }
 
@@ -111,7 +113,7 @@ export class UsersFormComponent {
     return form;
   }
 
-  private _getSecondaryAppInstance(): firebase.app.App  {
+  private _getSecondaryAppInstance(): firebase.app.App {
     const instance = firebase.initializeApp(config.firebase, "temporary")
     return instance;
   }
@@ -119,14 +121,18 @@ export class UsersFormComponent {
   private async _addUser() {
     const appInstance = this._getSecondaryAppInstance();
 
-    const newUser = await appInstance.auth().createUserWithEmailAndPassword(
+    appInstance.auth().createUserWithEmailAndPassword(
       this.form.controls['email'].value,
       this.form.controls['password'].value
-    );
-    const dbUser = this._usersMapperService.UsersFormGroupToIUserDbRefModel(this.form, this._userId);
-    await this._usersCollectionService.add(dbUser, newUser.user?.uid);
-    this.closeModal.emit();
-    appInstance.delete();
+    ).then(user => {
+      const dbUser = this._usersMapperService.UsersFormGroupToIUserDbRefModel(this.form, this._userId);
+      this._usersCollectionService.add(dbUser, user.user?.uid).then(() => {
+        const mappedUser = this._usersMapperService.IUserDbRefModelToIUserModel(dbUser);
+        this._usersListObservableService.addUser(mappedUser);
+        appInstance.delete();
+        this.closeModal.emit();
+      }).catch(() => appInstance.delete());
+    }).catch(() => appInstance.delete());
   }
 
   private _editUser() {
@@ -134,7 +140,10 @@ export class UsersFormComponent {
     user.nickname = this.form.controls['nickname'].value;
     user.roleId = (this.form.controls['role'].value as RoleDbRefModel).id;
 
-    this._usersCollectionService.update(user);
-    this.closeModal.emit();
+    this._usersCollectionService.update(user).then(() => {
+      const mappedUser = this._usersMapperService.IUserDbRefModelToIUserModel(user);
+      this._usersListObservableService.editUser(mappedUser);
+      this.closeModal.emit();
+    });
   }
 }

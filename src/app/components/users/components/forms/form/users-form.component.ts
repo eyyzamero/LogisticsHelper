@@ -7,6 +7,7 @@ import { IRoleDbRefModel, IUserDbRefModel, RoleDbRefModel, UserDbRefModel } from
 import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { exactTo } from 'src/app/core/validators';
 import { config } from 'src/configs/config';
+import { UserManageService } from '../../../services/manage/user-manage.service';
 import { UsersMapperService } from '../../../services/mapper/users-mapper.service';
 import { UsersListObservableService } from '../../../services/observable/list/users-list-observable.service';
 
@@ -37,6 +38,7 @@ export class UsersFormComponent {
   form: FormGroup = this._formDefinition();
   roles: Array<IRoleDbRefModel> = new Array<IRoleDbRefModel>();
   communicationState: CommunicationState = CommunicationState.LOADED;
+  errorMessage: string = '';
 
   readonly CommunicationState = CommunicationState;
 
@@ -49,7 +51,8 @@ export class UsersFormComponent {
   constructor(
     firestore: AngularFirestore,
     private _usersMapperService: UsersMapperService,
-    private _usersListObservableService: UsersListObservableService
+    private _usersListObservableService: UsersListObservableService,
+    private _userManageService: UserManageService
   ) {
     this._rolesCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.ROLES);
     this._usersCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.USERS);
@@ -57,6 +60,7 @@ export class UsersFormComponent {
   }
 
   submit() {
+    this._clearErrorMessage();
     this.form.updateValueAndValidity();
     this.form.markAllAsTouched();
 
@@ -118,21 +122,13 @@ export class UsersFormComponent {
     return instance;
   }
 
-  private async _addUser() {
-    const appInstance = this._getSecondaryAppInstance();
-
-    appInstance.auth().createUserWithEmailAndPassword(
-      this.form.controls['email'].value,
-      this.form.controls['password'].value
-    ).then(user => {
-      const dbUser = this._usersMapperService.UsersFormGroupToIUserDbRefModel(this.form, this._userId);
-      this._usersCollectionService.add(dbUser, user.user?.uid).then(() => {
-        const mappedUser = this._usersMapperService.IUserDbRefModelToIUserModel(dbUser);
-        this._usersListObservableService.addUser(mappedUser);
-        appInstance.delete();
-        this.closeModal.emit();
-      }).catch(() => appInstance.delete());
-    }).catch(() => appInstance.delete());
+  private _addUser() {
+    const user = this._usersMapperService.UsersFormGroupToIUserDbRefModel(this.form, this._userId);
+    this._userManageService.addUser(
+      user,
+      () => this.closeModal.emit(),
+      (errorMessage: string) => this.errorMessage = errorMessage 
+    );
   }
 
   private _editUser() {
@@ -145,5 +141,9 @@ export class UsersFormComponent {
       this._usersListObservableService.editUser(mappedUser);
       this.closeModal.emit();
     });
+  }
+
+  private _clearErrorMessage(): void {
+    this.errorMessage = '';
   }
 }

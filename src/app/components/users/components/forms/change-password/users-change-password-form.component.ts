@@ -32,7 +32,6 @@ export class UsersChangePasswordFormComponent {
     private _usersListObservableService: UsersListObservableService
   ) {
     this._usersCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.USERS);
-
   }
 
   submit(): void {

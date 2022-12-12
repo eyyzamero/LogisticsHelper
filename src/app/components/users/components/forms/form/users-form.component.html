@@ -1,6 +1,10 @@
 <div class="users-form-container">
   <app-loader *ngIf="communicationState !== CommunicationState.LOADED; else content"></app-loader>
   <ng-template #content>
+    <div *ngIf="errorMessage" class="error">
+      <ion-icon name="alert-outline"></ion-icon>
+      <span>{{ errorMessage }}</span>
+    </div>
     <form #formRef [formGroup]="form" class="form">
       <div class="row">
         <ion-item>

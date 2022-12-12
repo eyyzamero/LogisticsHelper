@@ -40,7 +40,7 @@ export class UsersChangePasswordFormComponent {
 
     const oldPasswordDecrypted = this._cryptoService.decrypt(this._user.password);
     const newPasswordNotEncrypted = this.form.controls['password'].value;
-    const newPasswordEncrypted = this._cryptoService.encrypt(this._user.password);
+    const newPasswordEncrypted = this._cryptoService.encrypt(newPasswordNotEncrypted);
 
     temporaryAppInstance.auth()
       .signInWithEmailAndPassword(this._user.email, oldPasswordDecrypted)

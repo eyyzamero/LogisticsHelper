@@ -7,13 +7,18 @@ import { config } from 'src/configs/config';
 })
 export class CryptoService {
 
+  private _key: crypto.lib.WordArray = crypto.enc.Base64.parse(config.auth.secret);
+  private _iv: crypto.lib.WordArray = crypto.enc.Base64.parse(`${config.auth.secret}IV#`);
+
   constructor() { }
 
-  encrypt(value: string) {
-    return crypto.AES.encrypt(value, config.auth.secret).toString();
+  encrypt(value: string): string {
+    const encrypted = crypto.AES.encrypt(value, this._key, { iv: this._iv });
+    return encrypted.toString();
   }
 
-  decrypt(value: string) {
-    return crypto.AES.decrypt(value, config.auth.secret).toString(crypto.enc.Utf8);
+  decrypt(value: string): string {
+    const decrypted = crypto.AES.decrypt(value, this._key, { iv: this._iv });
+    return decrypted.toString(crypto.enc.Utf8);
   }
 }

@@ -26,6 +26,15 @@ export class UserManageService {
     this._usersCollectionService = new FirestoreCollectionService<IUserDbRefModel>(firestore, FirestoreCollection.USERS);
   }
 
+  getUser(userId: string, onSuccess?: Function, onError?: Function): void {
+    this._usersCollectionService.getByDocIdAsync(userId).then(user => {
+      if (user && onSuccess)
+        onSuccess(user);
+      else
+        onError ? onError('Something went wrong!') : null
+    }).catch(() => onError ? onError('Something went wrong!') : null);
+  }
+
   addUser(user: IUserDbRefModel, onSuccess?: Function, onError?: Function): void {
     const appInstance = this._getSecondaryAppInstance();
 
@@ -62,6 +71,16 @@ export class UserManageService {
         onError(errorMessage);
       }
     });
+  }
+
+  editUser(user: IUserDbRefModel, onSuccess?: Function, onError?: Function): void {
+    this._usersCollectionService.update(user).then(() => {
+      const mappedUser = this._usersMapperService.IUserDbRefModelToIUserModel(user);
+      this._usersListObservableService.editUser(mappedUser);
+
+      if (onSuccess)
+        onSuccess();
+    }).catch(e => onError ? onError('Something went wrong!') : null);
   }
 
   private _getSecondaryAppInstance(): firebase.app.App {

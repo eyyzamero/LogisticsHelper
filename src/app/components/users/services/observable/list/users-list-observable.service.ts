@@ -22,7 +22,7 @@ export class UsersListObservableService extends BaseBehaviorSubjectObservableSer
   editUser(value: IUserModel) {
     let userIndex = this.observableSubjectValue.data.findIndex(x => x.id === value.id);
 
-    if (userIndex) {
+    if (userIndex !== -1) {
       this.observableSubjectValue.data[userIndex] = value;
       this.next();
     }

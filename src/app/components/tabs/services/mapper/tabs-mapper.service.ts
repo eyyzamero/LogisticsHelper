@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TabType } from 'src/app/core/enums';
+import { TabType, UserPermission } from 'src/app/core/enums';
 import { ITabModel, TabModel } from '../../models';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class TabsMapperService {
   TabTypeToArrayOfITabModel(): Array<ITabModel> {
     const dest = Object.values(TabType).filter(x => x !== TabType.NONE).map(x => {
       const tabType = x as TabType;
-      return new TabModel(tabType, this._getIconForTabType(tabType), [`/${x}`]);
+      return new TabModel(tabType, this._getIconForTabType(tabType), [`/${x}`], this._getPermissionsForTabType(tabType));
     });
     return dest;
   }
@@ -38,5 +38,19 @@ export class TabsMapperService {
         break;
     }
     return icon;
+  }
+
+  private _getPermissionsForTabType(type: TabType): Array<UserPermission> {
+    let permissions = new Array<UserPermission>();
+
+    switch(type) {
+      case TabType.USERS:
+        permissions.push(UserPermission.USER_MANAGEMENT);
+        break;
+      case TabType.ASSIGNMENTS:
+        permissions.push(UserPermission.ASSIGNMENTS);
+        break;
+    }    
+    return permissions;
   }
 }

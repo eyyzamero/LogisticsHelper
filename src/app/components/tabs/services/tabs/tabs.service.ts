@@ -12,6 +12,7 @@ export class TabsService {
   ) { }
 
   getTabs(): Array<ITabModel> {
-    return this._tabsMapperService.TabTypeToArrayOfITabModel();
+    let tabs = this._tabsMapperService.TabTypeToArrayOfITabModel();
+    return tabs;
   }
 }

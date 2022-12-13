@@ -26,6 +26,11 @@ const routes: Routes = [
           AuthObservableModelObtainedGuard,
           AuthPermissionsGuard
         ],
+        canActivate: [
+          FireAuthGuard,
+          AuthObservableModelObtainedGuard,
+          AuthPermissionsGuard
+        ],
         data: {
           requiredPermissions: new Array<UserPermission>(UserPermission.ASSIGNMENTS)
         }
@@ -34,6 +39,11 @@ const routes: Routes = [
         path: 'users',
         loadChildren: () => import('../components/users/users.module').then(m => m.UsersModule),
         canLoad: [
+          FireAuthGuard,
+          AuthObservableModelObtainedGuard,
+          AuthPermissionsGuard
+        ],
+        canActivate: [
           FireAuthGuard,
           AuthObservableModelObtainedGuard,
           AuthPermissionsGuard

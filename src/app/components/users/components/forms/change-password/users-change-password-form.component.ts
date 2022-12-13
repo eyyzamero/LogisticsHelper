@@ -1,37 +1,28 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import firebase from 'firebase/compat/app';
-import { FirestoreCollection } from 'src/app/core/enums';
-import { IUserDbRefModel } from 'src/app/core/models';
-import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
 import { CryptoService } from 'src/app/core/services/crypto/crypto.service';
 import { exactTo } from 'src/app/core/validators';
 import { config } from 'src/configs/config';
-import { IUserModel, UserModel } from '../../../models';
 import { UsersListObservableService } from '../../../services/observable/list/users-list-observable.service';
+import { BaseUsersForm } from '../base/users-form.base';
 
 @Component({
   selector: 'app-users-change-password-form',
   templateUrl: './users-change-password-form.component.html',
   styleUrls: ['./users-change-password-form.component.scss']
 })
-export class UsersChangePasswordFormComponent {
-
-  @Input() private _user: IUserModel = new UserModel();
-
-  @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
+export class UsersChangePasswordFormComponent extends BaseUsersForm {
 
   form: FormGroup = this._formDefinition();
-
-  private _usersCollectionService: FirestoreCollectionService<IUserDbRefModel>;
 
   constructor(
     firestore: AngularFirestore,
     private _cryptoService: CryptoService,
     private _usersListObservableService: UsersListObservableService
   ) {
-    this._usersCollectionService = new FirestoreCollectionService(firestore, FirestoreCollection.USERS);
+    super(firestore);
   }
 
   submit(): void {
@@ -54,7 +45,7 @@ export class UsersChangePasswordFormComponent {
       });
   }
 
-  private _formDefinition(): FormGroup {
+  protected _formDefinition(): FormGroup {
     const form = new FormGroup({
       password: new FormControl(null, [
         Validators.required,

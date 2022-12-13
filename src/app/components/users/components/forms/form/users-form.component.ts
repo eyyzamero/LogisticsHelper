@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommunicationState, FormMode } from 'src/app/core/enums';
 import { IUserDbRefModel, IUserRoleModel, RoleDbRefModel, UserDbRefModel } from 'src/app/core/models';
@@ -6,15 +7,14 @@ import { UserRolesObservableService } from 'src/app/core/services/observable/rol
 import { exactTo } from 'src/app/core/validators';
 import { UserManageService } from '../../../services/manage/user-manage.service';
 import { UsersMapperService } from '../../../services/mapper/users-mapper.service';
+import { BaseUsersForm } from '../base/users-form.base';
 
 @Component({
   selector: 'app-users-form',
   templateUrl: './users-form.component.html',
   styleUrls: ['./users-form.component.scss']
 })
-export class UsersFormComponent {
-
-  @ViewChild('formRef', { static: true }) formRef?: HTMLFormElement;
+export class UsersFormComponent extends BaseUsersForm {
 
   @Input() set userId(value: string) {
     if (value) {
@@ -29,7 +29,6 @@ export class UsersFormComponent {
       });
     }
   }
-  @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
 
   form: FormGroup = this._formDefinition();
   roles: Array<IUserRoleModel> = this._userRolesObservableService.observableSubjectValue.data;
@@ -43,10 +42,13 @@ export class UsersFormComponent {
   private _initialUser: IUserDbRefModel = new UserDbRefModel();
 
   constructor(
+    firestore: AngularFirestore,
     private _usersMapperService: UsersMapperService,
     private _userManageService: UserManageService,
     private _userRolesObservableService: UserRolesObservableService
-  ) { }
+  ) {
+    super(firestore);
+  }
 
   submit() {
     this._clearErrorMessage();
@@ -72,7 +74,7 @@ export class UsersFormComponent {
     );
   }
 
-  private _formDefinition(): FormGroup {
+  protected _formDefinition(): FormGroup {
     const form = new FormGroup({
       nickname: new FormControl(null, [
         Validators.required,

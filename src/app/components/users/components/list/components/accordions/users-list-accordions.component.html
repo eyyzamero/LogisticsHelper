@@ -1,5 +1,5 @@
 <div class="users-list-accordions-container">
-  <ion-accordion-group class="users" [multiple]="true">
+  <ion-accordion-group class="users" [multiple]="true" [value]="openAccordionIds">
     <ion-accordion *ngFor="let user of users" class="user" [value]="user.id" (click)="toggleAccordion(user.id)">
       <ion-item slot="header">
         <div class="label">

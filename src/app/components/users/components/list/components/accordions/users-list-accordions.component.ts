@@ -12,6 +12,8 @@ import { BaseUsersList } from '../../base/users.list.base';
 })
 export class UsersListAccordionsComponent extends BaseUsersList {
 
+  openAccordionIds: Array<string> = new Array<string>();
+
   constructor(
     usersListObservableService: UsersListObservableService,
     modalController: ModalController,
@@ -21,7 +23,11 @@ export class UsersListAccordionsComponent extends BaseUsersList {
     super(usersListObservableService, modalController, translateService, userManageService);
   }
 
-  toggleAccordion(userId: string) {
+  toggleAccordion(id: string) {
+    const index = this.openAccordionIds.findIndex(x => x === id);
 
+    index === -1
+      ? this.openAccordionIds.push(id)
+      : this.openAccordionIds.splice(index, 1);
   }
 }

@@ -9,6 +9,11 @@ import { FirestoreCollectionService } from './core/services/collections/firestor
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthMapperService } from './core/services/mapper/auth/auth-mapper.service';
 import { UserRolesObservableService } from './core/services/observable/roles/user-roles-observable.service';
+import { ModalController } from '@ionic/angular';
+import { LoadingObservableService } from './core/services/observable/loading/loading-observable.service';
+import { LoaderModalComponent } from './components/modals/loader/loader-modal.component';
+
+const LOADING_MODAL_ID = 'loading';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +37,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private _authService: AngularFireAuth,
     private _authObservableService: AuthObservableService,
     private _authMapperService: AuthMapperService,
-    private _userRolesObservableService: UserRolesObservableService
+    private _userRolesObservableService: UserRolesObservableService,
+    private _modalController: ModalController,
+    private _loadingObservableService: LoadingObservableService
   ) {
     appTranslateService.setDefaultLang(LanguageKind.EN);
 
@@ -52,11 +59,18 @@ export class AppComponent implements OnInit, OnDestroy {
         if (!user) {
           this._authObservableService.clear();
           return;
-        } else 
+        } else
           this._getUserFromDb(user.uid);
       }
     });
-    this._subscriptions.push(authStateSubscription);
+    const loadingSubscription = this._loadingObservableService.observable.subscribe({
+      next: (value) => {
+        value.data.visible
+          ? this._showLoadingModal()
+          : this._hideLoadingModal();
+      }
+    })
+    this._subscriptions.push(authStateSubscription, loadingSubscription);
   }
 
   private _getRoles() {
@@ -78,6 +92,25 @@ export class AppComponent implements OnInit, OnDestroy {
     this._authObservableService.addRoleWithoutNext(role);
     this._authObservableService.addPermissionsWithoutNext(permissions);
     this._authObservableService.next();
+  }
+
+  private _showLoadingModal(): void {
+    this._modalController.create({
+      id: LOADING_MODAL_ID,
+      component: LoaderModalComponent,
+      componentProps: {
+        text: 'Loading...'
+      },
+      cssClass: 'modal',
+      backdropDismiss: false
+    }).then(modal => modal.present());
+  }
+
+  private async _hideLoadingModal(): Promise<void> {
+    const modal = await this._modalController.getTop();
+
+    if (modal && modal.id === LOADING_MODAL_ID)
+      this._modalController.dismiss(undefined, undefined, LOADING_MODAL_ID);
   }
 
   ngOnDestroy(): void {

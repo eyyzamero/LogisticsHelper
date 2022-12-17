@@ -17,13 +17,16 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { LoaderModalComponent } from './components/modals/loader/loader-modal.component';
+import { LoaderModule } from './components/common/loader/loader.module';
 
 registerLocaleData(localeEn, 'en');
 registerLocaleData(localePl, 'pl');
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoaderModalComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ registerLocaleData(localePl, 'pl');
         ]
       }
     }),
+    LoaderModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(config.firebase)),
     provideDatabase(() => getDatabase()),

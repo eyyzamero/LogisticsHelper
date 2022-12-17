@@ -1,6 +1,6 @@
-import { Directive, Input } from "@angular/core";
-import { ModalController } from "@ionic/angular";
-import { IUserModel, UserModel } from "../../../models";
+import { Directive, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { IUserModel, UserModel } from '../../../models';
 
 @Directive()
 export abstract class BaseUsersFormModal {

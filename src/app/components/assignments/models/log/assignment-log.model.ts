@@ -1,5 +1,5 @@
-import { AssignmentLogType } from "../../enums";
-import { IAssignmentLogModel } from "..";
+import { AssignmentLogType } from '../../enums';
+import { IAssignmentLogModel } from '..';
 
 export class AssignmentLogModel implements IAssignmentLogModel {
 

@@ -1,5 +1,5 @@
-import { Directive } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { Directive } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Directive()
 export abstract class BaseAssignmentsModal {

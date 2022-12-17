@@ -114,7 +114,7 @@ export class UserManageService {
   }
 
   private _getSecondaryAppInstance(): firebase.app.App {
-    const instance = firebase.initializeApp(config.firebase, "temporary");
+    const instance = firebase.initializeApp(config.firebase, 'temporary');
     return instance;
   }
 }

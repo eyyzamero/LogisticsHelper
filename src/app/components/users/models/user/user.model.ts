@@ -1,5 +1,5 @@
-import { UserRole } from "src/app/core/enums";
-import { IUserModel } from "..";
+import { UserRole } from 'src/app/core/enums';
+import { IUserModel } from '..';
 
 export class UserModel implements IUserModel {
 

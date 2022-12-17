@@ -1,4 +1,4 @@
-import { ILoadingModel } from "..";
+import { ILoadingModel } from '..';
 
 export class LoadingModel implements ILoadingModel {
 

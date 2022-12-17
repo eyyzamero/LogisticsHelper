@@ -1,4 +1,4 @@
-import { IUserRoleModel } from "..";
+import { IUserRoleModel } from '..';
 
 export class UserRoleModel implements IUserRoleModel {
 

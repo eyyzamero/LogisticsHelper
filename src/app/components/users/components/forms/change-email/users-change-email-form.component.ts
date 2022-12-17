@@ -26,7 +26,7 @@ export class UsersChangeEmailFormComponent extends BaseUsersForm {
 
   submit(): void {
     if (this.form.valid) {
-      const temporaryAppInstance = firebase.initializeApp(config.firebase, "temporary");
+      const temporaryAppInstance = firebase.initializeApp(config.firebase, 'temporary');
       const passwordDecrypted = this._cryptoService.decrypt(this._user.password);
       const email = this.form.controls['email'].value;
 

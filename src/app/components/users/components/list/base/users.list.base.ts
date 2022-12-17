@@ -1,14 +1,14 @@
-import { Directive, OnDestroy, OnInit } from "@angular/core";
-import { ModalController } from "@ionic/angular";
-import { TranslateService } from "@ngx-translate/core";
-import { Subscription } from "rxjs";
-import { CommunicationState, UserRole } from "src/app/core/enums";
-import { IUserModel } from "../../../models";
-import { UserManageService } from "../../../services/manage/user-manage.service";
-import { UsersListObservableService } from "../../../services/observable/list/users-list-observable.service";
-import { UsersChangeEmailFormModalComponent } from "../../modals/change-email-form/users-change-email-form-modal.component";
-import { UsersChangePasswordFormModalComponent } from "../../modals/users-change-password/users-change-password-form-modal.component";
-import { UsersFormModalComponent } from "../../modals/users-form/users-form-modal.component";
+import { Directive, OnDestroy, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+import { CommunicationState, UserRole } from 'src/app/core/enums';
+import { IUserModel } from '../../../models';
+import { UserManageService } from '../../../services/manage/user-manage.service';
+import { UsersListObservableService } from '../../../services/observable/list/users-list-observable.service';
+import { UsersChangeEmailFormModalComponent } from '../../modals/change-email-form/users-change-email-form-modal.component';
+import { UsersChangePasswordFormModalComponent } from '../../modals/users-change-password/users-change-password-form-modal.component';
+import { UsersFormModalComponent } from '../../modals/users-form/users-form-modal.component';
 
 @Directive()
 export class BaseUsersList implements OnInit, OnDestroy {

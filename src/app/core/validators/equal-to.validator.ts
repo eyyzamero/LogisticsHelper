@@ -1,4 +1,4 @@
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl } from '@angular/forms';
 
 export function exactTo(controlName: string, controlMatchingName: string): (form: AbstractControl) => { [key: string]: any } | null {
   return (form: AbstractControl): { [key: string]: any } | null => {

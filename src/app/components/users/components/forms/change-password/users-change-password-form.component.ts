@@ -26,7 +26,7 @@ export class UsersChangePasswordFormComponent extends BaseUsersForm {
   }
 
   submit(): void {
-    const temporaryAppInstance = firebase.initializeApp(config.firebase, "temporary");
+    const temporaryAppInstance = firebase.initializeApp(config.firebase, 'temporary');
 
     const oldPasswordDecrypted = this._cryptoService.decrypt(this._user.password);
     const newPasswordNotEncrypted = this.form.controls['password'].value;

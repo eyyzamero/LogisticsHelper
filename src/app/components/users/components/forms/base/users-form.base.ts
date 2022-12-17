@@ -1,10 +1,10 @@
-import { Directive, EventEmitter, Input, Output } from "@angular/core";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { FormGroup } from "@angular/forms";
-import { FirestoreCollection } from "src/app/core/enums";
-import { IUserDbRefModel } from "src/app/core/models";
-import { FirestoreCollectionService } from "src/app/core/services/collections/firestore-collection.service";
-import { IUserModel, UserModel } from "../../../models";
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FormGroup } from '@angular/forms';
+import { FirestoreCollection } from 'src/app/core/enums';
+import { IUserDbRefModel } from 'src/app/core/models';
+import { FirestoreCollectionService } from 'src/app/core/services/collections/firestore-collection.service';
+import { IUserModel, UserModel } from '../../../models';
 
 @Directive()
 export abstract class BaseUsersForm {

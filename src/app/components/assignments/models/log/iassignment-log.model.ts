@@ -1,4 +1,4 @@
-import { AssignmentLogType } from "../../enums";
+import { AssignmentLogType } from '../../enums';
 
 export interface IAssignmentLogModel {
   id: string;

@@ -114,7 +114,7 @@ export class AssignmentsListComponent implements OnInit, OnDestroy {
     return Number(isNaN(count / limit) ? '0' : (count / limit).toFixed(2));
   }
 
-  toggleAccordion(id: string) {
+  toggleAccordion(id: string): void {
     const index = this._openedAssignmentAccordions.findIndex(x => x === id);
     index > -1 ? this._openedAssignmentAccordions.splice(index, 1) : this._openedAssignmentAccordions.push(id);
   }

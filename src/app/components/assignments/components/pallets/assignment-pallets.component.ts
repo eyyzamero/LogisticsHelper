@@ -41,7 +41,7 @@ export class AssignmentPalletsComponent implements OnInit, OnDestroy {
     this._router.navigate([`assignments/form/${this._assignmentId}`]);
   }
 
-  delete(pallet: IAssignmentPalletModel) {
+  delete(pallet: IAssignmentPalletModel): void {
     this._palletsCollectionService.delete(pallet.id).then(() => this._assignmentsObservableService.deletePallet(this._assignmentId, pallet));
   }
 

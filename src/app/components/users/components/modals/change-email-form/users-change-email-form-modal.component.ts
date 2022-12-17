@@ -18,7 +18,7 @@ export class UsersChangeEmailFormModalComponent extends BaseUsersFormModal {
     super(modalController);
   }
 
-  submit() {
+  submit(): void {
     this._usersChangeEmailFormRef?.submit();
   }
 }

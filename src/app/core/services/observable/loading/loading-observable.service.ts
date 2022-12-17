@@ -19,12 +19,12 @@ export class LoadingObservableService extends BaseBehaviorSubjectObservableServi
     this.next();
   }
 
-  show() {
+  show(): void {
     this.observableSubjectValue.data.visible = true;
     this.next();
   }
 
-  hide() {
+  hide(): void {
     this.observableSubjectValue.data.visible = false;
     this.next();
   }

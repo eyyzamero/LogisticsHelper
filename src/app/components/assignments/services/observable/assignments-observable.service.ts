@@ -150,7 +150,7 @@ export class AssignmentsObservableService extends BaseBehaviorSubjectObservableS
     return pallets;
   }
 
-  deletePallet(assignmentId: string, pallet: IAssignmentPalletModel) {
+  deletePallet(assignmentId: string, pallet: IAssignmentPalletModel): void {
     const assignment = this.observableSubjectValue.data.find(x => x.id === assignmentId);
 
     if (assignment) {

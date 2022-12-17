@@ -35,7 +35,7 @@ export class BaseUsersList implements OnInit, OnDestroy {
     this._initObservables();
   }
 
-  edit(user: IUserModel) {
+  edit(user: IUserModel): void {
     this._modalController.create({
       component: UsersFormModalComponent,
       componentProps: {
@@ -47,7 +47,7 @@ export class BaseUsersList implements OnInit, OnDestroy {
     }).then(modal => modal.present()); 
   }
 
-  changePassword(user: IUserModel) {
+  changePassword(user: IUserModel): void {
     this._modalController.create({
       component: UsersChangePasswordFormModalComponent,
       componentProps: {
@@ -59,7 +59,7 @@ export class BaseUsersList implements OnInit, OnDestroy {
     }).then(modal => modal.present());
   }
 
-  changeEmail(user: IUserModel) {
+  changeEmail(user: IUserModel): void {
     this._modalController.create({
       component: UsersChangeEmailFormModalComponent,
       componentProps: {
@@ -71,11 +71,11 @@ export class BaseUsersList implements OnInit, OnDestroy {
     }).then(modal => modal.present());
   }
 
-  delete(user: IUserModel) {
+  delete(user: IUserModel): void {
     this._userManageService.deleteUser(user);
   }
 
-  private _initObservables() {
+  private _initObservables(): void {
     const usersSubscription = this._usersListObservableService.observable.subscribe({
       next: (value) => {
         this.communicationState = value.communicationState;
@@ -85,7 +85,7 @@ export class BaseUsersList implements OnInit, OnDestroy {
     this._subscriptions.push(usersSubscription);
   }
 
-  private _sortByRoles(users: Array<IUserModel>) {
+  private _sortByRoles(users: Array<IUserModel>): Array<IUserModel> {
     const sortedUsers = users.sort((a, b) => {
       const enumEntries = Object.values(UserRole);
       return enumEntries.indexOf(a.role) - enumEntries.indexOf(b.role);

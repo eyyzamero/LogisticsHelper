@@ -23,7 +23,7 @@ export class UsersListAccordionsComponent extends BaseUsersList {
     super(usersListObservableService, modalController, translateService, userManageService);
   }
 
-  toggleAccordion(id: string) {
+  toggleAccordion(id: string): void {
     const index = this.openAccordionIds.findIndex(x => x === id);
 
     index === -1

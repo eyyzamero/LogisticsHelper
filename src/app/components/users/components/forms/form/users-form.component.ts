@@ -50,7 +50,7 @@ export class UsersFormComponent extends BaseUsersForm {
     super(firestore);
   }
 
-  submit() {
+  submit(): void {
     this._clearErrorMessage();
     this.form.updateValueAndValidity();
     this.form.markAllAsTouched();
@@ -59,7 +59,7 @@ export class UsersFormComponent extends BaseUsersForm {
       this._mode === FormMode.CREATE ? this._addUser() : this._editUser();
   }
 
-  private _getUser() {
+  private _getUser(): void {
     this.communicationState = CommunicationState.LOADING;
     this._userManageService.getUser(
       this._userId,
@@ -103,7 +103,7 @@ export class UsersFormComponent extends BaseUsersForm {
     return form;
   }
 
-  private _addUser() {
+  private _addUser(): void {
     const user = this._usersMapperService.UsersFormGroupToIUserDbRefModel(this.form, this._userId);
     this._userManageService.addUser(
       user,
@@ -112,7 +112,7 @@ export class UsersFormComponent extends BaseUsersForm {
     );
   }
 
-  private _editUser() {
+  private _editUser(): void {
     let user = this._initialUser;
     user.nickname = this.form.controls['nickname'].value;
     user.roleId = (this.form.controls['role'].value as RoleDbRefModel).id;

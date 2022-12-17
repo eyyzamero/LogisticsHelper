@@ -45,7 +45,7 @@ export class AssignmentsTcsManagementPanelComponent implements OnInit, OnDestroy
     this._initObservables();
   }
 
-  edit(tc: IAssignmentTcModel) {
+  edit(tc: IAssignmentTcModel): void {
     this._modalController.create({
       component: AssignmentsFormTcModalComponent,
       componentProps: {
@@ -62,20 +62,21 @@ export class AssignmentsTcsManagementPanelComponent implements OnInit, OnDestroy
     this._router.navigate([`assignments/form/${this.assignmentId}`]);
   }
 
-  async delete(tc: IAssignmentTcModel) {
-    const modal = await this._modalController.create({
+  delete(tc: IAssignmentTcModel): void {
+    this._modalController.create({
       component: DeleteModalComponent,
       componentProps: {
         tcId: tc.id
       },
       cssClass: 'modal',
       backdropDismiss: false,
+    }).then(modal => {
+      modal.onDidDismiss().then((data) => {
+        if (data)
+          this._deleteTc(tc);
+      });
+      modal.present();
     });
-    modal.onDidDismiss().then((data) => {
-      if (data)
-        this._deleteTc(tc);
-    });
-    modal.present();
   }
 
   private _initObservables(): void {
@@ -104,7 +105,7 @@ export class AssignmentsTcsManagementPanelComponent implements OnInit, OnDestroy
 
   }
 
-  private _deleteTc(tc: IAssignmentTcModel) {
+  private _deleteTc(tc: IAssignmentTcModel): void {
     this._tcsCollectionService.delete(tc.id).then(() => {
       this._assignmentsObservableService.deleteTc(this.assignmentId!, tc.id);
       

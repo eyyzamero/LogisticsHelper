@@ -11,7 +11,7 @@ export class LayoutSideMenuComponent {
 
   @ViewChild('menu', { static: true }) menuRef!: IonMenu;
   
-  hideSideMenu() {
+  hideSideMenu(): void {
     this.menuRef.close();
   }
 }

@@ -15,7 +15,7 @@ export class UsersComponent {
     private _translateService: TranslateService
   ) { }
 
-  openAddUserModal() {
+  openAddUserModal(): void {
     this._modalController.create({
       component: UsersFormModalComponent,
       componentProps: {

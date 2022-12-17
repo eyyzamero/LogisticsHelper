@@ -73,7 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this._subscriptions.push(authStateSubscription, loadingSubscription);
   }
 
-  private _getRoles() {
+  private _getRoles(): void {
     this._rolesCollectionService.getAll().then(roles => {
       const mappedRoles = this._authMapperService.ArrayOfIRoleDbRefModelToArrayOfIUserRoleModel(roles);
       this._userRolesObservableService.add(mappedRoles);

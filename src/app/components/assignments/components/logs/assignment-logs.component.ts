@@ -71,7 +71,7 @@ export class AssignmentLogsComponent implements OnInit, OnDestroy {
       this._getAssignmentLogsFromDatabase();
   }
 
-  private _getAssignmentLogsFromDatabase() {
+  private _getAssignmentLogsFromDatabase(): void {
 
   }
 

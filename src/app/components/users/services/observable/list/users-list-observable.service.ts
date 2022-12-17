@@ -14,12 +14,12 @@ export class UsersListObservableService extends BaseBehaviorSubjectObservableSer
     super(new Array<IUserModel>(), observableMapperService);
   }
 
-  addUser(user: IUserModel) {
+  addUser(user: IUserModel): void {
     this.observableSubjectValue.data.push(user);
     this.next();
   }
 
-  editUser(value: IUserModel) {
+  editUser(value: IUserModel): void {
     let userIndex = this.observableSubjectValue.data.findIndex(x => x.id === value.id);
 
     if (userIndex !== -1) {
@@ -28,7 +28,7 @@ export class UsersListObservableService extends BaseBehaviorSubjectObservableSer
     }
   }
 
-  deleteUser(userId: string) {
+  deleteUser(userId: string): void {
     const userIndex = this.observableSubjectValue.data.findIndex(x => x.id === userId);
 
     if (userIndex !== -1) {
@@ -46,7 +46,7 @@ export class UsersListObservableService extends BaseBehaviorSubjectObservableSer
     }
   }
 
-  changeEmail(id: string, email: string) {
+  changeEmail(id: string, email: string): void {
     let user = this.observableSubjectValue.data.find(x => x.id === id);
 
     if (user) {

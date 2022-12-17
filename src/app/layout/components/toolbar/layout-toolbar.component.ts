@@ -29,7 +29,7 @@ export class LayoutToolbarComponent implements OnInit, OnDestroy {
       .then(() => this._router.navigate(['logout']));
   }
 
-  navigateToMainPage() {
+  navigateToMainPage(): void {
     this._router.navigate(['home']);
   }
 

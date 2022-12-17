@@ -18,7 +18,7 @@ export class UsersChangePasswordFormModalComponent extends BaseUsersFormModal {
     super(modalController);
   }
 
-  submit() {
+  submit(): void {
     this._usersChangePasswordFormRef?.submit();
   }
 }

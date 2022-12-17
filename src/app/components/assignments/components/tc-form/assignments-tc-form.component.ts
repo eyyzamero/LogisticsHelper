@@ -28,7 +28,7 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
   }
   @Input() assignmentId: string = '';
 
-  get mode() {
+  get mode(): FormMode {
     return this._mode;
   }
 
@@ -149,7 +149,7 @@ export class AssignmentsTcFormComponent extends BaseAssignmentsModal {
     });
   }
 
-  private _addEventToLogs(tc: IAssignmentTcModel) {
+  private _addEventToLogs(tc: IAssignmentTcModel): void {
     const log = new AssignmentLogDbRef(
       undefined,
       this.assignmentId,

@@ -18,7 +18,7 @@ export class UsersFormModalComponent extends BaseUsersFormModal {
     super(modalController);
   }
 
-  submit() {
+  submit(): void {
     this._usersFormRef?.submit();
   }
 }

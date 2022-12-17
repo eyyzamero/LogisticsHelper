@@ -14,7 +14,7 @@ export abstract class BaseUsersFormModal {
 
   abstract submit(): void;
 
-  close() {
+  close(): void {
     this._modalController.dismiss();
   }
 }

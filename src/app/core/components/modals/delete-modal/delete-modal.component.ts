@@ -12,11 +12,11 @@ export class DeleteModalComponent {
     private _modalController: ModalController
   ) { }
 
-  close() {
+  close(): void {
     this._modalController.dismiss(false);
   }
 
-  confirm() {
+  confirm(): void {
     this._modalController.dismiss(true);
   }
 }

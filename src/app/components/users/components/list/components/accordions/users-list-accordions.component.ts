@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { UserManageService } from 'src/app/components/users/services/manage/user-manage.service';
 import { UsersListObservableService } from 'src/app/components/users/services/observable/list/users-list-observable.service';
+import { LoadingObservableService } from 'src/app/core/services/observable/loading/loading-observable.service';
 import { BaseUsersList } from '../../base/users.list.base';
 
 @Component({
@@ -18,9 +19,10 @@ export class UsersListAccordionsComponent extends BaseUsersList {
     usersListObservableService: UsersListObservableService,
     modalController: ModalController,
     translateService: TranslateService,
-    userManageService: UserManageService
+    userManageService: UserManageService,
+    loadingObservableService: LoadingObservableService
   ) {
-    super(usersListObservableService, modalController, translateService, userManageService);
+    super(usersListObservableService, modalController, translateService, userManageService, loadingObservableService);
   }
 
   toggleAccordion(id: string): void {

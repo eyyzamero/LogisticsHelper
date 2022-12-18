@@ -29,7 +29,8 @@
       "minimum-length": "Minimum length of input is: ",
       "maximum-length": "Maximum length of input is: ",
       "characters": "characters"
-    }
+    },
+    "loading": "Loading..."
   },
   "validation": {
     "field-required": "Field required",

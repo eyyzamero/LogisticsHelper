@@ -1,70 +1,75 @@
 <div class="users-form-container">
-  <app-loader *ngIf="communicationState !== CommunicationState.LOADED; else content"></app-loader>
-  <ng-template #content>
-    <div *ngIf="errorMessage" class="error">
-      <ion-icon name="alert-outline"></ion-icon>
-      <span>{{ errorMessage }}</span>
+  <div *ngIf="errorMessage" class="error">
+    <ion-icon name="alert-outline"></ion-icon>
+    <span>{{ errorMessage }}</span>
+  </div>
+  <form #formRef [formGroup]="form" class="form">
+    <div class="row">
+      <ion-item>
+        <ion-label position="floating" translate>common.nickname</ion-label>
+        <ion-input formControlName="nickname"></ion-input>
+        <ion-note slot="error" *ngIf="form.get('nickname').hasError('required')" translate>common.validation.required
+        </ion-note>
+        <ion-note slot="error" *ngIf="form.get('nickname').hasError('pattern')" translate>
+          common.validation.regex-did-not-match</ion-note>
+      </ion-item>
     </div>
-    <form #formRef [formGroup]="form" class="form">
-      <div class="row">
-        <ion-item>
-          <ion-label position="floating" translate>common.nickname</ion-label>
-          <ion-input formControlName="nickname"></ion-input>
-          <ion-note slot="error" *ngIf="form.get('nickname').hasError('required')" translate>common.validation.required
-          </ion-note>
-          <ion-note slot="error" *ngIf="form.get('nickname').hasError('pattern')" translate>
-            common.validation.regex-did-not-match</ion-note>
-        </ion-item>
-      </div>
-      <div *ngIf="form.controls['email']" class="row">
-        <ion-item>
-          <ion-label position="floating" translate>common.email</ion-label>
-          <ion-input formControlName="email"></ion-input>
-          <ion-note slot="error" *ngIf="form.get('email').hasError('required')" translate>common.validation.required
-          </ion-note>
-          <ion-note slot="error" *ngIf="form.get('email').hasError('email')" translate>common.validation.invalid-email
-          </ion-note>
-        </ion-item>
-      </div>
-      <div *ngIf="form.controls['password']" class="row">
-        <ion-item>
-          <ion-label position="floating" translate>common.password</ion-label>
-          <ion-input type="password" formControlName="password"></ion-input>
-          <ion-note slot="error" *ngIf="form.get('password').hasError('required')" translate>common.validation.required
-          </ion-note>
-          <ion-note slot="error" *ngIf="form.get('password').hasError('minlength')">
-            {{ ('common.validation.minimum-length' | translate) + form.get('password').errors.minlength.requiredLength + ' ' + ('common.validation.characters' | translate) }}
-          </ion-note>
-          <ion-note slot="error" *ngIf="form.get('password').hasError('maxlength')">
-            {{ ('common.validation.maximum-length' | translate) + form.get('password').errors.maxlength.requiredLength + ' ' + ('common.validation.characters' | translate) }}
-          </ion-note>
-        </ion-item>
-      </div>
-      <div *ngIf="form.controls['passwordConfirm']" class="row">
-        <ion-item>
-          <ion-label position="floating" translate>common.password-confirm</ion-label>
-          <ion-input type="password" formControlName="passwordConfirm"></ion-input>
-          <ion-note slot="error" *ngIf="form.get('passwordConfirm').hasError('required')" translate>common.validation.required</ion-note>
-          <ion-note slot="error" *ngIf="form.hasError('exactTo')" translate>
-            common.validation.passwords-are-not-the-same
-          </ion-note>
-          <ion-note slot="error" *ngIf="form.get('passwordConfirm').hasError('minlength')">
-            {{ ('common.validation.minimum-length' | translate) + form.get('passwordConfirm').errors.minlength.requiredLength + ' ' + ('common.validation.characters' | translate) }}
-          </ion-note>
-          <ion-note slot="error" *ngIf="form.get('passwordConfirm').hasError('maxlength')">
-            {{ ('common.validation.maximum-length' | translate) + form.get('passwordConfirm').errors.maxlength.requiredLength + ' ' + ('common.validation.characters' | translate) }}
-          </ion-note>
-        </ion-item>
-      </div>
-      <div class="row">
-        <ion-item>
-          <ion-label position="floating" translate>common.role</ion-label>
-          <ion-select formControlName="role" [placeholder]="'common.select-role' | translate">
-            <ion-select-option *ngFor="let role of roles" [value]="role">{{ role.name }}</ion-select-option>
-          </ion-select>
-          <ion-note slot="error" *ngIf="form.get('role').hasError('required')" translate>common.validation.required</ion-note>
-        </ion-item>
-      </div>
-    </form>
-  </ng-template>
+    <div *ngIf="form.controls['email']" class="row">
+      <ion-item>
+        <ion-label position="floating" translate>common.email</ion-label>
+        <ion-input formControlName="email"></ion-input>
+        <ion-note slot="error" *ngIf="form.get('email').hasError('required')" translate>common.validation.required
+        </ion-note>
+        <ion-note slot="error" *ngIf="form.get('email').hasError('email')" translate>common.validation.invalid-email
+        </ion-note>
+      </ion-item>
+    </div>
+    <div *ngIf="form.controls['password']" class="row">
+      <ion-item>
+        <ion-label position="floating" translate>common.password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+        <ion-note slot="error" *ngIf="form.get('password').hasError('required')" translate>common.validation.required
+        </ion-note>
+        <ion-note slot="error" *ngIf="form.get('password').hasError('minlength')">
+          {{ ('common.validation.minimum-length' | translate) + form.get('password').errors.minlength.requiredLength + '
+          ' + ('common.validation.characters' | translate) }}
+        </ion-note>
+        <ion-note slot="error" *ngIf="form.get('password').hasError('maxlength')">
+          {{ ('common.validation.maximum-length' | translate) + form.get('password').errors.maxlength.requiredLength + '
+          ' + ('common.validation.characters' | translate) }}
+        </ion-note>
+      </ion-item>
+    </div>
+    <div *ngIf="form.controls['passwordConfirm']" class="row">
+      <ion-item>
+        <ion-label position="floating" translate>common.password-confirm</ion-label>
+        <ion-input type="password" formControlName="passwordConfirm"></ion-input>
+        <ion-note slot="error" *ngIf="form.get('passwordConfirm').hasError('required')" translate>
+          common.validation.required</ion-note>
+        <ion-note slot="error" *ngIf="form.hasError('exactTo')" translate>
+          common.validation.passwords-are-not-the-same
+        </ion-note>
+        <ion-note slot="error" *ngIf="form.get('passwordConfirm').hasError('minlength')">
+          {{ ('common.validation.minimum-length' | translate) +
+          form.get('passwordConfirm').errors.minlength.requiredLength + ' ' + ('common.validation.characters' |
+          translate) }}
+        </ion-note>
+        <ion-note slot="error" *ngIf="form.get('passwordConfirm').hasError('maxlength')">
+          {{ ('common.validation.maximum-length' | translate) +
+          form.get('passwordConfirm').errors.maxlength.requiredLength + ' ' + ('common.validation.characters' |
+          translate) }}
+        </ion-note>
+      </ion-item>
+    </div>
+    <div class="row">
+      <ion-item>
+        <ion-label position="floating" translate>common.role</ion-label>
+        <ion-select formControlName="role" [placeholder]="'common.select-role' | translate">
+          <ion-select-option *ngFor="let role of roles" [value]="role">{{ role.name }}</ion-select-option>
+        </ion-select>
+        <ion-note slot="error" *ngIf="form.get('role').hasError('required')" translate>common.validation.required
+        </ion-note>
+      </ion-item>
+    </div>
+  </form>
 </div>

@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CommunicationState, FormMode } from 'src/app/core/enums';
+import { FormMode } from 'src/app/core/enums';
 import { IUserDbRefModel, IUserRoleModel, RoleDbRefModel, UserDbRefModel } from 'src/app/core/models';
+import { LoadingObservableService } from 'src/app/core/services/observable/loading/loading-observable.service';
 import { UserRolesObservableService } from 'src/app/core/services/observable/roles/user-roles-observable.service';
 import { exactTo } from 'src/app/core/validators';
 import { UserManageService } from '../../../services/manage/user-manage.service';
@@ -32,10 +33,7 @@ export class UsersFormComponent extends BaseUsersForm {
 
   form: FormGroup = this._formDefinition();
   roles: Array<IUserRoleModel> = this._userRolesObservableService.observableSubjectValue.data;
-  communicationState: CommunicationState = CommunicationState.LOADED;
   errorMessage: string = '';
-
-  readonly CommunicationState = CommunicationState;
 
   private _mode: FormMode = FormMode.CREATE;
   private _userId: string = '';
@@ -45,7 +43,8 @@ export class UsersFormComponent extends BaseUsersForm {
     firestore: AngularFirestore,
     private _usersMapperService: UsersMapperService,
     private _userManageService: UserManageService,
-    private _userRolesObservableService: UserRolesObservableService
+    private _userRolesObservableService: UserRolesObservableService,
+    private _loadingObservableService: LoadingObservableService
   ) {
     super(firestore);
   }
@@ -60,7 +59,7 @@ export class UsersFormComponent extends BaseUsersForm {
   }
 
   private _getUser(): void {
-    this.communicationState = CommunicationState.LOADING;
+    this._loadingObservableService.show();
     this._userManageService.getUser(
       this._userId,
       (user: IUserDbRefModel) => {
@@ -68,9 +67,12 @@ export class UsersFormComponent extends BaseUsersForm {
         this.form.controls['nickname'].setValue(user.nickname);
         const role = this.roles.find(x => x.id === user.roleId)!;
         this.form.controls['role'].setValue(role);
-        this.communicationState = CommunicationState.LOADED;
+        this._loadingObservableService.hide();
       },
-      (errorMessage: string) => this.errorMessage = errorMessage
+      (errorMessage: string) => {
+        this._loadingObservableService.hide();
+        this.errorMessage = errorMessage;
+      }
     );
   }
 
@@ -105,10 +107,17 @@ export class UsersFormComponent extends BaseUsersForm {
 
   private _addUser(): void {
     const user = this._usersMapperService.UsersFormGroupToIUserDbRefModel(this.form, this._userId);
+    this._loadingObservableService.show();
     this._userManageService.addUser(
       user,
-      () => this.closeModal.emit(),
-      (errorMessage: string) => this.errorMessage = errorMessage 
+      () => {
+        this._loadingObservableService.hide();
+        this.closeModal.emit();
+      },
+      (errorMessage: string) => {
+        this._loadingObservableService.hide();
+        this.errorMessage = errorMessage;
+      }
     );
   }
 
@@ -117,10 +126,17 @@ export class UsersFormComponent extends BaseUsersForm {
     user.nickname = this.form.controls['nickname'].value;
     user.roleId = (this.form.controls['role'].value as RoleDbRefModel).id;
 
+    this._loadingObservableService.show();
     this._userManageService.editUser(
       user,
-      () => this.closeModal.emit(),
-      (errorMessage: string) => this.errorMessage = errorMessage
+      () => {
+        this._loadingObservableService.hide();
+        this.closeModal.emit();
+      },
+      (errorMessage: string) => {
+        this._loadingObservableService.hide();
+        this.errorMessage = errorMessage;
+      }
     );
   }
 

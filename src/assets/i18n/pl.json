@@ -26,7 +26,8 @@
       "invalid-email": "Nieprawidłowy adres email",
       "regex-did-not-match": "Nieprawidłowe znaki w polu tekstowym",
       "passwords-are-not-the-same": "Hasła nie są jednakowe"
-    }
+    },
+    "loading": "Ładowanie..."
   },
   "validation": {
     "field-required": "Pole wymagane",

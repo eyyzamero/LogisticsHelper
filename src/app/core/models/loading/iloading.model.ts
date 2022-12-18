@@ -1,4 +1,4 @@
 export interface ILoadingModel {
   text: string;
-  visible: boolean;
+  visible: boolean | null;
 }

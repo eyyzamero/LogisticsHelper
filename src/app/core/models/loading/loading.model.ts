@@ -3,7 +3,7 @@ import { ILoadingModel } from '..';
 export class LoadingModel implements ILoadingModel {
 
   constructor(
-    public text: string = '',
-    public visible: boolean = false
+    public text: string = 'common.loading',
+    public visible: boolean | null = null
   ) { }
 }

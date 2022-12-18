@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { CommunicationState, UserRole } from 'src/app/core/enums';
+import { LoadingObservableService } from 'src/app/core/services/observable/loading/loading-observable.service';
 import { IUserModel } from '../../../models';
 import { UserManageService } from '../../../services/manage/user-manage.service';
 import { UsersListObservableService } from '../../../services/observable/list/users-list-observable.service';
@@ -28,7 +29,8 @@ export class BaseUsersList implements OnInit, OnDestroy {
     private _usersListObservableService: UsersListObservableService,
     private _modalController: ModalController,
     private _translateService: TranslateService,
-    private _userManageService: UserManageService
+    private _userManageService: UserManageService,
+    private _loadingObservableService: LoadingObservableService
   ) { }
 
   ngOnInit(): void {
@@ -72,7 +74,12 @@ export class BaseUsersList implements OnInit, OnDestroy {
   }
 
   delete(user: IUserModel): void {
-    this._userManageService.deleteUser(user);
+    this._loadingObservableService.show();
+    this._userManageService.deleteUser(
+      user,
+      () => this._loadingObservableService.hide(),
+      () => this._loadingObservableService.hide()
+    );
   }
 
   private _initObservables(): void {

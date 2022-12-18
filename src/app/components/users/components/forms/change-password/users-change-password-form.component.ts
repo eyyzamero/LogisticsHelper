@@ -27,7 +27,7 @@ export class UsersChangePasswordFormComponent extends BaseUsersForm {
     if (this.form.valid) {
       this._loadingObservableService.show();
       this._userManageService.changeUserPassword(
-        this._user,
+        this.user,
         this.form.controls['password'].value,
         () => {
           this._loadingObservableService.hide();
@@ -45,13 +45,13 @@ export class UsersChangePasswordFormComponent extends BaseUsersForm {
     const form = new FormGroup({
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(50)
+        Validators.minLength(this.PASSWORD_MIN_LENGTH),
+        Validators.maxLength(this.PASSWORD_MAX_LENGTH)
       ]),
       passwordConfirm: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(50)
+        Validators.minLength(this.PASSWORD_MIN_LENGTH),
+        Validators.maxLength(this.PASSWORD_MAX_LENGTH)
       ])
     }, { 
       validators: exactTo('password', 'passwordConfirm')

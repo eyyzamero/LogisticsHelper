@@ -26,7 +26,7 @@ export class UsersChangeEmailFormComponent extends BaseUsersForm {
     if (this.form.valid) {
       this._loadingObservableService.show();
       this._userManageService.changeEmail(
-        this._user,
+        this.user,
         this.form.controls['email'].value,
         () => {
           this._loadingObservableService.hide();

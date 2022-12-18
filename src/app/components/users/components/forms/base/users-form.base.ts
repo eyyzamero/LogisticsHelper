@@ -9,13 +9,16 @@ import { IUserModel, UserModel } from '../../../models';
 @Directive()
 export abstract class BaseUsersForm {
 
-  @Input() protected _user: IUserModel = new UserModel();
+  @Input() user: IUserModel = new UserModel();
 
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
 
   abstract form: FormGroup;
 
   protected errorMessage: string = '';
+
+  readonly PASSWORD_MIN_LENGTH = 8;
+  readonly PASSWORD_MAX_LENGTH = 50;
   
   protected _usersCollectionService: FirestoreCollectionService<IUserDbRefModel>;
   

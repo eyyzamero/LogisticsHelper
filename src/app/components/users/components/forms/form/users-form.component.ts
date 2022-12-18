@@ -87,13 +87,13 @@ export class UsersFormComponent extends BaseUsersForm {
       ]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(50)
+        Validators.minLength(this.PASSWORD_MIN_LENGTH),
+        Validators.maxLength(this.PASSWORD_MAX_LENGTH)
       ]),
       passwordConfirm: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(50)
+        Validators.minLength(this.PASSWORD_MIN_LENGTH),
+        Validators.maxLength(this.PASSWORD_MAX_LENGTH)
       ]),
       role: new FormControl(null, [
         Validators.required

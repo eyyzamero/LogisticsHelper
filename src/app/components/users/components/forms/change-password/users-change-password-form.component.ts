@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import firebase from 'firebase/compat/app';
-import { CryptoService } from 'src/app/core/services/crypto/crypto.service';
+import { LoadingObservableService } from 'src/app/core/services/observable/loading/loading-observable.service';
 import { exactTo } from 'src/app/core/validators';
-import { config } from 'src/configs/config';
-import { UsersListObservableService } from '../../../services/observable/list/users-list-observable.service';
+import { UserManageService } from '../../../services/manage/user-manage.service';
 import { BaseUsersForm } from '../base/users-form.base';
 
 @Component({
@@ -19,30 +17,26 @@ export class UsersChangePasswordFormComponent extends BaseUsersForm {
 
   constructor(
     firestore: AngularFirestore,
-    private _cryptoService: CryptoService,
-    private _usersListObservableService: UsersListObservableService
+    private _loadingObservableService: LoadingObservableService,
+    private _userManageService: UserManageService
   ) {
     super(firestore);
   }
 
   submit(): void {
-    const temporaryAppInstance = firebase.initializeApp(config.firebase, 'temporary');
-
-    const oldPasswordDecrypted = this._cryptoService.decrypt(this._user.password);
-    const newPasswordNotEncrypted = this.form.controls['password'].value;
-    const newPasswordEncrypted = this._cryptoService.encrypt(newPasswordNotEncrypted);
-
-    temporaryAppInstance.auth()
-      .signInWithEmailAndPassword(this._user.email, oldPasswordDecrypted)
-      .then(user => {
-        user.user?.updatePassword(newPasswordNotEncrypted).then(() => {
-          this._usersCollectionService.updateProperty(this._user.id, 'password', newPasswordEncrypted).then(() => {
-            this._usersListObservableService.updatePassword(this._user.id, newPasswordEncrypted);
-            temporaryAppInstance.delete();
-            this.closeModal.emit();
-          });
-        })
-      });
+    this._loadingObservableService.show();
+    this._userManageService.changeUserPassword(
+      this._user,
+      this.form.controls['password'].value,
+      () => {
+        this._loadingObservableService.hide();
+        this.closeModal.emit();
+      },
+      (errorMessage: string) => {
+        this._loadingObservableService.hide();
+        this.errorMessage = errorMessage;
+      }
+    );
   }
 
   protected _formDefinition(): FormGroup {

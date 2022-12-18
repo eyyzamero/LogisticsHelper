@@ -113,6 +113,42 @@ export class UserManageService {
     });
   }
 
+  changeUserPassword(user: IUserModel, newPasswordNotEncrypted: string, onSuccess?: Function, onError?: Function) {
+    const appInstance = this._getSecondaryAppInstance();
+
+    appInstance.auth().signInWithEmailAndPassword(
+      user.email,
+      this._cryptoService.decrypt(user.password)
+    ).then(authUser => {
+      const newPasswordEncrypted = this._cryptoService.encrypt(newPasswordNotEncrypted);
+
+      authUser.user?.updatePassword(newPasswordNotEncrypted).then(() => {
+        this._usersCollectionService.updateProperty(user.id, 'password', newPasswordEncrypted).then(() => {
+          this._usersListObservableService.updatePassword(user.id, newPasswordEncrypted);
+          appInstance.delete();
+
+          if (onSuccess)
+            onSuccess();
+        }).catch(() => {
+          appInstance.delete();
+
+          if (onError)
+            onError('Something went wrong!');
+        })
+      }).catch(() => {
+        appInstance.delete();
+
+        if (onError)
+          onError('Something went wrong!');
+      })
+    }).catch(() => {
+      appInstance.delete();
+
+      if (onError)
+        onError('Something went wrong!');
+    });
+  }
+
   private _getSecondaryAppInstance(): firebase.app.App {
     const instance = firebase.initializeApp(config.firebase, 'temporary');
     return instance;

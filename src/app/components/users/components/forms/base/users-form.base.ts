@@ -15,6 +15,8 @@ export abstract class BaseUsersForm {
 
   abstract form: FormGroup;
 
+  protected errorMessage: string = '';
+  
   protected _usersCollectionService: FirestoreCollectionService<IUserDbRefModel>;
   
   constructor(

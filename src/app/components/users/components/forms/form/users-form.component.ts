@@ -33,7 +33,6 @@ export class UsersFormComponent extends BaseUsersForm {
 
   form: FormGroup = this._formDefinition();
   roles: Array<IUserRoleModel> = this._userRolesObservableService.observableSubjectValue.data;
-  errorMessage: string = '';
 
   private _mode: FormMode = FormMode.CREATE;
   private _userId: string = '';

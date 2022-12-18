@@ -24,19 +24,21 @@ export class UsersChangePasswordFormComponent extends BaseUsersForm {
   }
 
   submit(): void {
-    this._loadingObservableService.show();
-    this._userManageService.changeUserPassword(
-      this._user,
-      this.form.controls['password'].value,
-      () => {
-        this._loadingObservableService.hide();
-        this.closeModal.emit();
-      },
-      (errorMessage: string) => {
-        this._loadingObservableService.hide();
-        this.errorMessage = errorMessage;
-      }
-    );
+    if (this.form.valid) {
+      this._loadingObservableService.show();
+      this._userManageService.changeUserPassword(
+        this._user,
+        this.form.controls['password'].value,
+        () => {
+          this._loadingObservableService.hide();
+          this.closeModal.emit();
+        },
+        (errorMessage: string) => {
+          this._loadingObservableService.hide();
+          this.errorMessage = errorMessage;
+        }
+      );
+    }
   }
 
   protected _formDefinition(): FormGroup {

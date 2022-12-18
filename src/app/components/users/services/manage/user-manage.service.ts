@@ -149,6 +149,42 @@ export class UserManageService {
     });
   }
 
+  changeEmail(user: IUserModel, newEmail: string, onSuccess?: Function, onError?: Function) {
+    const appInstance = this._getSecondaryAppInstance();
+
+    appInstance.auth()
+      .signInWithEmailAndPassword(
+        user.email,
+        this._cryptoService.decrypt(user.password)
+      ).then(authUser => {
+        authUser.user?.updateEmail(newEmail).then(() => {
+          this._usersCollectionService.updateProperty(user.id, 'email', newEmail).then(() => {
+            this._usersListObservableService.changeEmail(user.id, newEmail);
+
+            appInstance.delete();
+
+            if (onSuccess)
+              onSuccess();
+          }).catch(() => {
+            appInstance.delete();
+
+            if (onError)
+              onError('Something went wrong!');
+          })
+        }).catch(() => {
+          appInstance.delete();
+
+          if (onError)
+            onError('Something went wrong!');
+        })
+      }).catch(() => {
+        appInstance.delete();
+
+        if (onError)
+          onError('Something went wrong!');
+      });
+  }
+
   private _getSecondaryAppInstance(): firebase.app.App {
     const instance = firebase.initializeApp(config.firebase, 'temporary');
     return instance;

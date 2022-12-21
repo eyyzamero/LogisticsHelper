@@ -3,11 +3,13 @@
     <ion-accordion *ngFor="let user of users" class="user" [value]="user.id" (click)="toggleAccordion(user.id)">
       <ion-item slot="header">
         <div class="label">
-          <ion-icon name="person-outline"></ion-icon>
+          <div class="text">
+            <ion-icon name="person-outline"></ion-icon>
+            <ion-chip class="chip" [ngClass]="user.role">
+              <ion-label translate>auth.roles.{{ user.role }}</ion-label>
+            </ion-chip>
+          </div>
           <ion-text>{{ user.email }}</ion-text>
-          <ion-chip class="chip" [ngClass]="user.role">
-            <ion-label translate>auth.roles.{{ user.role }}</ion-label>
-          </ion-chip>
         </div>
       </ion-item>
       <div slot="content" class="content">

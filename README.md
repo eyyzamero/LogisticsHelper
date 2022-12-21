@@ -18,3 +18,8 @@ Aplikacja została napisana w oparciu o doświadczenie w branży logistycznej. G
 | <img src="https://user-images.githubusercontent.com/88888347/208962633-b8e387e0-efb0-4e72-b31e-70c51541277c.png" alt="" width="67.5px" height="150px">   | Lista zleceń        |
 | <img src="https://user-images.githubusercontent.com/88888347/208962984-1f802217-039d-4280-bc5f-da29a02386b9.png" alt="" width="67.5px" height="150px">   | Menu dodawania do zlecenia        |
 | <img src="https://user-images.githubusercontent.com/88888347/208963149-047f5207-e518-4291-966e-1c1b698829c0.png" alt="" width="67.5px" height="150px">   | Menu zarządzania zleceniem        |
+| <img src="https://user-images.githubusercontent.com/88888347/208978365-4da51afc-f240-4c46-b2be-3e8b9ff5d047.png" alt="" width="67.5px" height="150px">   | Dziennik zdarzeń zlecenia        |
+| <img src="https://user-images.githubusercontent.com/88888347/208978487-369220df-d2ce-42b9-b0d8-4e3a36f10430.png" alt="" width="67.5px" height="150px">   | Panel zarządzania TC (towarami)        |
+| <img src="https://user-images.githubusercontent.com/88888347/208978584-8f644cda-b582-4d19-b8d2-dc2e4b9cc37a.png" alt="" width="67.5px" height="150px">   | Panel zarządzania użytkownikami        |
+| <img src="https://user-images.githubusercontent.com/88888347/208978681-9bed5c1b-0d30-43da-a570-be1b6664d148.png" alt="" width="67.5px" height="150px">   | Strona po wylogowaniu        |
+| <img src="https://user-images.githubusercontent.com/88888347/208978743-f66aa32b-0716-49ec-9c12-609e670cbdf6.png" alt="" width="67.5px" height="150px">   | Strona logowania        |

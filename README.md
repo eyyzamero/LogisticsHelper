@@ -2,12 +2,45 @@
 
 ## Stack technologiczny
 - Angular v14.0.0
-- IONIC 6
+- IONIC v6.1.9
 - Firebase (FireAuth, Firestore) @angular/fire
 
 ## Zamysł aplikacji
 
 Aplikacja została napisana w oparciu o doświadczenie w branży logistycznej. Głównym zadaniem aplikacji jest policzenie dostawy tzn. przypisanie odpowiednich ilości do towarów oraz wypełnienie na podstawie danych z aplikacji dokumentu przewozowego.
+
+## Uruchomienie aplikacji
+
+- Należy w folderze /src/configs/ stworzyć plik: "config.ts" który eksportuje stałą "config" typu "Partial < Config >"
+```json
+{
+  "production": false,
+  "version": "0.0.0",
+  "firebase": {
+    "apiKey": "XXXXXXXXXXXXXXXXXXXXXXXXX",
+    "authDomain": "XXXXXXXXXXXXXXXXXXXXXXXX",
+    "projectId": "XXXXXXXXXXXXXXXXXXXX",
+    "storageBucket": "XXXXXXXXXXXXXXXXXXX",
+    "messagingSenderId": "XXXXXXXXXXXXXXXXXXXXXX",
+    "appId": "XXXXXXXXXXXXXXXXXXXXXX",
+    "databaseURL": "XXXXXXXXXXXXXXXXXXXXXXXXXX",
+  },
+  "auth": {
+    "secret": "XXXXXXXXXXXXXXXXXXXXX"
+  }
+}
+```
+- Po sklonowaniu tego repozytorium w folderze z aplikacją wywołać komendę: "npm install"
+- Wywołać komendę "ng serve"
+  
+## Zbudowanie aplikacji na Androida
+  
+Aby zbudować aplikację na system Android należy:
+- Wywołać komendę "ng build --output-path=www"
+- Wywołać komendę "ionic capacitor copy android"
+- Wywołać komendę "ionic capacitor open android" (Potrzebujemy programu Android Studio)
+- Po załadowaniu projektu do Android Studio przechodzimy Build > Build Bundle(s) / APK(s) > Build APK(s)
+- Przenieść utworzony plik .APK na urządzenie mobilne oraz zainstalować aplikację
 
 ## Screenshoty z aplikacji
 
